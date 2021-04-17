@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,8 +22,8 @@ namespace GamingStore.Models
         public int StockCounter { get; set; }
         [Required]
         public string Description { get; set; }
-
-        public Dictionary<string,string> PropertiesList { get; set; }
+        
+        //public Dictionary<string,string> PropertiesList { get; set; }
         [Required]
         public string Category { get; set; }
         public float StarReview { get; set; }
