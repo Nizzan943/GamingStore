@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<GamingStore.Models.Item>
 
-@{
-    ViewData["Title"] = "Items";
-}
+@{ ViewData["Title"] = "Items"; }
 
 <h1>Items</h1>
 
@@ -48,43 +46,67 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StockCounter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StarReview)
-            </td>
-            <td>
-                    <a href="@Html.DisplayFor(modelItem => item.ImageUrl)">Link</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PropertiesList)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Brand)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StockCounter)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StarReview)
+    </td>
+    <td>
+        <a href="@Html.DisplayFor(modelItem => item.ImageUrl)">Link</a>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PropertiesList)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Active)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
+    </td>
+</tr>
 }
     </tbody>
 </table>
+
+<div class="container">
+    <div class="row">
+        @for (int i = 0; i < 3; i++)
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-4">
+                    <div class="card" style="width: 18rem; margin: 5px; ">
+                        <img src="@item.ImageUrl" class="card-img-top" alt="Yuval">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Title</h5>
+                            <p class="card-text">Price: @item.Price .</p>
+                            <a asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-primary">View Item</a>
+                        </div>
+                    </div>
+                </div>      }  
+        }
+       
+
+
+    </div>
+</div>
+
