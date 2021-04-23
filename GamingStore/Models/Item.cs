@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,15 +16,17 @@ namespace GamingStore.Models
         [Required]
         public string Title { get; set; }
         [Required]
+     
         public float Price { get; set; }
         [Required]
         public string Brand { get; set; }
         [Required]
+
         public int StockCounter { get; set; }
         [Required]
         public string Description { get; set; }
-
-        public Dictionary<string,string> PropertiesList { get; set; }
+        [NotMapped]
+        public Dictionary<string,string> PropertiesList { get; set; } = new Dictionary<string, string>();
         [Required]
         public string Category { get; set; }
         public float StarReview { get; set; }
