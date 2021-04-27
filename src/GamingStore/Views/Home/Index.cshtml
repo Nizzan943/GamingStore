@@ -1,0 +1,25 @@
+﻿@using GamingStore.Contracts;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center" >
+    <h1 style="margin-bottom: 100px;"class="display-4">Welcome to N.Y.O Gaming Store!</h1>
+</div>
+<div class="row">
+    @for (int i = 0; i < 12; i++)
+    {
+        <div class="col-3">
+            <div class="card" style="width: 15rem; margin: 10px ">
+                <a href="#">
+                    <img class="card-img-top" src="https://funpo.co.il/images/thumbs/0002291_-5-5-ps5-playstation-825gb_625.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Consoles</h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+
+</div>

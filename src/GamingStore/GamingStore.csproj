@@ -22,4 +22,8 @@
     <Folder Include="Views\Items\Images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GamingStore.Contracts\GamingStore.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
