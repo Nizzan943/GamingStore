@@ -9,8 +9,7 @@ namespace GamingStore.Contracts
     {
         Cash,
         [Display(Name = "Credit Card")]
-        CreditCard,
-        Paypal
+        CreditCard
     }
 }
 

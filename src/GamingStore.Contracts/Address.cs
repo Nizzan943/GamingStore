@@ -5,7 +5,7 @@ using System.Reflection.PortableExecutable;
 
 namespace GamingStore.Contracts
 {
-    public abstract class Address
+    public class Address
     {
         [Required]
         [Display(Name = "Full Name")]
@@ -41,13 +41,4 @@ namespace GamingStore.Contracts
         
     }
 
-
-    public class DeliveryAddress : Address
-    { }
-
-    public class BillingAddress : Address
-    {
-        public string CompanyId { get; set; }
-
-    }
 }
