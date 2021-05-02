@@ -10,6 +10,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
+using GamingStore.Models;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace GamingStore
 {
@@ -29,6 +32,23 @@ namespace GamingStore
 
             services.AddDbContext<GamingStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GamingStoreContext")));
+
+            services.AddRazorPages();
+
+            // Authorization
+
+            services.AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 6;
+                    options.User.AllowedUserNameCharacters = null;
+                }).AddRoles<IdentityRole>().AddDefaultUI().AddEntityFrameworkStores<GamingStoreContext>()
+                .AddDefaultTokenProviders();
+            //Authentication
+                //services.AddAuthentication().AddFac
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +69,7 @@ namespace GamingStore
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -56,6 +77,7 @@ namespace GamingStore
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

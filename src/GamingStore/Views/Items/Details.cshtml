@@ -3,76 +3,99 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>Item</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
+<div class="container">
+    <div class="row">
+        <h1 class="col-11">
             @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Brand)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StockCounter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StockCounter)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StarReview)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StarReview)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            <img src=@Html.DisplayFor(model => model.ImageUrl) />
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PropertiesList)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PropertiesList)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Active)
-        </dd>
-    </dl>
+        </h1>
+        <a class="col-1" title="Back to Items" asp-action="Index">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-90deg-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.146 4.854a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H12.5A2.5 2.5 0 0 1 15 6.5v8a.5.5 0 0 1-1 0v-8A1.5 1.5 0 0 0 12.5 5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4z" />
+            </svg>
+        </a>
+    </div>
+    <div class="row">
+        <h6 class="col-11" style="font-size: 18px">Brand: @Html.DisplayFor(model => model.Brand)</h6>
+        <a class="btn btn-primary col-1" asp-action="Edit" asp-route-id="@Model.ItemId">Edit Item</a>
+
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ItemId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <hr />
+    @*<dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class = "col-sm-10">
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Brand)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Brand)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.StockCounter)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.StockCounter)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Category)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Category)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.StarReview)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.StarReview)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </dt>
+            <dd class = "col-sm-10">
+                <img src=@Html.DisplayFor(model => model.ImageUrl) />
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.PropertiesList)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.PropertiesList)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Active)
+            </dd>
+        </dl>*@
+</div>
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img class="img-fluid" src=@Html.DisplayFor(model => model.ImageUrl) />
+            </div>
+            <div class="col" style="text-align: center;padding-top: 10%; font-size: 28px; font-weight: bold; font-family: 'Rubik', sans-serif;">
+                <div>Price:@Html.DisplayFor(model => model.Price)$</div>
+            </div>
+            <div class="col" style="text-align: center;padding-top: 10%; font-size:28px">
+                Emo
+            </div>
+        </div>
+    </div>
 </div>

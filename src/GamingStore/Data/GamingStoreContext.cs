@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using GamingStore.Contracts;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace GamingStore.Data
 {
-    public class GamingStoreContext : DbContext
+    public class GamingStoreContext : IdentityDbContext<User, IdentityRole, string>
     {
         public GamingStoreContext(DbContextOptions<GamingStoreContext> options)
             : base(options)
