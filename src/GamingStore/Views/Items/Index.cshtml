@@ -5,9 +5,9 @@
 <h1>Items</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create" role="button">Create New Item</a>
+    <a asp-action="Create">Create New</a>
 </p>
-@*<table class="table">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -85,7 +85,7 @@
 </tr>
 }
     </tbody>
-</table>*@
+</table>
 
 <div class="container">
     <div class="row">
@@ -98,7 +98,7 @@
                         <img src="@item.ImageUrl" class="card-img-top" alt="Yuval">
                         <div class="card-body">
                             <h5 class="card-title">@item.Title</h5>
-                            <p class="card-text">Price: @item.Price.</p>
+                            <p class="card-text">Price: @item.Price .</p>
                             <a asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-primary">View Item</a>
                         </div>
                     </div>

@@ -85,9 +85,6 @@ namespace GamingStore.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<string>("PropertiesList")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<float>("StarReview")
                         .HasColumnType("real");
 
