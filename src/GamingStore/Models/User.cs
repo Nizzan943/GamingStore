@@ -36,7 +36,7 @@ namespace GamingStore.Models
         public List<Order> OrdersHistory { get; set; }
 
 
-        public Address Address { get; set; }
+        public Address? Address { get; set; }
 
     }
 }
