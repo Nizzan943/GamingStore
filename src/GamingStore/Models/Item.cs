@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
@@ -20,8 +21,7 @@ namespace GamingStore.Models
         public float Price { get; set; }
         [Required]
         public string Brand { get; set; }
-        [Required]
-
+        [Required, DisplayName("Stock Counter")]
         public int StockCounter { get; set; }
         [Required]
         public string Description { get; set; }
@@ -29,8 +29,9 @@ namespace GamingStore.Models
         public Dictionary<string,string> PropertiesList { get; set; } = new Dictionary<string, string>();
         [Required]
         public string Category { get; set; }
+        [DisplayName("Star Review")]
         public float StarReview { get; set; }
-        [Required]
+        [Required, DisplayName("Image URL")]
         public string ImageUrl { get; set; }
 
         public bool Active { get; set; } = true;
