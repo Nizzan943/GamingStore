@@ -36,6 +36,7 @@ namespace GamingStore.Data
         public DbSet<GamingStore.Models.Item> Item { get; set; }
         public DbSet<GamingStore.Models.Payment> Payment { get; set; }
         public DbSet<GamingStore.Models.User> User { get; set; }
+        public DbSet<GamingStore.Models.Category> Category { get; set; }
 
 
     }

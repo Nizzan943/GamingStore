@@ -25,10 +25,12 @@ namespace GamingStore.Models
         public int StockCounter { get; set; }
         [Required]
         public string Description { get; set; }
+
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
         [NotMapped]
         public Dictionary<string,string> PropertiesList { get; set; } = new Dictionary<string, string>();
         [Required]
-        public string Category { get; set; }
         [DisplayName("Star Review")]
         public float StarReview { get; set; }
         [Required, DisplayName("Image URL")]

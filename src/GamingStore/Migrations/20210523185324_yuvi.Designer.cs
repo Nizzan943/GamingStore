@@ -4,14 +4,16 @@ using GamingStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GamingStore.Migrations
 {
     [DbContext(typeof(GamingStoreContext))]
-    partial class GamingStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20210523185324_yuvi")]
+    partial class yuvi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,24 +47,6 @@ namespace GamingStore.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("GamingStore.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
             modelBuilder.Entity("GamingStore.Models.Item", b =>
                 {
                     b.Property<int>("ItemId")
@@ -76,9 +60,6 @@ namespace GamingStore.Migrations
                     b.Property<string>("Brand")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -108,8 +89,6 @@ namespace GamingStore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ItemId");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("OrderId");
 
@@ -388,12 +367,6 @@ namespace GamingStore.Migrations
 
             modelBuilder.Entity("GamingStore.Models.Item", b =>
                 {
-                    b.HasOne("GamingStore.Models.Category", "Category")
-                        .WithMany("Items")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GamingStore.Models.Order", null)
                         .WithMany("Items")
                         .HasForeignKey("OrderId");

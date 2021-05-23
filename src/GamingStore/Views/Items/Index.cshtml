@@ -100,7 +100,8 @@
                             <h5 class="card-title item-title">@item.Title</h5>
                             <p class="card-text">Price: @item.Price.</p>
                             <a asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-primary">View Item</a>
-                        </div>
+                            <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-danger">Delete</a>
+                            </div>
                     </div>
                 </div>}
         }

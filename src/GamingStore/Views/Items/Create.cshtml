@@ -37,11 +37,7 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="StarReview" class="control-label"></label>
                 <input asp-for="StarReview" class="form-control" />
@@ -53,16 +49,17 @@
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-            <label asp-for="PropertiesList" class="control-label"></label>
-            <input asp-for="PropertiesList" class="form-control" />
-            <span asp-validation-for="PropertiesList" class="text-danger"></span>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="PropertiesList" class="control-label"></label>
+                <input asp-for="PropertiesList" class="form-control" />
+                <span asp-validation-for="PropertiesList" class="text-danger"></span>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
