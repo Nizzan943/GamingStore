@@ -94,10 +94,10 @@
             @foreach (var item in Model)
             {
                 <div class="col-4">
-                    <div class="card" style="width: 18rem; margin: 5px; ">
-                        <img src="@item.ImageUrl" class="card-img-top" alt="Yuval">
+                    <div class="card item-card" style="width: 18rem; margin: 5px; ">
+                        <img src="@item.ImageUrl" class="card-img-top item-image" alt="Yuval">
                         <div class="card-body">
-                            <h5 class="card-title">@item.Title</h5>
+                            <h5 class="card-title item-title">@item.Title</h5>
                             <p class="card-text">Price: @item.Price.</p>
                             <a asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-primary">View Item</a>
                         </div>
