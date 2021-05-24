@@ -1,22 +1,29 @@
 ﻿@using GamingStore.Contracts;
+@model IEnumerable<GamingStore.Models.Category>
+
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center" >
-    <h1 style="margin-bottom: 100px;"class="display-4">Welcome to N.Y.O Gaming Store!</h1>
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+
+<div class="text-center">
+    <h1 style="margin-bottom: 100px;" class="display-4">Welcome to N.Y.O Gaming Store!</h1>
 </div>
 <div class="row">
-    @for (int i = 0; i < 12; i++)
+    @foreach (var item in Model)
     {
         <div class="col-3">
             <div class="card" style="width: 15rem; margin: 10px ">
-                <a href="#">
-                    <img class="card-img-top" src="https://funpo.co.il/images/thumbs/0002291_-5-5-ps5-playstation-825gb_625.png" alt="Card image cap">
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Consoles</h5>
-
+                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                     </div>
                 </a>
             </div>

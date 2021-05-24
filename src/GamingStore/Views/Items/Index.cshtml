@@ -4,86 +4,29 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StockCounter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropertiesList)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StarReview)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Active)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StockCounter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PropertiesList)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StarReview)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="text-center">
+    <h1 style="margin-bottom: 100px;" class="display-4">Welcome to N.Y.O Gaming Store!</h1>
+</div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-3">
+            <div class="card item-card" style="width: 15rem; margin: 10px ">
+                <a asp-action="Details" asp-route-id="@item.ItemId">
+                    <img class="card-img-top item-image" src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
+                        <a asp-action="Edit" asp-route-id="@item.ItemId" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-danger">Delete</a>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+
+</div>
