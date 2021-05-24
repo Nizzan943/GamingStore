@@ -41,7 +41,18 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category.Id)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PropertiesList)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PropertiesList)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.StarReview)
         </dt>
@@ -55,18 +66,11 @@
             @Html.DisplayFor(model => model.ImageUrl)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PropertiesList)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PropertiesList)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Active)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Active)
         </dd>
-
     </dl>
     
     <form asp-action="Delete">

@@ -8,6 +8,12 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GamingStore.Models
 {
+    public enum UserType
+    {
+        Client,
+        Admin
+    }
+
     public class User : IdentityUser
     {
         public User()
@@ -37,6 +43,8 @@ namespace GamingStore.Models
 
 
         public Address? Address { get; set; }
+
+        public UserType Type { get; set; } = UserType.Admin;
 
     }
 }

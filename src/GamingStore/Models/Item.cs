@@ -25,7 +25,7 @@ namespace GamingStore.Models
         public int StockCounter { get; set; }
         [Required]
         public string Description { get; set; }
-
+        [Required, DisplayName("Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         [NotMapped]

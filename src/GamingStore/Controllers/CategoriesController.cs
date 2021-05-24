@@ -46,6 +46,7 @@ namespace GamingStore.Controllers
         // GET: Categories/Create
         public IActionResult Create()
         {
+            ViewData["Categories"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
             return View();
         }
 
@@ -54,10 +55,13 @@ namespace GamingStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Image")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Image")] Category category, int[] Items)
         {
             if (ModelState.IsValid)
             {
+                category.Items = new List<Item>();
+                category.Items.AddRange(_context.Item.Where(x => Items.Contains(x.ItemId)));
+
                 _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

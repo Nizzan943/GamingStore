@@ -1,112 +1,89 @@
 ﻿@model IEnumerable<GamingStore.Models.Item>
 
-@{ ViewData["Title"] = "Items"; }
+@{
+    ViewData["Title"] = "Index";
+}
 
-<h1>Items</h1>
+<h1>Index</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create" role="button">Create New Item</a>
+    <a asp-action="Create">Create New</a>
 </p>
-@*<table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Brand)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StockCounter)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StarReview)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ImageUrl)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PropertiesList)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Brand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StockCounter)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StarReview)
-        </td>
-        <td>
-            <a href="@Html.DisplayFor(modelItem => item.ImageUrl)">Link</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PropertiesList)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
-        </td>
-    </tr>
-    }
-        </tbody>
-    </table>*@
-
-<div class="container">
-    <div class="row">
-        @for (int i = 0; i < 3; i++)
-        {
-            @foreach (var item in Model)
-            {
-                <div class="col-4">
-                    <div class="card item-card" style="width: 18rem; margin: 5px; ">
-                        <img src="@item.ImageUrl" class="card-img-top item-image" alt="Yuval">
-                        <div class="card-body">
-                            <h5 class="card-title item-title">@item.Title</h5>
-                            <p class="card-text">Price: @item.Price.</p>
-                            <a asp-action="Details" asp-route-id="@item.ItemId" class="btn btn-primary">View Item</a>
-                            <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-danger">Delete</a>
-                            </div>
-                    </div>
-                </div>}
-        }
-
-
-
-    </div>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockCounter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertiesList)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StarReview)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockCounter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertiesList)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StarReview)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

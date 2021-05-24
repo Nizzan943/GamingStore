@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
 {
@@ -18,11 +19,25 @@ namespace GamingStore.Controllers
         {
             _context = context;
         }
+        //Search function
+        public async Task<IActionResult> Search(string queryTitle, string queryBody)
+        {
+            var q = from a in _context.Item.Include(a => a.Category)
+                where (a.Title.Contains(queryTitle))
+                orderby a.Title descending
+                select a; // new { Id = a.Id, Summary = a.Title + a.Body.Substring(0, 50) };
+
+            var searchItems = _context.Item.Include(a => a.Category).Where(a => (a.Title.Contains(queryTitle) || queryTitle == null) );
+            return View("Index", await searchItems.ToListAsync());
+        }
+
+
 
         // GET: Items
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Item.ToListAsync());
+            var gamingStoreContext = _context.Item.Include(i => i.Category);
+            return View(await gamingStoreContext.ToListAsync());
         }
 
         // GET: Items/Details/5
@@ -34,6 +49,7 @@ namespace GamingStore.Controllers
             }
 
             var item = await _context.Item
+                .Include(i => i.Category)
                 .FirstOrDefaultAsync(m => m.ItemId == id);
             if (item == null)
             {
@@ -44,8 +60,10 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Create
+
         public IActionResult Create()
         {
+            ViewData["CategoryId"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
             return View();
         }
 
@@ -54,7 +72,7 @@ namespace GamingStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,Title,Price,Brand,StockCounter,Description,Category,StarReview,ImageUrl,Active")] Item item)
+        public async Task<IActionResult> Create([Bind("ItemId,Title,Price,Brand,StockCounter,Description,CategoryId,PropertiesList,StarReview,ImageUrl,Active")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -62,9 +80,10 @@ namespace GamingStore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", item.CategoryId);
             return View(item);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Items/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -78,6 +97,7 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", item.CategoryId);
             return View(item);
         }
 
@@ -86,7 +106,7 @@ namespace GamingStore.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ItemId,Title,Price,Brand,StockCounter,Description,Category,StarReview,ImageUrl,Active")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("ItemId,Title,Price,Brand,StockCounter,Description,CategoryId,PropertiesList,StarReview,ImageUrl,Active")] Item item)
         {
             if (id != item.ItemId)
             {
@@ -113,6 +133,7 @@ namespace GamingStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", item.CategoryId);
             return View(item);
         }
 
@@ -125,6 +146,7 @@ namespace GamingStore.Controllers
             }
 
             var item = await _context.Item
+                .Include(i => i.Category)
                 .FirstOrDefaultAsync(m => m.ItemId == id);
             if (item == null)
             {
