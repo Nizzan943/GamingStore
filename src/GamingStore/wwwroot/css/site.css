@@ -111,4 +111,7 @@ body {
     width: 18rem;
     height: 21rem;
     margin: 5px;
+    display: flex;
+    flex-direction: column
 }
+

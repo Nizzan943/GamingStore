@@ -17,7 +17,7 @@
     @foreach (var item in Model)
     {
         <div class="col-3">
-            <div class="card" style="width: 15rem; margin: 10px ">
+            <div class="card" style="width: 15rem; margin: 10px;">
                 <a asp-action="Details" asp-route-id="@item.Id">
                     <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image cap">
                     <div class="card-body">

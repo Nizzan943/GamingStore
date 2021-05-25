@@ -60,7 +60,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Create
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
@@ -138,6 +138,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

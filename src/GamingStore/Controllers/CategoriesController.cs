@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
 {
@@ -44,6 +45,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["Categories"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
@@ -70,6 +72,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -121,6 +124,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
