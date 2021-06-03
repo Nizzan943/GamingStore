@@ -22,10 +22,6 @@ namespace GamingStore.Controllers
         //Search function
         public async Task<IActionResult> Search(string queryTitle, string queryBody)
         {
-            var q = from a in _context.Item.Include(a => a.Category)
-                where (a.Title.Contains(queryTitle))
-                orderby a.Title descending
-                select a; // new { Id = a.Id, Summary = a.Title + a.Body.Substring(0, 50) };
 
             var searchItems = _context.Item.Include(a => a.Category).Where(a => (a.Title.Contains(queryTitle) || queryTitle == null) );
             return View("Index", await searchItems.ToListAsync());
