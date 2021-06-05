@@ -39,12 +39,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="PropertiesList" class="control-label"></label>
-                <input asp-for="PropertiesList" class="form-control" />
-                <span asp-validation-for="PropertiesList" class="text-danger"></span>
+                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.Categories"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+
             </div>
             <div class="form-group">
                 <label asp-for="StarReview" class="control-label"></label>
