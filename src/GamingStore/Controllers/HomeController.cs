@@ -13,6 +13,8 @@ namespace GamingStore.Controllers
 {
     public class HomeController : Controller
     {
+        public static int flag = 0;
+
         private readonly ILogger<HomeController> _logger;
 
          private readonly GamingStoreContext _context;

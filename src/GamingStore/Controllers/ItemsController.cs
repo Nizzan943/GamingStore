@@ -49,7 +49,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            return View(item);
+            return View("~/Views/Items/Details.cshtml");
         }
 
         // GET: Items/Create
@@ -92,7 +92,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", nameof(Category.Name), item.Category);
-            return View(item);
+            return View("~/Views/Items/Edit.cshtml");
         }
 
         // POST: Items/Edit/5
@@ -148,7 +148,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            return View(item);
+            return View("~/Views/Items/Delete.cshtml");
         }
 
         // POST: Items/Delete/5

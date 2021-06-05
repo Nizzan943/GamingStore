@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -26,17 +25,40 @@ namespace GamingStore.Controllers
         {
             return View(await _context.Category.ToListAsync());
         }
+       
 
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (HomeController.flag == 0)
             {
-                return NotFound();
-            }
+                HomeController.flag = 1;
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var searchItems = _context.Item.Include(i => i.Category).Where(i => i.CategoryId == id);
-            return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
+                var searchItems = _context.Item.Include(i => i.Category).Where(i => i.CategoryId == id);
+                return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
+            }
+            else
+            {
+                HomeController.flag = 0;
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var item = await _context.Item
+                    .Include(i => i.Category)
+                    .FirstOrDefaultAsync(m => m.ItemId == id);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+                return View("~/Views/Items/Details.cshtml", item);
+            }
         }
 
 
