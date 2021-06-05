@@ -30,6 +30,24 @@ namespace GamingStore.Controllers
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var item = await _context.Item
+                .Include(i => i.Category)
+                .FirstOrDefaultAsync(m => m.ItemId == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return View("~/Views/Items/Details.cshtml", item);
+        }
+
         public async Task<IActionResult> IndexAsync()
         {
             return View(await _context.Category.ToListAsync());

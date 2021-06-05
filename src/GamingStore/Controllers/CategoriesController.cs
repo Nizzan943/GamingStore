@@ -39,6 +39,7 @@ namespace GamingStore.Controllers
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
+
         // GET: Categories/Create
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
