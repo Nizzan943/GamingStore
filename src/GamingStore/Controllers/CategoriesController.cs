@@ -48,8 +48,7 @@ namespace GamingStore.Controllers
         public IActionResult Create()
         {
             //ViewData["Categories"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
-            //ViewData["items"] = new SelectList(_context.Item.Where(x => x.CategoryId == null), nameof(Item.ItemId), nameof(Item.Title));
-            ViewData["items"] = new SelectList(_context.Item, nameof(Item.ItemId), nameof(Item.Title));
+            ViewData["items"] = new SelectList(_context.Item.Where(x => x.CategoryId == null), nameof(Item.ItemId), nameof(Item.Title));
             return View();
         }
 
