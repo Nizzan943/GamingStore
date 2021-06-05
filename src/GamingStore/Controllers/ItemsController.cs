@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
 {
@@ -19,15 +18,13 @@ namespace GamingStore.Controllers
         {
             _context = context;
         }
-        //Search function
-        public async Task<IActionResult> Search(string queryTitle, string queryBody)
+        // Search
+        public async Task<IActionResult> Search(string queryTitle)
         {
 
-            var searchItems = _context.Item.Include(a => a.Category).Where(a => (a.Title.Contains(queryTitle) || queryTitle == null) );
+            var searchItems = _context.Item.Include(a => a.Category).Where(a => (a.Title.Contains(queryTitle) || queryTitle == null));
             return View("Index", await searchItems.ToListAsync());
         }
-
-
 
         // GET: Items
         public async Task<IActionResult> Index()
@@ -56,19 +53,18 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Create
-        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
+            ViewData["Categories"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
             return View();
         }
 
         // POST: Items/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,Title,Price,Brand,StockCounter,Description,CategoryId,PropertiesList,StarReview,ImageUrl,Active")] Item item)
+        public async Task<IActionResult> Create([Bind("ItemId,Title,Price,Brand,StockCounter,Description,CategoryId,StarReview,ImageUrl,Active")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -76,10 +72,10 @@ namespace GamingStore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", item.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", item.CategoryId);
             return View(item);
         }
-        [Authorize(Roles = "Admin")]
+
         // GET: Items/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -93,16 +89,16 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", item.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", nameof(Category.Name), item.Category);
             return View(item);
         }
 
         // POST: Items/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ItemId,Title,Price,Brand,StockCounter,Description,CategoryId,PropertiesList,StarReview,ImageUrl,Active")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("ItemId,Title,Price,Brand,StockCounter,Description,CategoryId,StarReview,ImageUrl,Active")] Item item)
         {
             if (id != item.ItemId)
             {
@@ -129,12 +125,11 @@ namespace GamingStore.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", item.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", item.CategoryId);
             return View(item);
         }
 
         // GET: Items/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

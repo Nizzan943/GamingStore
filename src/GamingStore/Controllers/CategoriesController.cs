@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
 {
@@ -41,20 +40,22 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
+            //ViewData["ItemsList"] = _context.Item.Where(x => x.CategoryId == category.Id);
             return View(category);
         }
 
         // GET: Categories/Create
-        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["Categories"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
+            //ViewData["Categories"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
+            //ViewData["items"] = new SelectList(_context.Item.Where(x => x.CategoryId == null), nameof(Item.ItemId), nameof(Item.Title));
+            ViewData["items"] = new SelectList(_context.Item, nameof(Item.ItemId), nameof(Item.Title));
             return View();
         }
 
         // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Image")] Category category, int[] Items)
@@ -72,7 +73,6 @@ namespace GamingStore.Controllers
         }
 
         // GET: Categories/Edit/5
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,8 +89,8 @@ namespace GamingStore.Controllers
         }
 
         // POST: Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Image")] Category category)
@@ -99,6 +99,7 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
+            ViewData["itemsEdit"] = new SelectList(_context.Item.Where(x => x.CategoryId == category.Id), nameof(Item.ItemId), nameof(Item.Title));
 
             if (ModelState.IsValid)
             {
@@ -124,7 +125,6 @@ namespace GamingStore.Controllers
         }
 
         // GET: Categories/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
