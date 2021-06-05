@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
 {
@@ -21,9 +22,8 @@ namespace GamingStore.Controllers
         // Search
         public async Task<IActionResult> Search(string queryTitle)
         {
-
             var searchItems = _context.Item.Include(a => a.Category).Where(a => (a.Title.Contains(queryTitle) || queryTitle == null));
-            return View("Index", await searchItems.ToListAsync());
+            return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
         // GET: Items
@@ -53,6 +53,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["Categories"] = new SelectList(_context.Category, nameof(Category.Id), nameof(Category.Name));
@@ -77,6 +78,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -130,6 +132,7 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
