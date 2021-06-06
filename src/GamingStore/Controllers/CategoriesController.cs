@@ -25,42 +25,30 @@ namespace GamingStore.Controllers
         {
             return View(await _context.Category.ToListAsync());
         }
-       
 
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (HomeController.flag == 0)
+            if (id == null)
             {
-                HomeController.flag = 1;
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var searchItems = _context.Item.Include(i => i.Category).Where(i => i.CategoryId == id);
-                return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
+                return NotFound();
             }
-            else
+
+            var category = await _context.Category
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (category == null)
             {
-                HomeController.flag = 0;
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var item = await _context.Item
-                    .Include(i => i.Category)
-                    .FirstOrDefaultAsync(m => m.ItemId == id);
-                if (item == null)
-                {
-                    return NotFound();
-                }
-
-                return View("~/Views/Items/Details.cshtml", item);
+                return NotFound();
             }
+
+            var items = new List<Item>();
+            items.AddRange(_context.Item.Where(i => i.CategoryId == id));
+
+            category.Items = items;
+            //ViewData["ItemsList"] = _context.Item.Where(x => x.CategoryId == category.Id);
+            return View(category);
         }
-
 
         // GET: Categories/Create
         [Authorize(Roles = "Admin")]

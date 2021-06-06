@@ -13,8 +13,6 @@ namespace GamingStore.Controllers
 {
     public class HomeController : Controller
     {
-        public static int flag = 0;
-
         private readonly ILogger<HomeController> _logger;
 
          private readonly GamingStoreContext _context;
@@ -30,24 +28,6 @@ namespace GamingStore.Controllers
         {
             var searchItems = _context.Item.Include(a => a.Category).Where(a => (a.Title.Contains(queryTitle) || queryTitle == null));
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
-        }
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var item = await _context.Item
-                .Include(i => i.Category)
-                .FirstOrDefaultAsync(m => m.ItemId == id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            return View("~/Views/Items/Details.cshtml", item);
         }
 
         public async Task<IActionResult> IndexAsync()
