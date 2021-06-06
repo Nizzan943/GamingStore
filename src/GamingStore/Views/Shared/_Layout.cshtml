@@ -50,11 +50,10 @@
                 <ul class="nav">
 
                     <div class="ml-auto" style="align-content: center!important">
-                        <form asp-action="Search">
+                        <form asp-controller="Items" asp-action="Search">
                             <input name="queryTitle" placeholder="Enter something to search" />
                             <input type="submit" value="Search" class="btn btn-primary" />
                         </form>
-
                     </div>
                 </ul>
 

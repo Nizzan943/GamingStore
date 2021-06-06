@@ -15,7 +15,7 @@
     {
         <div class="col-3">
             <div class="card" style="width: 15rem; margin: 10px;">
-                <a href="https://localhost:44394/Categories/Details/@item.Id" >
+                <a form asp-controller="Items" asp-action="CategoryItems" asp-route-id="@item.Id">
                     <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
