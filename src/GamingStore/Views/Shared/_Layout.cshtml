@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using GamingStore.Data
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject GamingStoreContext GamingStoreContext
+<!DOCTYPE html>
 <html lang="en" style="font-family: 'Rubik', sans-serif">
 
 <head>
@@ -11,13 +16,35 @@
 </head>
 <body>
     <header>
+        <!---TopBar-->
+        <nav style="background-color: #fff!important; margin-bottom: 0!important" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container d-flex flex-wrap">
+                <ul class="nav me-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-open" viewBox="0 0 16 16">
+                        <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.818l5.724 3.465L8 8.917l1.276.766L15 6.218V5.4a1 1 0 0 0-.53-.882l-6-3.2zM15 7.388l-4.754 2.877L15 13.117v-5.73zm-.035 6.874L8 10.083l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738zM1 13.117l4.754-2.852L1 7.387v5.73zM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2z" />
+                    </svg>
+                    <a href="mailto:support@nyo.com" style="margin-left: 10px">support@nyo.com</a>
+                </ul>
+                @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Viewer")))
+                {
+                    <div class="top_bar_contact_item">
+                        <a asp-controller="Administration" asp-action="Index">Admin CP</a>
+                    </div>
+                }
+                <ul class="nav">
+                    <div class="ml-auto">
+                        <partial name="_LoginPartial" />
+
+                    </div>
+                </ul>
+            </div>
+        </nav>
+        <!--MainBar-->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-color: #edf1f4 !important;">
             <div class="container d-flex flex-wrap">
                 <ul class="nav me-auto">
-                    <a class="navbar-brand" href="/">
-                    </a>
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                        <img class="card-img-top logo" src="https://i.imgur.com/8c330j2.png" alt="Card image cap" style="width: 300px!important;">
+                        <img class="card-img-top logo" src="https://i.imgur.com/8c330j2.png" alt="Card image cap" style="width: 300px !important;">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +78,7 @@
                             <input name="queryTitle" placeholder="Enter something to search" />
                             <input type="submit" value="Search" class="btn btn-primary" />
                         </form>
-                        <partial name="_LoginPartial" />
+
                     </div>
                     @*<li class="nav-item" title="Account">
                             <a class="nav-link link-dark px-2" asp-area="Identity" asp-route="/Identity/account/login">
