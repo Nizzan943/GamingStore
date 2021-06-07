@@ -13,7 +13,7 @@ namespace GamingStore.Models
     {
 
         [Key]
-        public int ItemId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]

@@ -1739,7 +1739,7 @@ namespace GamingStore.Data
 
         //            store.StoreItems.Add(new StoreItem
         //            {
-        //                ItemId = item.Id,
+        //                Id = item.Id,
         //                StoreId = store.Id,
         //                ItemsCount =
         //                    (uint)random.Next(1,
@@ -1797,7 +1797,7 @@ namespace GamingStore.Data
 
         //                order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, store, out Payment payment, out ShippingMethod shippingMethod);
         //                order.Payment = payment;
-        //                order.PaymentId = payment.Id;
+        //                order.Id = payment.Id;
         //                order.ShippingMethod = shippingMethod;
         //                paymentsList.Add(payment);
         //                orderList.Add(order);
@@ -1851,8 +1851,8 @@ namespace GamingStore.Data
 
         //            var orderItem = new OrderItem()
         //            {
-        //                OrderId = orderId,
-        //                ItemId = curItem.Id,
+        //                Id = orderId,
+        //                Id = curItem.Id,
         //                Item = curItem,
         //                ItemsCount = rand.Next(1, 3)
         //            };

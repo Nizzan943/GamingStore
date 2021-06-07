@@ -13,7 +13,7 @@ namespace GamingStore.Models
     public class Order
     {
         [Key]
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         [Required]
         public List<Item> Items { get; set; }
         [Required,DisplayName("User ID")]

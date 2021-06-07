@@ -31,10 +31,10 @@ namespace GamingStore
             services.AddControllersWithViews();
 
             services.AddDbContext<GamingStoreContext>(options =>
-                    //options.UseSqlServer(Configuration.GetConnectionString("Local")));
-                    options.UseSqlServer(Configuration.GetConnectionString("DB.Colman")));
+                    options.UseSqlServer(Configuration.GetConnectionString("Local")));
+            //options.UseSqlServer(Configuration.GetConnectionString("DB.Colman")));
 
-                    services.AddRazorPages();
+            services.AddRazorPages();
 
             // Authorization
 

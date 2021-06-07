@@ -11,7 +11,7 @@ namespace GamingStore.Models
     public class Payment
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string PaymentId { get; set; }
+        public string Id { get; set; }
 
         public string OrderForeignKey { get; set; }
 

@@ -54,7 +54,7 @@ namespace GamingStore.Controllers
 
             var item = await _context.Item
                 .Include(i => i.Category)
-                .FirstOrDefaultAsync(m => m.ItemId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();
@@ -76,7 +76,7 @@ namespace GamingStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,Title,Price,Brand,StockCounter,Description,CategoryId,StarReview,ImageUrl,Active")] Item item)
+        public async Task<IActionResult> Create([Bind("Id,Title,Price,Brand,StockCounter,Description,CategoryId,StarReview,ImageUrl,Active")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -111,9 +111,9 @@ namespace GamingStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ItemId,Title,Price,Brand,StockCounter,Description,CategoryId,StarReview,ImageUrl,Active")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Price,Brand,StockCounter,Description,CategoryId,StarReview,ImageUrl,Active")] Item item)
         {
-            if (id != item.ItemId)
+            if (id != item.Id)
             {
                 return NotFound();
             }
@@ -127,7 +127,7 @@ namespace GamingStore.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.ItemId))
+                    if (!ItemExists(item.Id))
                     {
                         return NotFound();
                     }
@@ -153,7 +153,7 @@ namespace GamingStore.Controllers
 
             var item = await _context.Item
                 .Include(i => i.Category)
-                .FirstOrDefaultAsync(m => m.ItemId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
             {
                 return NotFound();
@@ -175,7 +175,7 @@ namespace GamingStore.Controllers
 
         private bool ItemExists(int id)
         {
-            return _context.Item.Any(e => e.ItemId == id);
+            return _context.Item.Any(e => e.Id == id);
         }
     }
 }

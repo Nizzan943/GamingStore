@@ -1,0 +1,15 @@
+﻿@font-face {
+    src: url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,100&display=swap");
+    font-family: 'Roboto', sans-serif;
+}
+
+rect.bar-rect {
+    fill: #4692C6;
+}
+
+
+
+rect.bar-rect:hover {
+    fill: #6BAED6;
+    transition: all .2s;
+}

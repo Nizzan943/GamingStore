@@ -14,12 +14,12 @@
     {
         <div class="col-3">
             <div class="card item-card" style="width: 15rem; margin: 10px ">
-                <a asp-action="Details" asp-route-id="@item.ItemId">
+                <a asp-action="Details" asp-route-id="@item.Id">
                     <img class="card-img-top item-image" src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
-                        <a asp-action="Edit" asp-route-id="@item.ItemId" class="btn btn-primary">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.ItemId" class="btn btn-danger">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                     </div>
                 </a>
             </div>

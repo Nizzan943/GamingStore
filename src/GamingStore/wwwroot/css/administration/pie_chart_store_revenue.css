@@ -1,0 +1,10 @@
+﻿body {
+    background-color: #F6F6F6;
+}
+
+#chart {
+    width: 50%;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: white;
+}
