@@ -11,14 +11,14 @@
     <h1 style="margin-bottom: 100px;" class="display-4">Welcome to N.Y.O Gaming Store!</h1>
 </div>
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var category in Model)
     {
         <div class="col-3">
             <div class="card" style="width: 15rem; margin: 10px;">
-                <a form asp-controller="Items" asp-action="CategoryItems" asp-route-id="@item.Id">
-                    <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.Image)" alt="Card image cap">
+                <a form asp-controller="Items" asp-action="CategoryItems" asp-route-id="@category.Id">
+                    <img class="card-img-top" src="@Html.DisplayFor(modelItem => category.Image)" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
+                        <h5 class="card-title"> @Html.DisplayFor(modelItem => category.Name)</h5>
                     </div>
                 </a>
             </div>

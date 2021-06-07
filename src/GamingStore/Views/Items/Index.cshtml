@@ -1,13 +1,21 @@
-﻿@model IEnumerable<GamingStore.Models.Item>
+﻿@using Microsoft.AspNetCore.Identity
+@using GamingStore.Data
+@model IEnumerable<GamingStore.Models.Item>
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject GamingStoreContext GamingStoreContext
 
 @{
     ViewData["Title"] = "Index";
 }
 
+@if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Viewer")))
+{
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p>
+}
 
-<p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
-</p>
 
 <div class="row">
     @foreach (var item in Model)

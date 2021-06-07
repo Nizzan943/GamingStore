@@ -1,0 +1,8 @@
+{
+  "Title": "Corsair M65 RGB ELITE Tunable FPS Gaming Mouse, White, Backlit RGB LED, 18000 dpi, Optical",
+  "Manufacturer": null,
+  "Price": 54.4975,
+  "Description": "Corsair M65 RGB ELITE gaming mouse takes your FPS gameplay to the next level. It's equipped with Corsair's most advanced optical sensor that features native 18,000 DPI, giving you unsurpassed precision and complete sensitivity customization. Eight programmable buttons, including one Sniper Button that reduces sensitivity for crucial shots, offer ultimate in-game control no matter the genre of game. Tunable weight system lets you adjust for the most suitable grip while RGB illumination creates a captivating ambiance. M65 RGB ELITE is also built to last, with Omron switches rated at over 50 million clicks.\r\n2:00\r\n0:56\r\nDocuments",
+  "Category": null,
+  "ImageUrl": "/images/items/CorsairM65RGBELITETunableFPSGamingMouse,"
+}
