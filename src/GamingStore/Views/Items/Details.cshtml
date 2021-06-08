@@ -1,71 +1,46 @@
-﻿@model GamingStore.Models.Item
+﻿@*@model GamingStore.ViewModels.Items.ItemViewModel*@
+@model GamingStore.Models.Item
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/single_product.css">
+</head>
+<div class="single_product">
+    <div class="container">
+        <div class="row">
 
-<h1>Details</h1>
+            <!-- Images -->
+            <div class="col-lg-2 order-lg-1 order-2">
+                <ul class="image_list">
+                    <li data-image="/@Model.ImageUrl/1.jpg"><img src="/@Model.ImageUrl/1.jpg" alt=""></li>
+                    <li data-image="/@Model.ImageUrl/2.jpg"><img src="/@Model.ImageUrl/2.jpg" alt=""></li>
+                    <li data-image="/@Model.ImageUrl/3.jpg"><img src="/@Model.ImageUrl/3.jpg" alt=""></li>
+                </ul>
+            </div>
 
-<div>
-    <h4>Item</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Brand)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StockCounter)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StockCounter)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StarReview)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StarReview)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ImageUrl)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Active)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Active)
-        </dd>
-    </dl>
+            <!-- Selected Image -->
+            <div class="col-lg-5 order-lg-2 order-1">
+                <div class="image_selected"><img src="/@Model.ImageUrl/1.jpg" alt="" style="max-width: 80%"></div>
+            </div>
+
+            <!-- Description -->
+            <div class="col-lg-5 order-3">
+                <div class="product_description">
+                    <div class="product_category"> @Html.DisplayFor(c => Model.Category)</div>
+                    <div class="product_name">@Model.Title</div>
+                    <div class="product_text"><p>@Model.Description</p></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-</div>
+
+
+@section Scripts{
+    <script src="/js/product_details.js"></script>
+
+}

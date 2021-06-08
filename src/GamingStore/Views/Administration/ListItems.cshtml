@@ -19,7 +19,7 @@
                     </div>
                     <div class="col">
                         <div class="float-right">
-                            <a class="badge" asp-action="Create" asp-controller="Items">Create a New Item</a>
+                            <a class="badge" style="background: gold;"asp-action="Create" asp-controller="Items">Create a New Item</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                                     @Html.DisplayFor(modelItem => item.Price)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Category)
+                                    @Html.DisplayFor(modelItem => item.Category.Name)
                                 </td>
                                 <td class="properties">
                                     @Html.DisplayFor(modelItem => item.PropertiesList)
@@ -72,8 +72,9 @@
                                     @Html.DisplayFor(modelItem => item.Active)
                                 </td>
                                 <td class="action-buttons">
-                                    <a class="badge" style="background: #fb9678; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
-                                    <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
+                                    <a class="badge" style="background: #11D0F6; color: white; padding: 10px; text-transform: uppercase; font-weight: normal; margin-bottom: 5px; " asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
+                                    <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal; margin-bottom: 5px;" asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
+                                    <a class="badge" style="background: #F61111; color: white; padding: 10px; text-transform: uppercase; font-weight: normal; margin-bottom: 5px; " asp-action="Delete" asp-controller="Items" asp-route-id="@item.Id">Delete</a>
                                 </td>
                             </tr>
                         }

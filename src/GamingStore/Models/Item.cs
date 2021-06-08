@@ -30,9 +30,6 @@ namespace GamingStore.Models
         public Category Category { get; set; }
         [NotMapped]
         public Dictionary<string,string> PropertiesList { get; set; } = new Dictionary<string, string>();
-        [Required]
-        [DisplayName("Star Review")]
-        public float StarReview { get; set; }
         [Required, DisplayName("Image URL")]
         public string ImageUrl { get; set; }
 
