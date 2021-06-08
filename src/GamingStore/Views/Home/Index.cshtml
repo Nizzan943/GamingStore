@@ -3,7 +3,7 @@
 
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page!";
 }
 
 
@@ -16,7 +16,7 @@
         <div class="col-3">
             <div class="card" style="width: 15rem; margin: 10px;">
                 <a form asp-controller="Items" asp-action="CategoryItems" asp-route-id="@category.Id">
-                    <img class="card-img-top" src="@Html.DisplayFor(modelItem => category.Image)/1.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="@Html.DisplayFor(modelItem => category.Image)" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title"> @Html.DisplayFor(modelItem => category.Name)</h5>
                     </div>

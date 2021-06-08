@@ -19,7 +19,7 @@
                     </div>
                     <div class="col">
                         <div class="float-right">
-                            <a class="badge" style="background: gold;"asp-action="Create" asp-controller="Items">Create a New Item</a>
+                            <a class="badge" style="background: gold;" asp-action="Create" asp-controller="Items">Create a New Item</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                                     @Html.DisplayFor(modelItem => item.Price)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Category.Name)
+                                    @Html.DisplayFor(modelItem => item.CategoryId)
                                 </td>
                                 <td class="properties">
                                     @Html.DisplayFor(modelItem => item.PropertiesList)
