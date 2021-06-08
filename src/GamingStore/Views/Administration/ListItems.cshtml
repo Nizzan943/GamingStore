@@ -1,0 +1,95 @@
+﻿@model GamingStore.ViewModels.Administration.ListItemsViewModel
+@addTagHelper *, Vereyon.Web.FlashMessage
+
+@{
+    ViewData["Title"] = "Admin Items";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <strong class="card-title">Products</strong>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
+                    </div>
+                    <div class="col">
+                        <div class="float-right">
+                            <a class="badge" asp-action="Create" asp-controller="Items">Create a New Item</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Items.First().Title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Items.First().Brand)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Items.First().Price)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Items.First().Category)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Items.First().PropertiesList)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Items.First().Active)
+                            </th>
+                            <th width="8%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Item item in Model.Items)
+                        {
+                            <tr>
+                                <td class="item-titles">
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td class="item-manufacturer">
+                                    @Html.DisplayFor(modelItem => item.Brand)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category)
+                                </td>
+                                <td class="properties">
+                                    @Html.DisplayFor(modelItem => item.PropertiesList)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Active)
+                                </td>
+                                <td class="action-buttons">
+                                    <a class="badge" style="background: #fb9678; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Edit" asp-controller="Items" asp-route-id="@item.Id">Edit</a>
+                                    <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Details" asp-controller="Items" asp-route-id="@item.Id">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        },
+            5000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+}

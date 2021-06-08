@@ -4,11 +4,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.ViewModels;
+using GamingStore.ViewModels.Administration;
+using GamingStore.Models;
+using GamingStore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace GamingStore.Controllers
 {
     public class AdministrationController : Controller
     {
+        private readonly GamingStoreContext _context;
+
+        public AdministrationController(GamingStoreContext context)
+        {
+            _context = context;
+        }
+
         // GET: Administrator
         public ActionResult Index()
         {
@@ -82,6 +94,19 @@ namespace GamingStore.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ListItems()
+        {
+            List<Item> items = await _context.Item.ToListAsync();
+
+            var viewModel = new ListItemsViewModel()
+            {
+                Items = items
+            };
+
+            return View(viewModel);
         }
     }
 }
