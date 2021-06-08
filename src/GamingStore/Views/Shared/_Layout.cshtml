@@ -48,12 +48,30 @@
                     </a>
                 </ul>
                 <ul class="nav">
-
+                    
+                    <!--Search-->
                     <div class="ml-auto" style="align-content: center!important">
-                        <form asp-controller="Items" asp-action="Search">
-                            <input name="queryTitle" placeholder="Enter something to search" />
+                        @*<form asp-controller="Items" asp-action="Search">
+                            <input name="queryTitle" placeholder="Enter something to search" />   //yuv search need to implement on bottom template
                             <input type="submit" value="Search" class="btn btn-primary" />
-                        </form>
+                        </form>*@
+                        @using (Html.BeginForm("Index", "Items", FormMethod.Get))
+                        {
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Search</div>
+                            </div>
+                            <form asp-controller="Items" asp-action="Search">
+                                <input name="queryTitle" placeholder="" />
+                                @{
+                                    var allCategories = new List<string> { "All Categories" };
+                                    allCategories.AddRange(GamingStoreContext.Item.Select(item => item.Category.Name).Distinct());
+                                }
+                                @Html.DropDownList("Category", new SelectList(allCategories), null, new { @class = "category-dropdown form-control" })
+                                <input type="image" class="search-topbar-button btn-primary btn" src="/images/searchIcon4.png" />
+                            </form>
+                        </div>
+                        }
                     </div>
                 </ul>
 

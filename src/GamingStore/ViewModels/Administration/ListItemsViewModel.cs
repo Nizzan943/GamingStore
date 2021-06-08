@@ -6,5 +6,8 @@ namespace GamingStore.ViewModels.Administration
     public class ListItemsViewModel
     {
         public IEnumerable<Item> Items { get; set; }
+
+        public IEnumerable<Category> Categories { get; set; }
+
     }
 }

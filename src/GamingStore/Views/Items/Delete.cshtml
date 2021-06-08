@@ -30,12 +30,6 @@
             @Html.DisplayFor(model => model.Brand)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StockCounter)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StockCounter)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd class = "col-sm-10">
@@ -64,6 +58,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a  asp-controller="Administration" asp-action="ListItems">Back to List</a>
     </form>
 </div>

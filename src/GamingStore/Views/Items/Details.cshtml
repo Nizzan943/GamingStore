@@ -40,16 +40,16 @@
                             <!-- Product Quantity -->
                             <div class="product_quantity clearfix">
                                 <span>Quantity: </span>
-                                <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="1">
+                                <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*">
                                 <input id="product_id" name="id" type="hidden" value="@Model.Id">
-                                <div class="quantity_buttons">
+                                @*<div class="quantity_buttons">
                                     <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
                                     <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
 
-                        <div class="product_price">@Html.DisplayFor(model => model.Price)</div>
+                        <div class="product_price">@Html.DisplayFor(model => model.Price)$</div>
                         <div class="button_container">
                             <input type="submit" value="Add to Cart" name="submit" class="button cart_button">
                         </div>

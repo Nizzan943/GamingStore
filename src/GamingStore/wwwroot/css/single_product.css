@@ -105,18 +105,16 @@ Single Product
 }
 .order_info
 {
-	margin-top: 53px;
+	/*margin-top: 53px;*/
 }
-.product_quantity
-{
-	width: 182px;
-	height: 50px;
+.product_quantity {
 	border: solid 1px #e5e5e5;
 	border-radius: 5px;
 	overflow: hidden;
-	padding-left: 25px;
-	float: left;
-	margin-right: 30px;
+	/*padding-left: 25px;*/
+    padding-left: 5px;
+    float: left;
+	/*margin-right: 30px;*/
 }
 .product_quantity span
 {
@@ -298,7 +296,8 @@ Single Product
 	display: inline-block;
 	font-size: 24px;
 	font-weight: 500;
-	margin-top: 75px;
+	margin-top: 30px;
+    margin-left: 10px;
 	clear: left;
 }
 .button_container
@@ -317,6 +316,7 @@ Single Product
 	padding-right: 35px;
 	outline: none;
 	cursor: pointer;
+	margin-left: 30px;
 }
 .cart_button:focus
 {

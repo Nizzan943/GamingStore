@@ -1,4 +1,6 @@
-﻿@model GamingStore.ViewModels.Administration.ListItemsViewModel
+﻿@using GamingStore.Data
+@model GamingStore.ViewModels.Administration.ListItemsViewModel
+@inject GamingStoreContext GamingStoreContext
 @addTagHelper *, Vereyon.Web.FlashMessage
 
 @{
@@ -52,6 +54,10 @@
                     <tbody>
                         @foreach (Item item in Model.Items)
                         {
+                            var categoriesList = new List<Category>();
+                            categoriesList.AddRange(GamingStoreContext.Item.Select(item => item.Category).Distinct());
+                            var itemCategoryId = item.CategoryId;
+                            var categoryName = categoriesList.Find(category => category.Id==itemCategoryId).Name;
                             <tr>
                                 <td class="item-titles">
                                     @Html.DisplayFor(modelItem => item.Title)
@@ -63,7 +69,7 @@
                                     @Html.DisplayFor(modelItem => item.Price)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CategoryId)
+                                    @categoryName
                                 </td>
                                 <td class="properties">
                                     @Html.DisplayFor(modelItem => item.PropertiesList)

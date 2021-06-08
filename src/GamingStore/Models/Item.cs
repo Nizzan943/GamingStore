@@ -21,8 +21,7 @@ namespace GamingStore.Models
         public double Price { get; set; }
         [Required]
         public string Brand { get; set; }
-        [Required, DisplayName("Stock Counter")]
-        public int StockCounter { get; set; }
+        
         [Required]
         public string Description { get; set; }
         [Required, DisplayName("Category")]

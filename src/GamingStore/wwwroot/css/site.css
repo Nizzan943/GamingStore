@@ -114,3 +114,42 @@ body {
     flex-direction: column
 }
 
+
+/*Category search */
+.search-topbar-button {
+    background-color: #ffffff;
+    max-width: 38px;
+    max-height: 38px;
+    padding: 7px;
+    margin: 0px;
+    border: 1px solid #ced4da;
+    border-left: none;
+    border-radius: 0px;
+}
+.search-topbar-button:hover {
+    background-color: #ffffff;
+    max-width: 38px;
+    max-height: 38px;
+    padding: 7px;
+    margin: 0px;
+    border: 1px solid #ced4da;
+    border-left: none;
+    border-radius: 0px;
+}
+
+.category-dropdown {
+    border-left: none;
+    border-right: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.category-dropdown:hover {
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    border: 1px solid #ced4da;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+}
