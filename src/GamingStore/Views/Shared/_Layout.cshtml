@@ -59,7 +59,7 @@
                             <form asp-controller="Items" asp-action="Search" id="form">
                                 <input name="queryTitle" placeholder="Search something..." />
                                 <select name="category" form="form">
-                                    <option value="">select category</option>
+                                    <option value="all">all categories</option>
                                     @foreach (var category in GamingStoreContext.Category)
                                     {
                                         <option value="@category.Name">@category.Name</option>

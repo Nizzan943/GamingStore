@@ -22,7 +22,7 @@ namespace GamingStore.Controllers
         // Search
         public async Task<IActionResult> Search(string queryTitle, string category)
         {
-            var searchItems = _context.Item.Where(a => (a.Title.Contains(queryTitle) && a.Category.Name.Equals(category)));
+            var searchItems = _context.Item.Where(a => (a.Title.Contains(queryTitle)|| queryTitle == null) && (a.Category.Name.Equals(category) || category == "all"));
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
