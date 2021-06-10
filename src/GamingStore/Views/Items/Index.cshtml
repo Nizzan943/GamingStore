@@ -16,7 +16,7 @@
         <div class="col-3">
             <div class="card item-card">
                 <a asp-action="Details" asp-route-id="@item.Id">
-                    <img class="card-img-top item-image" src="@Html.DisplayFor(modelItem => item.ImageUrl)/1.jpg" alt="Card image cap">
+                    <img class="card-img-top item-image" src="/@item.ImageUrl/1.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
 
