@@ -51,27 +51,22 @@
                     
                     <!--Search-->
                     <div class="ml-auto" style="align-content: center!important">
-                        @*<form asp-controller="Items" asp-action="Search">
-                            <input name="queryTitle" placeholder="Enter something to search" />   //yuv search need to implement on bottom template
-                            <input type="submit" value="Search" class="btn btn-primary" />
-                        </form>*@
-
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <!--<div class="input-group-text">Search</div>-->
                             </div>
-                            @{
-                                var allCategories = new List<string> { "All Categories" };
-                                allCategories.AddRange(GamingStoreContext.Item.Select(item => item.Category.Name).Distinct());
-                            }
-                            @Html.DropDownList("Category", new SelectList(allCategories), null, new { @class = "category-dropdown form-control" })
-                           
 
-
-                        <form asp-controller="Items" asp-action="Search">
-                            <input name="queryTitle" placeholder="" />
-                            <input type="image" class="search-topbar-button btn-primary btn" src="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png" />
-                        </form>
+                            <form asp-controller="Items" asp-action="Search" id="form">
+                                <input name="queryTitle" placeholder="Search something..." />
+                                <select name="category" form="form">
+                                    <option value="">select category</option>
+                                    @foreach (var category in GamingStoreContext.Category)
+                                    {
+                                        <option value="@category.Name">@category.Name</option>
+                                    }
+                                </select>
+                                <input type="image" class="search-topbar-button btn-primary btn" src="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png" />
+                            </form>
                         </div>
                     </div>
                 </ul>
