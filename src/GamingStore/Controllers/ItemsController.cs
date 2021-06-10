@@ -22,7 +22,7 @@ namespace GamingStore.Controllers
         // Search
         public async Task<IActionResult> Search(string queryTitle)
         {
-            var searchItems = _context.Item.Include(a => a.Category).Where(a => (a.Title.Contains(queryTitle) || queryTitle == null));
+            var searchItems = _context.Item.Where(a => (a.Title.Contains(queryTitle) || queryTitle == null));
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
@@ -33,7 +33,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            var searchItems = _context.Item.Include(i => i.Category).Where(i => i.CategoryId == id);
+            var searchItems = _context.Item.Where(i => i.CategoryId == id);
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
