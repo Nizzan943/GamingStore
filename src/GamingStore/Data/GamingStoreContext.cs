@@ -58,6 +58,16 @@ namespace GamingStore.Data
             //        builder.HasNoKey();
             //    });
 
+
+            modelBuilder.Entity<Order>().Property(c => c.ShippingAddress).HasConversion(v => JsonConvert.SerializeObject(v),
+              v => JsonConvert.DeserializeObject<Address>(v));
+
+            modelBuilder.Entity<OrderItem>().HasKey(orderItem => new { orderItem.OrderId, orderItem.ItemId });
+            modelBuilder.Entity<OrderItem>().HasOne(orderItem => orderItem.Order).WithMany(order => order.OrderItems)
+                .HasForeignKey(orderItem => orderItem.OrderId);
+            modelBuilder.Entity<OrderItem>().HasOne(orderItem => orderItem.Item).WithMany(item => item.OrderItems)
+                .HasForeignKey(orderItem => orderItem.ItemId);
+
             modelBuilder.Entity<Store>().Property(s => s.OpeningHours).HasConversion(
                 v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<OpeningHours>>(v));
 
@@ -73,6 +83,7 @@ namespace GamingStore.Data
         public DbSet<GamingStore.Models.User> User { get; set; }
         public DbSet<GamingStore.Models.Category> Category { get; set; }
         public DbSet<GamingStore.Models.Store> Store { get; set; }
+        public DbSet<GamingStore.Models.Order> Order { get; set; }
 
 
     }

@@ -35,6 +35,9 @@ namespace GamingStore.Models
 
         public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
 
+        public ICollection<OrderItem> OrderItems { get; set; } // many to many relationship
+
+
         public bool Active { get; set; } = true;
     }
 }
