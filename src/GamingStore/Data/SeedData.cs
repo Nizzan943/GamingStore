@@ -152,7 +152,7 @@ namespace GamingStore.Data
 
             var items = SeedItems(context);
 
-            var stores = SeedStores(context, directoryPath, items);
+            //var stores = SeedStores(context, directoryPath, items);
 
             //SeedOrdersAndPayments(context, items, stores);
         }
