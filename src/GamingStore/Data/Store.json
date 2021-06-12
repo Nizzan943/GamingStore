@@ -1,0 +1,378 @@
+[
+  {
+    "Name": "Website",
+    "Address": {
+      "Address1": "",
+      "City": "",
+      "Country": ""
+    },
+    "PhoneNumber": "03-521-8666",
+    "Email": "Website@nyo.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:50"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:50"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:50"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:50"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:50"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:50"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:50"
+      }
+    ]
+  },
+  {
+    "Name": "Big Eilat Store",
+    "Address": {
+      "Address1": "Hasatat 20",
+      "City": "Eilat",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "04-522-3633",
+    "Email": "BigEilatStore@nyo.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:30"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:00"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:30"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:15"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:40"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:00"
+      }
+    ]
+  },
+  {
+    "Name": "Rishon LeZion Ben Gurion Store",
+    "Address": {
+      "Address1": "Ben Gurion 58",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "03-954-7777",
+    "Email": "RishonLeZionStore@nyo.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:30"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:00"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:40"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:10"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:30"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:10"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:50"
+      }
+    ]
+  },
+  {
+    "Name": "Jerusalem Ben Gurion Store",
+    "Address": {
+      "Address1": "Ben Gurion 3",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "02-581-3222",
+    "Email": "JerusalemBenGurionStore@nyo.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:30"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:35"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:50"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:00"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:30"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "22:00"
+      }
+    ]
+  },
+  {
+    "Name": "Tel-Aviv Ben Yehuda Store",
+    "Address": {
+      "Address1": "Ben Yehuda 10",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "03-724-7777",
+    "Email": "BenYehudaStore@nyo.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:10"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:00"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:30"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:00"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:45"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:00"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:30"
+      }
+    ]
+  },
+  {
+    "Name": "Jerusalem Herzl Store",
+    "Address": {
+      "Address1": "Herzl 10",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "02-531-4600",
+    "Email": "JerusalemHerzlStore@nyo.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:10"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:25"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:50"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:15"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:00"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:40"
+      }
+    ]
+  },
+  {
+    "Name": "Tel-Aviv Levi Eshkol Store",
+    "Address": {
+      "Address1": "Levi Eshkol 22",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "03-521-7777",
+    "Email": "LeviEshkolStore@nyo.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:35"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:20"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:30"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:50"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:10"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:50"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:10"
+      }
+    ]
+  },
+  {
+    "Name": "Haifa Herzl Store",
+    "Address": {
+      "Address1": "Herzl 1",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "04-111-2222",
+    "Email": "HaifaStore@nyo.com",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:00"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:00"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:30"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:08"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:30"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:30"
+      }
+    ]
+  }
+]

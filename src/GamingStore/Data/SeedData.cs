@@ -151,9 +151,23 @@ namespace GamingStore.Data
 
             var items = SeedItems(context);
 
-            //var stores = SeedStores(context, directoryPath, items);
+            var stores = SeedStores(context, directoryPath, items);
 
             //SeedOrdersAndPayments(context, items, stores);
+        }
+
+
+        private static List<Store> SeedStores(GamingStoreContext context, string directoryPath, Item[] items)
+        {
+            string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Stores.json");
+
+            List<Store> stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
+
+            context.Store.AddRange(stores);
+
+            context.SaveChanges();
+
+            return stores;
         }
 
         //private static void SeedOrdersAndPayments(GamingStoreContext context, Item[] items, List<Store> stores)
