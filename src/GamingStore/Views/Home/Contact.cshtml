@@ -1,0 +1,61 @@
+﻿@addTagHelper *, Vereyon.Web.FlashMessage
+@{
+    ViewData["Title"] = "Customer Service";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/contact_styles.css">
+</head>
+<body>
+
+    <div class="contact_info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="d-flex flex-lg-row flex-column justify-content-between">
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_1.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Phone</div>
+                                <div class="contact_info_text">+972 50 665 6474</div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_2.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Email</div>
+                                <div class="contact_info_text">sales@nyo.com</div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Item -->
+                        <div class="contact_info_item d-flex flex-row align-items-center justify-content-start">
+                            <div class="contact_info_image"><img src="~/images/contact_3.png" alt=""></div>
+                            <div class="contact_info_content">
+                                <div class="contact_info_title">Address</div>
+                                <div class="contact_info_text">48 Yirmiyahu Street, Tel Aviv, IL, Israel</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="store_map" id="map"></div>
+    </div>
+
+
+
+</body>
+
+@section scripts{
+    <script type="text/javascript" src="/js/stores.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJ8e0GNYL2ZJLC1g68-2-0Iv-yXGrZkAQ&callback=initMap" type="text/javascript"></script>
+
+}

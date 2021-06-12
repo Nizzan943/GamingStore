@@ -109,17 +109,17 @@ namespace GamingStore.Controllers
             return View(viewModel);
         }
 
-     /*   [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> ListStores()
         {
-            List<Store> stores = await _context.Stores.Include(s => s.Orders).ToListAsync();
+            List<Store> stores = await _context.Store.Include(s => s.Orders).ToListAsync();
             var viewModel = new ListStoresViewModel()
             {
                 Stores = stores,
             };
 
             return View(viewModel);
-        }*/
+        }
 
     }
 }

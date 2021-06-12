@@ -33,7 +33,7 @@ namespace GamingStore.Controllers
             return View(await _context.Category.ToListAsync());
         }
 
-        public IActionResult Privacy()
+        public IActionResult Contact()
         {
             return View();
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GamingStore.Contracts;
 //using GamingStore.Extensions;
 using GamingStore.Models;
+using GamingStore.Models.Relationships;
 //using GamingStore.Models.Relationships;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -159,15 +160,49 @@ namespace GamingStore.Data
 
         private static List<Store> SeedStores(GamingStoreContext context, string directoryPath, Item[] items)
         {
-            string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Stores.json");
+            string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Data\Store.json");
 
             List<Store> stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
+
+            if (context.Item.Any() && context.User.Any())
+            {
+                GenerateStoreItems(stores, items, context.User.ToList());
+            }
 
             context.Store.AddRange(stores);
 
             context.SaveChanges();
 
             return stores;
+        }
+
+        private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items, List<User> customersList)
+        {
+            var random = new Random();
+
+            foreach (Store store in stores)
+            {
+                foreach (Item item in items)
+                {
+                    bool itemCreated = random.Next(2) == 1; // 1 - True  - False
+
+                    if (!itemCreated)
+                    {
+                        continue;
+                    }
+
+                    const float itemsNumberMultiplier = 0.3f;
+
+                    store.StoreItems.Add(new StoreItem
+                    {
+                        ItemId = item.Id,
+                        StoreId = store.Id,
+                        ItemsCount =
+                            (uint)random.Next(1,
+                                (int)(customersList.Count * itemsNumberMultiplier)) // customers number times 0.3
+                    });
+                }
+            }
         }
 
         //private static void SeedOrdersAndPayments(GamingStoreContext context, Item[] items, List<Store> stores)
