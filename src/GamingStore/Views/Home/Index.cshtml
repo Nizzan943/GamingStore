@@ -1,28 +1,120 @@
 ﻿@using GamingStore.Contracts;
 @model IEnumerable<GamingStore.Models.Category>
 
+<link rel="stylesheet" type="text/css" href="~/css/homepage_styles.css">
 
 @{
     ViewData["Title"] = "Home Page!";
 }
 
+<body>
 
-<div class="text-center">
-    <h1 style="margin-bottom: 100px;" class="display-4">Welcome to N.Y.O Gaming Store!</h1>
-</div>
-<div class="row">
-    @foreach (var category in Model)
-    {
-        <div class="col-3">
-            <div class="card" style="width: 15rem; margin: 10px;">
-                <a form asp-controller="Items" asp-action="CategoryItems" asp-route-id="@category.Id">
-                    <img class="card-img-top" src="@Html.DisplayFor(modelItem => category.Image)" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"> @Html.DisplayFor(modelItem => category.Name)</h5>
+    <div class="text-center">
+        <h1 style="margin-bottom: 100px;" class="display-4">Welcome to N.Y.O Gaming Store!</h1>
+    </div>
+    <div class="row">
+        @foreach (var category in Model)
+        {
+            <div class="col-3">
+                <div class="card" style="width: 15rem; margin: 10px;">
+                    <a form asp-controller="Items" asp-action="CategoryItems" asp-route-id="@category.Id">
+                        <img class="card-img-top" src="@Html.DisplayFor(modelItem => category.Image)" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"> @Html.DisplayFor(modelItem => category.Name)</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <section class="featured-item-video">
+        <div class="item-description">
+            <div>
+                <h1 class="h1"><span><strong>GEFORCE RTX 3080</strong></span></h1>
+                <h2 class="h3"><strong>THE ULTIMATE PLAY</strong></h2>
+                <div style="color: white">
+                    <strong>
+                        <p class="item-text-description">
+                            The GeForce RTX<sup>™</sup>
+                            3070 is powered by Ampere—NVIDIA’s 2nd gen RTX architecture. Built with enhanced Ray Tracing Cores and Tensor Cores, new streaming multiprocessors, and high-speed G6 memory, it gives you the power you need to rip through the most demanding games.
+                        </p>
+                    </strong>
+                </div>
+            </div>
+
+        </div>
+        <video src="video/GeForce RTX 3070 Unboxing.mp4" controls="controls"
+               height="498"> </video>
+
+        <div class="btn btn-primary btn-lg btn-block">
+            <a href="/Items/Details?id=97">
+                <i class="fas fa-shopping-cart"></i> SEE BUYING OPTION
+            </a>
+        </div>
+    </section>
+
+
+    <section class="best_sellers" style=" margin-top: 5% ;margin-bottom:5%">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="tabbed_container">
+                        <div class="tabs clearfix tabs-right">
+                            <div class="new_arrivals_title">Hot Products</div>
+                            <div class="tabs_line"></div>
+                        </div>
                     </div>
-                </a>
+                </div>
+            </div>
+            <div class="row" style="padding: 3%">
+
+                <div class="col-lg-4 advert_col">
+                    <!-- Advert Item -->
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=101">New Surround Gaming Headset For Best Experience!</a></div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="col-5" style="margin: auto">
+                            <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=101"> <img src="/images/items/G432Wired7dot1SurroundSoundGamingHeadset/1.jpg" alt=""> </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 advert_col">
+                    <!-- Advert Item -->
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=103">New Powerful CPU Intel Core i9-10900KA</a></div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="col-5" style="margin: auto">
+                            <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=103"> <img src="/images/items/IntelCorei9-10900KACometLakeBox/1.jpg" alt=""> </a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 advert_col">
+                    <!-- Advert Item -->
+                    <div class="ml-item advert d-flex flex-row align-items-center justify-content-start">
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="advert_title" style="margin-left: 10%"><a href="/Items/Details?id=96">New Powerful GPU Nvidia GeForce RTX3090</a></div>
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="col-5" style="margin: auto">
+                            <div class="advert_image" style="max-height: 80%; max-width: 100%; margin: auto;"> <a href="/Items/Details?id=96"> <img src="/images/items/NVIDIAGeForceRTX3090/1.jpg" alt=""> </a></div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
-    }
-
-</div>
+    </section>
+</body>
