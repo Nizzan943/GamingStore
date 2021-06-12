@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Models.Relationships;
 
 namespace GamingStore.Models
 {
@@ -31,6 +32,8 @@ namespace GamingStore.Models
         public Dictionary<string,string> PropertiesList { get; set; } = new Dictionary<string, string>();
         [Required, DisplayName("Image URL")]
         public string ImageUrl { get; set; }
+
+        public ICollection<StoreItem> StoreItems { get; set; } // many to many relationship
 
         public bool Active { get; set; } = true;
     }

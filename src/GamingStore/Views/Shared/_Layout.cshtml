@@ -52,13 +52,9 @@
                     <!--Search-->
                     <div class="ml-auto" style="align-content: center!important">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <!--<div class="input-group-text">Search</div>-->
-                            </div>
-
                             <form asp-controller="Items" asp-action="Search" id="form">
                                 <input name="queryTitle" placeholder="Search something..." />
-                                <select name="category" form="form">
+                                <select name="category" form="form" style="height: 30px">
                                     <option value="all">all categories</option>
                                     @foreach (var category in GamingStoreContext.Category)
                                     {

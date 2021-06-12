@@ -83,6 +83,12 @@ body {
 }
 
 
+/*common*/
+.btn-nyo {
+    background: linear-gradient(90deg, rgba(82,113,255,1) 0%, rgba(52,107,182,1) 66%, rgba(53,92,187,1) 91%);
+}
+
+
 /* logo styles
 -------------------------------------------------- */
 .logo {
