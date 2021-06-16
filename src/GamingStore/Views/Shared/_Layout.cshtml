@@ -54,13 +54,6 @@
                         <div class="input-group mb-3">
                             <form asp-controller="Items" asp-action="Search" id="form">
                                 <input name="queryTitle" placeholder="Search something..." />
-                                <select name="category" form="form" style="height: 30px">
-                                    <option value="all">all categories</option>
-                                    @foreach (var category in GamingStoreContext.Category)
-                                    {
-                                        <option value="@category.Name">@category.Name</option>
-                                    }
-                                </select>
                                 <input type="image" class="search-topbar-button btn-primary btn" src="https://cdn0.iconfinder.com/data/icons/very-basic-2-android-l-lollipop-icon-pack/24/search-512.png" />
                             </form>
                         </div>
