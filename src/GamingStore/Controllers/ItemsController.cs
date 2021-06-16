@@ -26,9 +26,9 @@ namespace GamingStore.Controllers
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
-        public async Task<IActionResult> SearchBy(string[] brands, string[] category)
+        public async Task<IActionResult> SearchBy(string[] brands, string[] category, int price)
         {
-            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name)|| category.Length == 0));
+            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name)|| category.Length == 0) && (a.Price <= price));
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 

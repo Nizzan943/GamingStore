@@ -25,12 +25,26 @@
             brands.Add(item.Brand);
         }
     }
+
     <div>choose brand:</div>
     @foreach (var brand in brands)
     {
         <input type="checkbox" id="brands" name="brands" value=@brand>
         <label for=@brand>@brand</label><br>
     }
+
+    @{var maxPrice = 0.0;}
+    @foreach (var item in GamingStoreContext.Item)
+    {
+        if (item.Price > maxPrice)
+        {
+            maxPrice = item.Price;
+        }
+    }
+
+    <div>choose price:</div>
+    <input type="range" id="price" name="price" min="0" max=@maxPrice>
+
     <input type="submit" value="Search">
 </form>
 
