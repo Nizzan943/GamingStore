@@ -8,5 +8,4 @@
         $('#toload').load('/Item/SearchByBrand?brands=' + brands);
     });
     */
-
 });

@@ -9,22 +9,42 @@
     ViewData["Title"] = "Index";
 }
 
+<form asp-controller="Items" asp-action="SearchBy">
+    <div>choose category:</div>
+    @foreach (var category in GamingStoreContext.Category)
+    {
+        <input type="checkbox" id="category" name="category" value=@category.Name>
+        <label for=@category.Name>@category.Name</label><br>
+    }
 
-<div>choose brand:</div>
-<form asp-controller="Items" asp-action="SearchByBrand">
     @{List<string> brands = new List<string>();}
-    @foreach (var item in Model)
+    @foreach (var item in GamingStoreContext.Item)
     {
         if (!brands.Contains(item.Brand))
         {
             brands.Add(item.Brand);
         }
     }
+
+    <div>choose brand:</div>
     @foreach (var brand in brands)
     {
         <input type="checkbox" id="brands" name="brands" value=@brand>
         <label for=@brand>@brand</label><br>
     }
+
+    @{var maxPrice = 0.0;}
+    @foreach (var item in GamingStoreContext.Item)
+    {
+        if (item.Price > maxPrice)
+        {
+            maxPrice = item.Price;
+        }
+    }
+
+    <div>choose price:</div>
+    <input type="range" id="price" name="price" min="0" max=@maxPrice>
+
     <input type="submit" value="Search">
 </form>
 
