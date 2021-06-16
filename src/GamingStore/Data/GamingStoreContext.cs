@@ -85,6 +85,7 @@ namespace GamingStore.Data
         public DbSet<GamingStore.Models.Category> Category { get; set; }
         public DbSet<GamingStore.Models.Store> Store { get; set; }
         public DbSet<GamingStore.Models.Order> Order { get; set; }
+        public DbSet<GamingStore.Models.Cart> Cart { get; set; }
 
 
     }
