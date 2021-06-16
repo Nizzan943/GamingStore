@@ -9,8 +9,25 @@
     ViewData["Title"] = "Index";
 }
 
+<div>choose brand:</div>
+<form asp-controller="Items" asp-action="SearchByBrand">
+    @{List<string> brands = new List<string>();}
+    @foreach (var item in Model)
+    {
+        if (!brands.Contains(item.Brand))
+        {
+            brands.Add(item.Brand);
+        }
+    }
+    @foreach (var brand in brands)
+    {
+        <input type="checkbox" id="brands" name="brands" value=@brand>
+        <label for=@brand>@brand</label><br>
+    }
+    <input type="submit" value="Search">
+</form>
 
-<div class="row">
+<div class="row" id="toload">
     @foreach (var item in Model)
     {
         <div class="col-3">
@@ -19,7 +36,6 @@
                     <img class="card-img-top item-image" src="/@item.ImageUrl/1.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
-
                     </div>
                 </a>
             </div>
@@ -27,3 +43,7 @@
     }
 
 </div>
+
+@section Scripts {
+    <script src="~/js/search.js"></script>
+}

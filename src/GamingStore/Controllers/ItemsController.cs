@@ -26,6 +26,12 @@ namespace GamingStore.Controllers
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
+        public async Task<IActionResult> SearchByBrand(string[] brands)
+        {
+            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0));
+            return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
+        }
+
         public async Task<IActionResult> CategoryItems(int? id)
         {
             if (id == null)
