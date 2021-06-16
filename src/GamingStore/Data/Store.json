@@ -190,12 +190,12 @@
   {
     "Name": "Tel-Aviv Ben Yehuda Store",
     "Address": {
-      "Address1": "Ben Yehuda 10",
+      "Address1": "Dizengoff 50",
       "City": "Tel-Aviv",
       "Country": "Israel"
     },
     "PhoneNumber": "03-724-7777",
-    "Email": "BenYehudaStore@nyo.com",
+    "Email": "DizengoffStore@nyo.com",
     "OpeningHours": [
       {
         "DayOfWeek": 0,

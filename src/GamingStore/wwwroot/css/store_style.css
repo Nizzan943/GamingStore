@@ -1,0 +1,53 @@
+﻿.store_container {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.store_list {
+    max-height: 800px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.store_list > li.active { background-color: #86c0ff; }
+
+.store_title {
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 20px;
+    color: #282828;
+}
+
+.store_detail {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 100;
+    letter-spacing: -0.25px;
+    line-height: 1.5;
+    font-size: 16px;
+    word-break: break-all;
+    color: #282828;
+    margin-bottom: 3px;
+}
+.opening_hours  span  {
+    display: inline-block
+}
+
+.store_map {
+    height: 800px;
+    width: 100%;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/*Search Form*/
+.store_container h3 {
+}
+.store_container .search_form {
+    margin-bottom: 15px;
+}
+
+.store_container .custom-select {
+    margin: 0px;
+}
+.store_container .search_bar {
+    width: 100%;
+}
