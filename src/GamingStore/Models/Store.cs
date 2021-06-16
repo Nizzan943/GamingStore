@@ -22,7 +22,7 @@ namespace GamingStore.Models
             Interlocked.Increment(ref StoreCounter);
         }
 
-        
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]

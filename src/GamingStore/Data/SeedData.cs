@@ -152,25 +152,23 @@ namespace GamingStore.Data
 
             var items = SeedItems(context);
 
-            //var stores = SeedStores(context, directoryPath, items);
+            var stores = SeedStores(context, directoryPath);
 
             //SeedOrdersAndPayments(context, items, stores);
         }
 
 
-        private static List<Store> SeedStores(GamingStoreContext context, string directoryPath, Item[] items)
+        private static List<Store> SeedStores(GamingStoreContext context, string directoryPath)
         {
             string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Data\Store.json");
-
             List<Store> stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
 
             if (context.Item.Any() && context.User.Any())
             {
-                GenerateStoreItems(stores, items, context.User.ToList());
+                //GenerateStoreItems(stores, items, context.Customers.ToList());
             }
 
             context.Store.AddRange(stores);
-
             context.SaveChanges();
 
             return stores;
@@ -224,21 +222,7 @@ namespace GamingStore.Data
         //    context.SaveChanges();
         //}
 
-        //private static List<Store> SeedStores(GamingStoreContext context, string directoryPath, Item[] items)
-        //{
-        //    string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Data\Mock_Data\Stores.json");
-        //    List<Store> stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
 
-        //    if (context.Items.Any() && context.Users.Any())
-        //    {
-        //        GenerateStoreItems(stores, items, context.Users.ToList());
-        //    }
-
-        //    context.Stores.AddRange(stores);
-        //    context.SaveChanges();
-
-        //    return stores;
-        //}
 
         private static Category[] SeedCategories(GamingStoreContext context)
         {

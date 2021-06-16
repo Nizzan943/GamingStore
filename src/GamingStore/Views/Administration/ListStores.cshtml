@@ -17,7 +17,7 @@
                     </div>
                     <div class="col">
                         <div class="float-right">
-                            <a class="badge" style="background: lightskyblue; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Create" asp-controller="Stores">Create a New Item</a>
+                            <a class="badge" style="background: gold;  padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Create" asp-controller="Stores">Create a New Store</a>
                         </div>
                     </div>
                 </div>
@@ -102,14 +102,14 @@
                                     </table>
                                 </td>
                                 <td>
-                                    <a class="badge" style="background: #fb9678; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Edit" asp-controller="Stores" asp-route-id="@store.Id">Edit</a>
+                                    <a class="badge" style="background: #11D0F6; color: white; padding: 10px; margin-bottom: 5px; text-transform: uppercase; font-weight: normal; " asp-action="Edit" asp-controller="Stores" asp-route-id="@store.Id">Edit</a>
                                     @{
                                         if (store.Orders.Count <= 0)
                                         {
-                                            <a class="badge" style="background: red; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Delete" asp-controller="Stores" asp-route-id="@store.Id">Delete</a>
+                                            <a class="badge" style="background: red; color: white; padding: 10px; margin-bottom: 5px; text-transform: uppercase; font-weight: normal;" asp-action="Delete" asp-controller="Stores" asp-route-id="@store.Id">Delete</a>
                                         }
                                     }
-                                    <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal;" asp-action="Details" asp-controller="Stores" asp-route-id="@store.Id">Details</a>
+                                    <a class="badge" style="background: #00c292; color: white; padding: 10px; margin-bottom: 5px; text-transform: uppercase; font-weight: normal; " asp-action="Details" asp-controller="Stores" asp-route-id="@store.Id">Details</a>
                                 </td>
                             </tr>
                         }
