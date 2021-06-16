@@ -1,0 +1,91 @@
+﻿@model GamingStore.ViewModels.Administration.ListUsersViewModels
+@addTagHelper *, Vereyon.Web.FlashMessage
+
+@{
+    ViewBag.Title = "All Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">All Users</strong>
+            </div>
+            <div class="card-body">
+                <div class="col">
+                    <div class="d-flex justify-content-center" id="flash_message">
+                        <flash dismissable="true" />
+                    </div>
+                    <div id="users">
+                        @if (Model.Users.Any())
+                        {
+                            var userNum = 0;
+                            bool isAdmin = Model.CurrentUserRoles.Any(s => s.Equals("Admin"));
+                            foreach (var user in Model.Users)
+                            {
+                                userNum++;
+                                var userNameString = "user" + userNum;@*adding user number to div*@
+                                <div class="card mb-3 @userNameString">
+                                    <div class="card-header">
+                                        User Id : @user.Id
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">@user.Email</h5>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a asp-controller="Administration" asp-action="Edituser"
+                                           asp-route-id="@user.Id" class="btn btn-outline-primary">
+                                            Edit
+                                        </a>
+                                        @*<span id="confirmDeleteSpan_@user.Id" style="display: none">
+                                            <span>Are you sure you want to delete?</span>
+
+                                            <input type="button" onclick="confirmDeleteUserAjax('@user.Id', '@userNum', '@user.Email', '@isAdmin')" class="btn btn-outline-danger" value="Yes">
+                                            <a href="javascript:void(0)" class="btn btn-primary"
+                                               onclick="toggleConfirmDeleteUserButton('@user.Id', false)">
+                                                No
+                                            </a>
+                                        </span>
+                                        @{
+                                            if (user.Id != Model.CurrentUser.Id)
+                                            {
+                                                <span id="deleteSpan_@user.Id">
+                                                    <a href="javascript:void(0)" class="btn btn-outline-danger"
+                                                       onclick="toggleConfirmDeleteUserButton('@user.Id', true)">
+                                                        Delete
+                                                    </a>
+                                                </span>
+                                            }
+                                        }*@
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="card">
+                                <div class="card-header">
+                                    No users created yet
+                                </div>
+                                <div class="card-body">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="/js/list_users.js"></script>
+    <script type="text/javascript" src="/lib/notifyjs/notify.min.js"></script>
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        },
+            5000); // <-- time in milliseconds
+    </script>
+}

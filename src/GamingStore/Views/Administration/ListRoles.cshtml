@@ -1,0 +1,50 @@
+﻿@model GamingStore.ViewModels.Administration.ListRolesViewModel
+
+@{
+    ViewBag.Title = "All Roles";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">All Roles</strong>
+            </div>
+            <div class="card-body">
+                <div class="col">
+                    <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
+                    @if (Model.Roles.Any())
+                    {
+
+                        foreach (var role in Model.Roles)
+                        {
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    Role Id : @role.Id
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@role.Name</h5>
+                                </div>
+                                <div class="card-footer">
+                                    <a asp-controller="Administration" asp-action="EditRole"
+                                       asp-route-id="@role.Id" class="btn btn-outline-primary">
+                                        Edit
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="card">
+                            <div class="card-header">
+                                No roles created yet
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
