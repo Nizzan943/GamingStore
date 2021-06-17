@@ -10,7 +10,7 @@
 }
 
 
-<form asp-controller="Items" asp-action="SearchBy">
+<form asp-controller="Items" asp-action="Search">
     <div>choose category:</div>
     @foreach (var category in GamingStoreContext.Category)
     {
@@ -58,7 +58,16 @@
     }
 
     <div>choose price:</div>
-    <input type="range" id="price" name="price" min="0" max=@maxPrice value=@ViewData["price"]>
+    @if ((double)ViewData["price"] != 0.0)
+    {
+           <input type="range" id="price" name="price" min="0" max=@maxPrice value=@ViewData["price"]>
+    }
+    else
+    {
+           <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice> 
+    }
+
+    <input name="queryTitle" value=@ViewData["queryTitle"] hidden />
 
     <input type="submit" value="Search">
 </form>

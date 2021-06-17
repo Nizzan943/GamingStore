@@ -9,7 +9,7 @@
     ViewData["Title"] = "Index";
 }
 
-<form asp-controller="Items" asp-action="SearchBy">
+<form asp-controller="Items" asp-action="Search">
     <div>choose category:</div>
     @foreach (var category in GamingStoreContext.Category)
     {
@@ -43,7 +43,7 @@
     }
 
     <div>choose price:</div>
-    <input type="range" id="price" name="price" min="0" max=@maxPrice>
+    <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice>
 
     <input type="submit" value="Search">
 </form>
