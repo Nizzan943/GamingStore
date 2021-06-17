@@ -26,10 +26,24 @@ namespace GamingStore.Controllers
             return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
         }
 
-        public async Task<IActionResult> SearchBy(string[] brands, string[] category, int price)
+        public async Task<IActionResult> SearchBy(string[] brands, string[] category, double price)
         {
             var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name)|| category.Length == 0) && (a.Price <= price));
-            return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
+            List<string> _brands = new List<string>();
+            for (int i = 0; i < brands.Length; i++)
+            {
+                _brands.Add(brands[i]);
+            }
+            ViewData["brands"] = _brands.ToList();
+
+            List<string> _category = new List<string>();
+            for (int i = 0; i < category.Length; i++)
+            {
+                _category.Add(category[i]);
+            }
+            ViewData["category"] = _category.ToList();
+            ViewData["price"] = price;
+            return View("~/Views/Items/chosenIndex.cshtml", await searchItems.ToListAsync());
         }
 
         public async Task<IActionResult> CategoryItems(int? id)
