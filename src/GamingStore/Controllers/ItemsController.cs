@@ -23,7 +23,7 @@ namespace GamingStore.Controllers
         // Search
         public async Task<IActionResult> Search(string[] brands, string[] category, double price, string queryTitle)
         {
-            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name)|| category.Length == 0) && (a.Price <= price) && (a.Title.Contains(queryTitle) || queryTitle == null));
+            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name)|| category.Length == 0) && (a.Price <= price || price == 0) && (a.Title.Contains(queryTitle) || queryTitle == null));
             ViewData["brands"] = brands.ToList();
 
             ViewData["category"] = category.ToList();
