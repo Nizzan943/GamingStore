@@ -10,24 +10,61 @@
 <body>
 
     <div class="text-center">
-        <h1 style="margin-bottom: 100px;" class="display-4">Welcome to N.Y.O Gaming Store!</h1>
+        <h4 style="margin-bottom: 10px;" class="display-4">Welcome to N.Y.O Gaming Store!</h4>
     </div>
-    <div class="row">
-        @foreach (var category in Model)
-        {
-            <div class="col-3">
-                <div class="card" style="width: 15rem; margin: 10px;">
-                    <a form asp-controller="Items" asp-action="CategoryItems" asp-route-id="@category.Id">
-                        <img class="card-img-top" src="@Html.DisplayFor(modelItem => category.Image)" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title"> @Html.DisplayFor(modelItem => category.Name)</h5>
+    <section class="characteristics">
+        <div class="container">
+            <div class="row">
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_icon"><img src="~/images/char_1.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Free Delivery</div>
+                            <div class="char_subtitle">from $50</div>
                         </div>
-                    </a>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_icon"><img src="~/images/char_2.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Great New Products</div>
+                            <div class="char_subtitle" style="margin: 5px">Every Week</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_icon"><img src="~/images/char_3.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title" style="margin: 6px"> Cheapest Online Gaming Store </div>
+                            <div class="char_subtitle" style="margin: 5px">Best Seller Store</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Char. Item -->
+                <div class="col-lg-3 col-md-6 char_col">
+
+                    <div class="char_item d-flex flex-row align-items-center justify-content-start">
+                        <div class="char_icon"><img src="~/images/char_4.png" alt=""></div>
+                        <div class="char_content">
+                            <div class="char_title">Best Offers Every Day</div>
+                            <div class="char_subtitle">Save Money</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        }
-
-    </div>
+        </div>
+    </section>
 
     <section class="featured-item-video">
         <div class="item-description">

@@ -41,32 +41,6 @@ Logo style
     width: 100%;
 }
 
-/*********************************
-Item style
-*********************************/
-.item-image {
-    width: 190px;
-    height: 155px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.item-title {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-    -webkit-box-orient: vertical;
-}
-
-.item-card {
-    width: 16rem;
-    height: 18rem;
-    margin: 5px;
-    display: flex;
-    flex-direction: column
-}
 
 
 /*********************************

@@ -255,17 +255,17 @@ namespace GamingStore.Data
                 },
                 new Category
                 {
-                    Name = "Gaming Chairs",
+                    Name = "Chairs",
                     Image = "images/categories/gaming chairs.jpg",
                 },
                 new Category
                 {
-                    Name = "Gaming Headsets",
+                    Name = "Headsets",
                     Image = "images/categories/gaming headsets.jpg",
                 },
                 new Category
                 {
-                    Name = "Mouse Pads",
+                    Name = "Pads",
                     Image = "images/categories/mouse pads.jpg",
                 }
             };
@@ -881,7 +881,7 @@ namespace GamingStore.Data
                 new Item
                 {
                     Title = "Mad Catz Gaming Headset 7.1",
-                    Brand = "Mad Catz",
+                    Brand = "MadCatz",
                     Price = 41.45,
                     Category = context.Category.Find(7),
                     ImageUrl = "images/items/MadCatzF.R.E.Q.4USBConnectorCircumauralG",
@@ -960,7 +960,7 @@ namespace GamingStore.Data
 
                 new Item
                 {
-                    Title = "KLIM Puma - USB Gamer Headset with Mic", Brand = "KLIM Puma", Price = 44.99,
+                    Title = "KLIM Puma - USB Gamer Headset with Mic", Brand = "KlimPuma", Price = 44.99,
                     Category = context.Category.Find(7), PropertiesList = new Dictionary<string, string>()
                     {
                         {"Sound Mode", "Stereo"},
