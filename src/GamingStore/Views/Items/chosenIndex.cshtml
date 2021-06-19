@@ -10,85 +10,91 @@
 }
 
 
-<form asp-controller="Items" asp-action="Search">
-    <div>choose category:</div>
-    @foreach (var category in GamingStoreContext.Category)
-    {
-        @if (((List<string>)ViewData["category"]).Contains(category.Name))
-        {
-            <input type="checkbox" id="category" name="category" value=@category.Name checked>
-        }
-        else
-        {
-            <input type="checkbox" id="category" name="category" value=@category.Name>
-        }
-        <label for=@category.Name>@category.Name</label><br>
-    }
 
-    @{List<string> brands = new List<string>();}
-    @foreach (var item in GamingStoreContext.Item)
-    {
-        if (!brands.Contains(item.Brand))
-        {
-            brands.Add(item.Brand);
-        }
-    }
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <form asp-controller="Items" asp-action="Search">
+                <div><strong>Filter by Category:</strong></div>
+                @foreach (var category in GamingStoreContext.Category)
+                {
+                    @if (((List<string>)ViewData["category"]).Contains(category.Name))
+                    {
+                        <input type="checkbox" id="category" name="category" value=@category.Name checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="category" name="category" value=@category.Name>
+                    }
+                    <label for=@category.Name>@category.Name</label><br>
+                }
 
-    <div>choose brand:</div>
-    @foreach (var brand in brands)
-    {
-        @if (((List<string>)ViewData["brands"]).Contains(brand))
-        {
-            <input type="checkbox" id="brands" name="brands" value=@brand checked>
-        }
-        else
-        {
-            <input type="checkbox" id="brands" name="brands" value=@brand>
-        }
-        <label for=@brand>@brand</label><br>
-    }
+                @{List<string> brands = new List<string>();}
+                @foreach (var item in Model)
+                {
+                    if (!brands.Contains(item.Brand))
+                    {
+                        brands.Add(item.Brand);
+                    }
+                }
 
-    @{var maxPrice = 0.0;}
-    @foreach (var item in GamingStoreContext.Item)
-    {
-        if (item.Price > maxPrice)
-        {
-            maxPrice = item.Price;
-        }
-    }
+                <div><strong>Filter by Brand:</strong></div>
+                @foreach (var brand in brands)
+                {
+                    @if (((List<string>)ViewData["brands"]).Contains(brand))
+                    {
+                        <input type="checkbox" id="brands" name="brands" value=@brand checked>
+                    }
+                    else
+                    {
+                        <input type="checkbox" id="brands" name="brands" value=@brand>
+                    }
+                    <label for=@brand>@brand</label><br>
+                }
 
-    <div>choose price:</div>
-    @if ((double)ViewData["price"] != 0.0)
-    {
-           <input type="range" id="price" name="price" min="0" max=@maxPrice value=@ViewData["price"]>
-    }
-    else
-    {
-           <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice> 
-    }
+                @{var maxPrice = 0.0;}
+                @foreach (var item in Model)
+                {
+                    if (item.Price > maxPrice)
+                    {
+                        maxPrice = item.Price;
+                    }
+                }
 
-    <input name="queryTitle" value=@ViewData["queryTitle"] hidden />
+                <div><strong>Filter by Price:</strong></div>
+                @if ((double)ViewData["price"] != 0.0)
+                {
+                    <input type="range" id="price" name="price" min="0" max=@maxPrice value=@ViewData["price"]>
+                }
+                else
+                {
+                    <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice>
+                }
 
-    <input type="submit" value="Search">
-</form>
+                <input name="queryTitle" value=@ViewData["queryTitle"] hidden />
 
-<div class="row" id="toload">
-    @foreach (var item in Model)
-    {
-        <div class="col-3">
-            <div class="card item-card">
-                <a asp-action="Details" asp-route-id="@item.Id">
-                    <img class="card-img-top item-image" src="/@item.ImageUrl/1.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
-                    </div>
-                </a>
-            </div>
+                <div>
+                    <input type="submit" value="Search" style="width: 100%">
+
+                </div>
+            </form>
         </div>
-    }
 
+        <div class="col-lg-9">
+            @foreach (var item in Model)
+            {
+                <div class="card item-card">
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img class="card-img-top item-image" src="/@item.ImageUrl/1.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
 </div>
-
 @section Scripts {
     <script src="~/js/search.js"></script>
 }

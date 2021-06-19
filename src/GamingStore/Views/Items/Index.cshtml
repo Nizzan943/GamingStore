@@ -23,7 +23,7 @@
                 }
 
                 @{List<string> brands = new List<string>();}
-                @foreach (var item in GamingStoreContext.Item)
+                @foreach (var item in Model)
                 {
                     if (!brands.Contains(item.Brand))
                     {
@@ -39,7 +39,7 @@
                 }
 
                 @{var maxPrice = 0.0;}
-                @foreach (var item in GamingStoreContext.Item)
+                @foreach (var item in Model)
                 {
                     if (item.Price > maxPrice)
                     {
