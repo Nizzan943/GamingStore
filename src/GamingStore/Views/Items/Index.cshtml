@@ -39,7 +39,7 @@
                 }
 
                 @{var maxPrice = 0.0;}
-                @foreach (var item in Model)
+                @foreach (var item in GamingStoreContext.Item)
                 {
                     if (item.Price > maxPrice)
                     {
