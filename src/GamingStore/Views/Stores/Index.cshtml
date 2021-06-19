@@ -1,6 +1,7 @@
 ﻿@using GamingStore.Contracts
 @using System.Text.RegularExpressions
 @using Microsoft.EntityFrameworkCore.ChangeTracking.Internal
+@using Accuweather
 @model GamingStore.ViewModels.Stores.StoresCitiesViewModel
 
 @{
@@ -71,6 +72,39 @@
                 Email:
                 <a href="mailto:@store.Email">@store.Email </a>
             </div>
+            <div class="store_detail store_email">
+
+                @{
+                    if (store.Address.City == "")
+                    {
+                        <div>Weather: No weather in the big world wide web. &#127760;</div>
+                    }
+                    else
+                    {
+                        var temp = Model.CurrentWeather.GetValueOrDefault(store.Address.City);
+                        <div>
+
+                            @{
+                                if (temp > 16)
+                                {
+                                    <div>Weather: @temp Celsius &#127774;</div>
+                                }
+                                if (temp < 16 && temp > 10)
+                                {
+                                    <div>Weather: @temp Celsius &#9925;</div>
+                                }
+
+                                if (temp < 10)
+                                {
+                                    <div>Weather: @temp Celsius &#9924;</div>
+                                }
+                            }
+                        </div>
+                    }
+                }
+
+            </div>
+
             @{ OpeningHoursTemplate(store); }
         </li>
     }

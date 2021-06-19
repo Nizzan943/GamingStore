@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
 using Microsoft.AspNetCore.Identity;
+using Accuweather;
 
 
 namespace GamingStore
@@ -34,6 +35,7 @@ namespace GamingStore
                     options.UseSqlServer(Configuration.GetConnectionString("Local")));
             //options.UseSqlServer(Configuration.GetConnectionString("DB.Colman")));
 
+            services.AddSingleton<IAccuweatherApi>(l => new AccuweatherApi("I7i66pnCspYN80KAWUGeAbMoo0dkdsLc", "en-us"));
             services.AddRazorPages();
 
             // Authorization

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Accuweather;
 using GamingStore.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,14 @@ using GamingStore.ViewModels;
 using GamingStore.ViewModels.Stores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
+using RestSharp;
 
 namespace GamingStore.Controllers
 {
     public class StoresController : BaseController
     {
+        private static readonly IAccuweatherApi _accuweatherApi = new AccuweatherApi("I7i66pnCspYN80KAWUGeAbMoo0dkdsLc");
 
         public StoresController(UserManager<User> userManager, GamingStoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
             : base(userManager, context, roleManager, signInManager)
@@ -30,13 +34,24 @@ namespace GamingStore.Controllers
             List<Store> stores = await Context.Store.ToListAsync();
             HashSet<string> uniqueCities = GetUniqueCities(stores);
             List<Store> openStores = GetOpenStores(stores);
+            Dictionary<string, int> locations = new Dictionary<string, int>();
+            foreach (var element in stores)
+            {
+                if (element.Name == "Website")
+                    continue;
 
+                if (locations.ContainsKey(element.Address.City))
+                    continue;
 
+                locations.Add(element.Address.City, element.LocationKey);
+            }
+            Dictionary<string, double> weather = GetCurrentWeather(uniqueCities);
             var viewModel = new StoresCitiesViewModel
             {
                 Stores = stores,
                 CitiesWithStores = uniqueCities.ToArray(),
                 OpenStores = openStores,
+                CurrentWeather = weather,
                 ItemsInCart = await CountItemsInCart()
             };
 
@@ -106,6 +121,32 @@ namespace GamingStore.Controllers
             return uniqueCities;
         }
 
+        private static Dictionary<string, double> GetCurrentWeather(HashSet<string> stores)
+        {
+            var weather = new Dictionary<string, double>();
+
+            foreach (var store in stores)
+            {
+                try
+                {
+                    if(store == String.Empty)
+                        continue;
+                    var client = new RestClient("http://api.weatherapi.com/v1/");
+                    var request = new RestRequest("current.json", Method.GET);
+                    request.AddParameter("key", "df7bc763685d44b68aa114413211906");
+                    request.AddParameter("q", store);
+                    var response = client.Execute(request);
+                    var weatherByCity = JsonConvert.DeserializeObject<Root>(response.Content);
+                    weather.Add(store, weatherByCity.current.temp_c);
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+            }
+
+            return weather;
+        }
 
         // GET: Stores/Details/5
         public async Task<IActionResult> Details(int? id)
