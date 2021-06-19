@@ -34,17 +34,6 @@ namespace GamingStore.Controllers
             List<Store> stores = await Context.Store.ToListAsync();
             HashSet<string> uniqueCities = GetUniqueCities(stores);
             List<Store> openStores = GetOpenStores(stores);
-            Dictionary<string, int> locations = new Dictionary<string, int>();
-            foreach (var element in stores)
-            {
-                if (element.Name == "Website")
-                    continue;
-
-                if (locations.ContainsKey(element.Address.City))
-                    continue;
-
-                locations.Add(element.Address.City, element.LocationKey);
-            }
             Dictionary<string, double> weather = GetCurrentWeather(uniqueCities);
             var viewModel = new StoresCitiesViewModel
             {

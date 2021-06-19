@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.Services.Twitter;
+using GamingStore.ViewModels.Items;
 using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
@@ -85,16 +87,32 @@ namespace GamingStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Price,Brand,StockCounter,Description,CategoryId,StarReview,ImageUrl,Active")] Item item)
+        public async Task<IActionResult> Create(CreateEditItemViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(item);
+                model.Item.Brand = model.Item.Brand.Trim();
+                //string uploadFolder = await UploadImages(model);
+
+                await _context.Item.AddAsync(model.Item);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                #region TwitterPost
+
+                if (model.PublishItemFlag)
+                {
+
+                    //PublishTweet(model.Item, uploadFolder);
+                }
+
+                #endregion
+
             }
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", item.CategoryId);
-            return View(item);
+            catch (Exception e)
+            {
+            }
+
+            return RedirectToAction("ListItems", "Administration");
         }
 
         // GET: Items/Edit/5
@@ -186,5 +204,31 @@ namespace GamingStore.Controllers
         {
             return _context.Item.Any(e => e.Id == id);
         }
+
+        private void PublishTweet(Item item, string itemImagesPath)
+        {
+            const string consumerKey = "";
+            const string consumerKeySecret = "";
+            const string accessToken = "";
+            const string accessTokenSecret = "";
+
+            var twitter = new Twitter(consumerKey, consumerKeySecret, accessToken, accessTokenSecret);
+
+            string fullImageUrl = $"{itemImagesPath}\\1.jpg";
+            string tweet = $"Gaming Store now sells {item.Title} only on {item.Price}$";
+
+            try
+            {
+
+                string response = twitter.PublishToTwitter(tweet, fullImageUrl);
+                Console.WriteLine(response);
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
     }
 }
+

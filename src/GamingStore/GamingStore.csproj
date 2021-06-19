@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GamingStore.Contracts\GamingStore.Contracts.csproj" />
+    <ProjectReference Include="..\GamingStore.Services\GamingStore.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

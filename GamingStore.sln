@@ -7,7 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{86885341-EE4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamingStore", "src\GamingStore\GamingStore.csproj", "{1C6F8021-80EF-4BC4-825C-E6987EB2C710}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamingStore.Contracts", "src\GamingStore.Contracts\GamingStore.Contracts.csproj", "{6BA340C5-9657-43A1-A233-113725CDF60D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamingStore.Contracts", "src\GamingStore.Contracts\GamingStore.Contracts.csproj", "{6BA340C5-9657-43A1-A233-113725CDF60D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamingStore.Services", "src\GamingStore.Services\GamingStore.Services.csproj", "{0F60CAF6-17A8-4E6D-9EF5-A69AE4B7B6F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{6BA340C5-9657-43A1-A233-113725CDF60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BA340C5-9657-43A1-A233-113725CDF60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BA340C5-9657-43A1-A233-113725CDF60D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F60CAF6-17A8-4E6D-9EF5-A69AE4B7B6F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F60CAF6-17A8-4E6D-9EF5-A69AE4B7B6F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F60CAF6-17A8-4E6D-9EF5-A69AE4B7B6F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F60CAF6-17A8-4E6D-9EF5-A69AE4B7B6F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1C6F8021-80EF-4BC4-825C-E6987EB2C710} = {86885341-EE43-4E5A-AE88-665AB2A1F86B}
 		{6BA340C5-9657-43A1-A233-113725CDF60D} = {86885341-EE43-4E5A-AE88-665AB2A1F86B}
+		{0F60CAF6-17A8-4E6D-9EF5-A69AE4B7B6F9} = {86885341-EE43-4E5A-AE88-665AB2A1F86B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFE8BC0E-524B-4B8F-B893-84D1A25B6EE8}
