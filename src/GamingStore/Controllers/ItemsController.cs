@@ -207,10 +207,10 @@ namespace GamingStore.Controllers
 
         private void PublishTweet(Item item, string itemImagesPath)
         {
-            const string consumerKey = "";
-            const string consumerKeySecret = "";
-            const string accessToken = "";
-            const string accessTokenSecret = "";
+            const string consumerKey = "rPwLqEA8pe0iEw8dvta4SxGE1";
+            const string consumerKeySecret = "iySGb1uxhorSzFitQgxjYZRufiqPpa81gVQlSZvO088nqXrhtc";
+            const string accessToken = "1406322532949630976-VzcCFalG79mlF8L5BEts0yRtwZoR4A";
+            const string accessTokenSecret = "c8OeT0BZ5j4GBHrIdyBVApKSwNSVvJUI2FThW5NF6JiVw";
 
             var twitter = new Twitter(consumerKey, consumerKeySecret, accessToken, accessTokenSecret);
 
