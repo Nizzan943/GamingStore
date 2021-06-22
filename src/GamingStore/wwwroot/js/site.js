@@ -1,4 +1,13 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
 
-// Write your JavaScript code.
+function disableCartButtonCheckOut() {
+    if (!flag) {
+        document.getElementById('cart_button_checkout').addClass("disabled", "true");
+    } else {
+        document.getElementById('cart_button_checkout').removeAttribute("disabled");
+        document.getElementById('cart_button_checkout').focus();
+    }
+}
+
+$("cart_button_checkout").toggleClass("disabled", true);
+

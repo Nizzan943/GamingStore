@@ -10,64 +10,93 @@
 }
 
 
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/products_styles.css">
+</head>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-3">
-            <form asp-controller="Items" asp-action="Search">
-                <div><strong>Filter by Category:</strong></div>
-                @foreach (var category in GamingStoreContext.Category)
-                {
-                    <input type="checkbox" id="category" name="category" value=@category.Name>
-                    <label for=@category.Name>@category.Name</label><br>
-                }
-
-                @{List<string> brands = new List<string>();}
-                @foreach (var item in Model.Items)
-                {
-                    if (!brands.Contains(item.Brand))
+<div class="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <form asp-controller="Items" asp-action="Search">
+                    <div><strong>Filter by Category:</strong></div>
+                    @foreach (var category in GamingStoreContext.Category)
                     {
-                        brands.Add(item.Brand);
+                        <input type="checkbox" id="category" name="category" value=@category.Name>
+                        <label for=@category.Name>@category.Name</label><br>
                     }
-                }
 
-                <div><strong>Filter by Brand:</strong></div>
-                @foreach (var brand in brands)
-                {
-                    <input type="checkbox" id="brands" name="brands" value=@brand>
-                    <label for=@brand>@brand</label><br>
-                }
-
-                @{var maxPrice = 0.0;}
-                @foreach (var item in GamingStoreContext.Item)
-                {
-                    if (item.Price > maxPrice)
+                    @{List<string> brands = new List<string>();}
+                    @foreach (var item in Model.Items)
                     {
-                        maxPrice = item.Price;
+                        if (!brands.Contains(item.Brand))
+                        {
+                            brands.Add(item.Brand);
+                        }
                     }
-                }
 
-                <div><strong>Filter by Price:</strong></div>
-                <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice>
-                <div>
-                    <input type="submit" value="Search" style="width: 100%">
+                    <div><strong>Filter by Brand:</strong></div>
+                    @foreach (var brand in brands)
+                    {
+                        <input type="checkbox" id="brands" name="brands" value=@brand>
+                        <label for=@brand>@brand</label><br>
+                    }
+
+                    @{var maxPrice = 0.0;}
+                    @foreach (var item in GamingStoreContext.Item)
+                    {
+                        if (item.Price > maxPrice)
+                        {
+                            maxPrice = item.Price;
+                        }
+                    }
+
+                    <div><strong>Filter by Price:</strong></div>
+                    <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice>
+                    <div>
+                        <input type="submit" value="Search" style="width: 100%">
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-9">
+                <!-- Shop Content -->
+                <div class="shop_content">
+
+                    <div class="product_grid">
+                        @{ foreach (var item in Model.PaginatedItems)
+                            { <!-- Product Item -->
+                                <div class="product_item">
+                                    <div class="product_image ">
+                                        <a href="/Items/Details?id=@item.Id">
+                                            <img src="/@item.ImageUrl/1.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="product_content">
+                                        <div class="product_price">@Html.DisplayFor(m => item.Price)</div>
+                                        <div class="product_name">
+                                            <a asp-action="Details" asp-route-id="@item.Id" tabindex="0" style="overflow-wrap: break-word">@item.Title</a>
+                                        </div>
+                                        @*<div class="buttons d-flex flex-row">
+                                                <div class="cart">
+                                                    <i class="fa fa-shopping-cart" style="padding-right: 8%" ;></i>
+
+                                                    @using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, null))
+                                                    {
+                                                        @Html.Hidden("itemId", item.Id)
+                                                        <input type="submit" value="Add to Cart" class="btn btn-success cart-button btn-block" style="width: 90%" />
+                                                    }
+                                                </div>
+                                            </div>*@
+                                    </div>
+                                </div> } }
+                    </div>
+
+
 
                 </div>
-            </form>
-        </div>
-
-        <div class="col-lg-9">
-            @foreach (var item in Model.Items)
-            {
-                <div class="card item-card">
-                    <a asp-action="Details" asp-route-id="@item.Id">
-                        <img class="card-img-top item-image" src="/@item.ImageUrl/1.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
-                        </div>
-                    </a>
-                </div>
-            }
+            </div>
         </div>
     </div>
 </div>

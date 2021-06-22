@@ -13,6 +13,7 @@ using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using GamingStore.Services.Twitter;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using GamingStore.Contracts;
 
 namespace GamingStore.Controllers
 {
@@ -55,9 +56,9 @@ namespace GamingStore.Controllers
         }
 
         // GET: Items
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-
+            const int pageSize = 16;
             var gamingStoreContext = _context.Item.Include(i => i.Category);
 
             IQueryable<Item> items = _context.Item.Where(i => i.Active);
@@ -66,14 +67,16 @@ namespace GamingStore.Controllers
 
             List<string> categories = items.Select(i => i.Category.Name).Distinct().ToList();
 
-
+            PaginatedList<Item> paginatedList = await PaginatedList<Item>.CreateAsync(items.AsNoTracking(), pageNumber ?? 1, pageSize);
 
             var viewModel = new GetItemsViewModel()
             {
                 Categories = categories,
                 Brands = brands,
                 Items = items.ToArray(),
-               
+                PaginatedItems = paginatedList,
+
+
                 ItemsInCart = await CountItemsInCart()
             };
 
@@ -338,5 +341,10 @@ namespace GamingStore.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
+
+
+
     }
 }
