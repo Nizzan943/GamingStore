@@ -229,3 +229,18 @@ Footer
     .logos_list li:last-child {
         margin-right: 0px;
     }
+
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
