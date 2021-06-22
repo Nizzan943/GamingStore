@@ -1,27 +1,33 @@
 ﻿using GamingStore.Data;
-using GamingStore.Models;
-using GamingStore.Services.Twitter;
-using GamingStore.ViewModels.Items;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Data;
+using GamingStore.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using GamingStore.ViewModels.Items;
+using System.IO;
+using Microsoft.AspNetCore.Authorization;
+using GamingStore.Services.Twitter;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GamingStore.Controllers
 {
-    public class ItemsController : Controller
+    public class ItemsController : BaseController
     {
         private readonly GamingStoreContext _context;
 
-        public ItemsController(GamingStoreContext context)
+
+        public ItemsController(UserManager<User> userManager, GamingStoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
+            : base(userManager, context, roleManager, signInManager)
         {
             _context = context;
         }
 
+   
         // Search
         public async Task<IActionResult> Search(string[] brands, string[] category, double price, string queryTitle)
         {
@@ -51,8 +57,29 @@ namespace GamingStore.Controllers
         // GET: Items
         public async Task<IActionResult> Index()
         {
+
             var gamingStoreContext = _context.Item.Include(i => i.Category);
-            return View(await gamingStoreContext.ToListAsync());
+
+            IQueryable<Item> items = _context.Item.Where(i => i.Active);
+
+            List<string> brands = items.Select(i => i.Brand).Distinct().ToList();
+
+            List<string> categories = items.Select(i => i.Category.Name).Distinct().ToList();
+
+
+
+            var viewModel = new GetItemsViewModel()
+            {
+                Categories = categories,
+                Brands = brands,
+                Items = items.ToArray(),
+               
+                ItemsInCart = await CountItemsInCart()
+            };
+
+            
+
+            return View(viewModel);
         }
 
         // GET: Items/Details/5
@@ -66,12 +93,19 @@ namespace GamingStore.Controllers
             var item = await _context.Item
                 .Include(i => i.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (item == null)
             {
                 return NotFound();
             }
 
-            return View(item);
+            var viewModel = new ItemViewModel()
+            {
+                Item = item,
+                ItemsInCart = await CountItemsInCart()
+            };
+
+            return View(viewModel);
         }
 
         // GET: Items/Create
@@ -257,6 +291,52 @@ namespace GamingStore.Controllers
             var fileStream = new FileStream(filePath, FileMode.Create);
             await model.File1.CopyToAsync(fileStream);
             fileStream.Close();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> AddToCart(int itemId, int quantity = 1)
+        {
+            try
+            {
+                if (quantity == 0)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                User user = await GetCurrentUserAsync();
+
+                if (user == null) // Not Log In
+                {
+                    return NotFound();
+                }
+
+                Cart cart = await _context.Cart.FirstOrDefaultAsync(c => c.UserId == user.Id && c.ItemId == itemId);
+
+                if (cart == null)
+                {
+                    cart = new Cart()
+                    {
+                        UserId = user.Id,
+                        ItemId = itemId,
+                        Quantity = quantity
+                    };
+
+                    await _context.Cart.AddAsync(cart);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+
+                cart.Quantity = cart.Quantity + quantity;
+                _context.Update(cart);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

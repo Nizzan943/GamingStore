@@ -1,10 +1,7 @@
-﻿@*@model GamingStore.ViewModels.Items.ItemViewModel*@
-@model GamingStore.Models.Item
+﻿@model GamingStore.ViewModels.Items.ItemViewModel
 
-@{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/single_product.css">
 </head>
@@ -15,58 +12,52 @@
             <!-- Images -->
             <div class="col-lg-2 order-lg-1 order-2">
                 <ul class="image_list">
-                    <li data-image="/@Model.ImageUrl/1.jpg"><img src="/@Model.ImageUrl/1.jpg" alt=""></li>
-                    <li data-image="/@Model.ImageUrl/2.jpg"><img src="/@Model.ImageUrl/2.jpg" alt=""></li>
-                    <li data-image="/@Model.ImageUrl/3.jpg"><img src="/@Model.ImageUrl/3.jpg" alt=""></li>
+                    <li data-image="/@Model.Item.ImageUrl/1.jpg"><img src="/@Model.Item.ImageUrl/1.jpg" alt=""></li>
+                    <li data-image="/@Model.Item.ImageUrl/2.jpg"><img src="/@Model.Item.ImageUrl/2.jpg" alt=""></li>
+                    <li data-image="/@Model.Item.ImageUrl/3.jpg"><img src="/@Model.Item.ImageUrl/3.jpg" alt=""></li>
                 </ul>
             </div>
 
             <!-- Selected Image -->
             <div class="col-lg-5 order-lg-2 order-1">
-                <div class="image_selected"><img src="/@Model.ImageUrl/1.jpg" alt="" style="max-width: 80%"></div>
+                <div class="image_selected"><img src="/@Model.Item.ImageUrl/1.jpg" alt="" style="max-width: 80%"></div>
             </div>
 
             <!-- Description -->
             <div class="col-lg-5 order-3">
                 <div class="product_description">
-                    <div class="product_category"> @Html.DisplayFor(c => Model.Category.Name)</div>
-                    <div class="product_name">@Model.Title</div>
-                    <div class="product_text"><p>@Model.Description</p></div>
-                    <!-- Item Quantity -->
+                    <div class="product_category"> @Html.DisplayFor(c => Model.Item.Category)</div>
+                    <div class="product_name">@Model.Item.Title</div>
+                    <div class="product_text"><p>@Model.Item.Description</p></div>
                     <div class="order_info d-flex flex-row">
+                        @using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, new { role = "form" }))
+                        {
+            @Html.Hidden("itemId", Model.Item.Id)
+                            <div class="clearfix" style="z-index: 1000;">
 
-                        @Html.Hidden("itemId", Model.Id)
-                        <div class="clearfix" style="z-index: 1000;">
-
-                            <div class="product_quantity clearfix">
-                                <span>Quantity: </span>
-                                <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*">
-                                <input id="product_id" name="id" type="hidden" value="@Model.Id">
+                                <!-- Product Quantity -->
+                                <div class="product_quantity clearfix">
+                                    <span>Quantity: </span>
+                                    <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="1">
+                                    <input id="product_id" name="id" type="hidden" value="@Model.Item.Id">
+                                    <div class="quantity_buttons">
+                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
+                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Item price -->
 
-                    <div class="order_info d-flex flex-row">
-                        <div class="product_price">@Html.DisplayFor(model => model.Price)$</div>
-                    </div>
-
-                    <!-- Item Add-To-Cart-Button -->
-                    <div class="order_info d-flex flex-row">
-
-                        @Html.Hidden("itemId", Model.Id)
-                        <div class="clearfix" style="z-index: 1000;">
-                        <div class="button_container">
-                            <input type="submit" value="Add to Cart" name="submit" class="button cart_button" style="background: linear-gradient(90deg, rgba(82,113,255,1) 0%, rgba(52,107,182,1) 66%, rgba(53,92,187,1) 91%); ">
-                        </div>
+                                            <div class="product_price">@Html.DisplayFor(m => m.Item.Price)</div>
+                                                            <div class="button_container">
+                                                                <input type="submit" value="Add to Cart" name="submit" class="button cart_button" @*onclick="updateCartIndicator()"*@>
+                                                            </div>}
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>
-
 
 @section Scripts{
     <script src="/js/product_details.js"></script>

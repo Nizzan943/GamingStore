@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using GamingStore.Data
-@model IEnumerable<GamingStore.Models.Item>
+@model GamingStore.ViewModels.Items.GetItemsViewModel
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject GamingStoreContext GamingStoreContext
@@ -23,7 +23,7 @@
                 }
 
                 @{List<string> brands = new List<string>();}
-                @foreach (var item in Model)
+                @foreach (var item in Model.Items)
                 {
                     if (!brands.Contains(item.Brand))
                     {
@@ -31,7 +31,7 @@
                     }
                 }
 
-            <div><strong>Filter by Brand:</strong></div>
+                <div><strong>Filter by Brand:</strong></div>
                 @foreach (var brand in brands)
                 {
                     <input type="checkbox" id="brands" name="brands" value=@brand>
@@ -47,7 +47,7 @@
                     }
                 }
 
-            <div><strong>Filter by Price:</strong></div>
+                <div><strong>Filter by Price:</strong></div>
                 <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice>
                 <div>
                     <input type="submit" value="Search" style="width: 100%">
@@ -57,16 +57,16 @@
         </div>
 
         <div class="col-lg-9">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Items)
             {
-                    <div class="card item-card">
-                        <a asp-action="Details" asp-route-id="@item.Id">
-                            <img class="card-img-top item-image" src="/@item.ImageUrl/1.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
-                            </div>
-                        </a>
-                    </div>
+                <div class="card item-card">
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img class="card-img-top item-image" src="/@item.ImageUrl/1.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title item-title"> @Html.DisplayFor(modelItem => item.Title)</h5>
+                        </div>
+                    </a>
+                </div>
             }
         </div>
     </div>

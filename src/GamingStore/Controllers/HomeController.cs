@@ -1,5 +1,7 @@
 ﻿using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels.Home;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -11,26 +13,33 @@ using System.Threading.Tasks;
 
 namespace GamingStore.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        ItemsController ItemsController;
-
-        private readonly ILogger<HomeController> _logger;
-
          private readonly GamingStoreContext _context;
 
-        public HomeController(ILogger<HomeController> logger,GamingStoreContext context)
+        public HomeController(UserManager<User> userManager, GamingStoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
+            : base(userManager, context, roleManager, signInManager)
         {
-            _logger = logger;
-
             _context = context;
-
-            ItemsController = new ItemsController(context);
         }
+
 
         public async Task<IActionResult> IndexAsync()
         {
-            return View(await _context.Category.ToListAsync());
+            User user = await GetCurrentUserAsync();
+
+            var viewModel = new HomeViewModel()
+            {
+                Items = new List<Item>(),
+                ItemsInCart = await CountItemsInCart()
+            };
+
+            if (user == null)
+            {
+                return View(viewModel);
+            }
+
+            return View(viewModel);
         }
 
         public IActionResult Contact()

@@ -29,8 +29,8 @@ namespace GamingStore.Controllers
         {
             try
             {
-                User customer = await GetCurrentUserAsync();
-                IQueryable<Cart> itemsInCart = Context.Cart.Where(c => c.UserId == customer.Id);
+                User User = await GetCurrentUserAsync();
+                IQueryable<Cart> itemsInCart = Context.Cart.Where(c => c.UserId == User.Id);
 
                 foreach (Cart cartItem in itemsInCart)
                 {
@@ -68,8 +68,8 @@ namespace GamingStore.Controllers
         [Authorize]
         public async Task<IActionResult> Delete()
         {
-            User customer = await GetCurrentUserAsync();
-            IQueryable<Cart> cart = Context.Cart.Where(c => c.UserId == customer.Id);
+            User User = await GetCurrentUserAsync();
+            IQueryable<Cart> cart = Context.Cart.Where(c => c.UserId == User.Id);
             Context.Cart.RemoveRange(cart);
             await Context.SaveChangesAsync();
 

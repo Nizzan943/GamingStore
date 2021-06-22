@@ -40,10 +40,10 @@ namespace GamingStore.Controllers
 
             var itemsInCart = 0;
 
-            //foreach (Cart itemInCart in Context.Cart.Where(c => c.UserId == user.Id))
-            //{
-            //    itemsInCart += itemInCart.Quantity;
-            //}
+            foreach (Cart itemInCart in Context.Cart.Where(c => c.UserId == user.Id))
+            {
+                itemsInCart += itemInCart.Quantity;
+            }
 
 
             return itemsInCart;

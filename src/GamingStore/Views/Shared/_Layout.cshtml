@@ -72,30 +72,34 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        
-                            <ul class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right navbar-nav flex-grow-1">
-                                <li class="nav-item">
-                                    <strong>
-                                        <a class="nav-link text-dark" style="margin-right: 100px" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                    </strong>
-                        </li>
-                    <li class="nav-item">
-                        <strong><a class="nav-link text-dark" style="margin-right: 100px" asp-area="" asp-controller="Items" asp-action="Index">Items</a></strong>
-                    </li>
-                    <li class="nav-item">
-                        <strong> <a class="nav-link text-dark" style="margin-right: 100px" asp-area="" asp-controller="Stores" asp-action="Index">Stores</a></strong>
-                    </li>
-                    <li class="nav-item">
-                        <strong><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></strong>
-                    </li>
+
+                        <ul class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <strong>
+                                    <a class="nav-link text-dark" style="margin-right: 100px" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                </strong>
+                            </li>
+                            <li class="nav-item">
+                                <strong><a class="nav-link text-dark" style="margin-right: 100px" asp-area="" asp-controller="Items" asp-action="Index">Items</a></strong>
+                            </li>
+                            <li class="nav-item">
+                                <strong> <a class="nav-link text-dark" style="margin-right: 100px" asp-area="" asp-controller="Stores" asp-action="Index">Stores</a></strong>
+                            </li>
+                            <li class="nav-item">
+                                <strong><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></strong>
+                            </li>
                         </ul>
                     </div>
                 </ul>
-                <a href="#" class="nav-link link-dark px-2">
+                <a asp-action="Index" asp-controller="Carts" class="nav-link link-dark px-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                     </svg>
-                    <span class="badge badge-light">4</span>
+                    <span class="badge badge-light"
+                    <div class="cart_count">
+                                        <span id="cart_items_count">@Model?.ItemsInCart</span>
+                                    </div>
+                    </span>
                 </a>
             </div>
 
@@ -193,17 +197,17 @@
                 </div>
             </div>
         </footer>
-        
+
         @*<footer class="border-top footer text-muted" style="background-color: #edf1f4 !important;">
-            <div class="container">
-                &copy; 2021 - GamingStore - Nitzan Miranda, Ori Bachar and Yuval Amir.
-                <a href="#" class="fa fa-facebook"></a>
-                <a href="#" class="fa fa-twitter"></a>
-                <a href="#" class="fa fa-linkedin"></a>
-                <a href="#" class="fa fa-instagram"></a>
-            </div>
-        </footer>*@
-        
+                <div class="container">
+                    &copy; 2021 - GamingStore - Nitzan Miranda, Ori Bachar and Yuval Amir.
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-linkedin"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                </div>
+            </footer>*@
+
 
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
