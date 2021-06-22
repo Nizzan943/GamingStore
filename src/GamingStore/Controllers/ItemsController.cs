@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GamingStore.Data;
+﻿using GamingStore.Data;
 using GamingStore.Models;
 using GamingStore.Services.Twitter;
 using GamingStore.ViewModels.Items;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GamingStore.Controllers
 {
@@ -25,7 +25,7 @@ namespace GamingStore.Controllers
         // Search
         public async Task<IActionResult> Search(string[] brands, string[] category, double price, string queryTitle)
         {
-            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name)|| category.Length == 0) && (a.Price <= price || price == 0) && (a.Title.Contains(queryTitle) || queryTitle == null));
+            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name) || category.Length == 0) && (a.Price <= price || price == 0) && (a.Title.Contains(queryTitle) || queryTitle == null));
             ViewData["brands"] = brands.ToList();
 
             ViewData["category"] = category.ToList();
@@ -92,7 +92,7 @@ namespace GamingStore.Controllers
             try
             {
                 model.Item.Brand = model.Item.Brand.Trim();
-                //string uploadFolder = await UploadImages(model);
+                string uploadFolder = await UploadImages(model);
 
                 await _context.Item.AddAsync(model.Item);
                 await _context.SaveChangesAsync();
@@ -101,12 +101,10 @@ namespace GamingStore.Controllers
 
                 if (model.PublishItemFlag)
                 {
-
-                    //PublishTweet(model.Item, uploadFolder);
+                    PublishTweet(model.Item, uploadFolder);
                 }
 
-                #endregion
-
+                #endregion TwitterPost
             }
             catch (Exception e)
             {
@@ -219,16 +217,46 @@ namespace GamingStore.Controllers
 
             try
             {
-
                 string response = twitter.PublishToTwitter(tweet, fullImageUrl);
                 Console.WriteLine(response);
             }
             catch (Exception e)
             {
-
             }
         }
 
+        private async Task<string> UploadImages(CreateEditItemViewModel model)
+        {
+            string directoryName = model.Item.Title.Trim().Replace(" ", string.Empty);
+            string uploadFolder = Path.Combine("images", "items", directoryName);
+
+            if (model.File1 != null)
+            {
+                await CopyImage(model, uploadFolder, 1);
+                model.Item.ImageUrl = $"images/items/{directoryName}";
+            }
+
+            if (model.File2 != null)
+            {
+                await CopyImage(model, uploadFolder, 1);
+            }
+
+            if (model.File3 != null)
+            {
+                await CopyImage(model, uploadFolder, 1);
+            }
+
+            return uploadFolder;
+        }
+
+        private static async Task CopyImage(CreateEditItemViewModel model, string uploadFolder, int imageNumber)
+        {
+            Directory.CreateDirectory(uploadFolder);
+            string uniqueFileName = $"{imageNumber}.jpg";
+            string filePath = Path.Combine(uploadFolder, uniqueFileName);
+            var fileStream = new FileStream(filePath, FileMode.Create);
+            await model.File1.CopyToAsync(fileStream);
+            fileStream.Close();
+        }
     }
 }
-
