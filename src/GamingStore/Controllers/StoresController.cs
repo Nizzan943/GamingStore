@@ -78,7 +78,7 @@ namespace GamingStore.Controllers
             {
                 stores = stores.Where(store => store.IsOpen()).ToList();
             }
-
+            Dictionary<string, double> weather = GetCurrentWeather(uniqueCities);
             var viewModel = new StoresCitiesViewModel
             {
                 Stores = stores,
@@ -86,6 +86,7 @@ namespace GamingStore.Controllers
                 OpenStores = openStores,
                 Name = received.Name,
                 City = received.City,
+                CurrentWeather = weather,
                 IsOpen = received.IsOpen,
                 ItemsInCart = await CountItemsInCart()
             };
