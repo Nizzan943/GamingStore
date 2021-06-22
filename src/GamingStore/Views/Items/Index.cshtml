@@ -9,9 +9,8 @@
     ViewData["Title"] = "Index";
 }
 
-
 <head>
-    <link rel="stylesheet" type="text/css" href="~/css/products_styles.css">
+    <link rel="stylesheet" type="text/css" href="~/css/product_styles.css">
 </head>
 
 <div class="shop">
@@ -55,7 +54,6 @@
                     <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice>
                     <div>
                         <input type="submit" value="Search" style="width: 100%">
-
                     </div>
                 </form>
             </div>
@@ -93,13 +91,17 @@
                                 </div> } }
                     </div>
 
+                    <div class="paging-btns">
+                        @{ var prevDisabled = !Model.PaginatedItems.HasPreviousPage ? "disabled" : "";
+                            var nextDisabled = !Model.PaginatedItems.HasNextPage ? "disabled" : ""; }
 
-
+                   
+                         
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@section Scripts {
-    <script src="~/js/search.js"></script>
-}
+    @section Scripts {
+        <script src="~/js/products_index.js"></script>
+    }

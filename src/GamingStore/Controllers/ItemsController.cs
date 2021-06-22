@@ -58,7 +58,7 @@ namespace GamingStore.Controllers
         // GET: Items
         public async Task<IActionResult> Index(int? pageNumber)
         {
-            const int pageSize = 16;
+            const int pageSize = 150;
             var gamingStoreContext = _context.Item.Include(i => i.Category);
 
             IQueryable<Item> items = _context.Item.Where(i => i.Active);
