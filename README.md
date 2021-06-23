@@ -9,7 +9,7 @@ The application motivation is to create an web application that serves both the 
 
 ## Tech/framework used
 <b>Built with</b>
-- [ASP.NET Core 3.1](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-3.1)
+- [ASP.NET 5](https://docs.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-5.0)
 
 ## Features
 1. Publication of new items in Twitter using Twitter API.
