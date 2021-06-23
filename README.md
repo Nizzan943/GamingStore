@@ -41,3 +41,5 @@ todo
 
 ## Credits
  Course Instructor [Hemi Leibowitz](https://il.linkedin.com/in/hemi-leibowitz-6117a31a2)
+ Students:
+ [Nitzan Miranda](https://github.com/Nizzan943), [Ori Bachar](https://github.com/OriBachar),[Yuval Amir](https://github.com/yuvalamir123)
