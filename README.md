@@ -29,10 +29,10 @@ todo
 ## Installation
 0. Make sure you have secrets.json on your computer in %APPDATA%
 1. Remove migrations folder
-2. use ###`Drop-Database`
+2. `Drop-Database`
 3. write following commands on PMC:
-3.1 ###`Add-Migration InitialCreate`
-3.2 ###`Update-Database`
+3.1 `Add-Migration InitialCreate`
+3.2 `Update-Database`
 4. run program.
 
 ## API Reference
