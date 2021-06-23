@@ -37,7 +37,7 @@ todo
 
 ## API Reference
 - [Google Maps API](https://developers.google.com/maps/documentation)
-- [Facebook API](https://developers.facebook.com/)
+- [Twitter API](https://developer.twitter.com/en)
 
 ## Credits
  Course Instructor [Hemi Leibowitz](https://il.linkedin.com/in/hemi-leibowitz-6117a31a2)
