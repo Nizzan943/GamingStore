@@ -30,19 +30,37 @@ namespace GamingStore.Controllers
 
    
         // Search
-        public async Task<IActionResult> Search(string[] brands, string[] category, double price, string queryTitle)
+        public async Task<IActionResult> Search(string[] brands, string[] category, double price, string queryTitle, int? pageNumber)
         {
             var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name) || category.Length == 0) && (a.Price <= price || price == 0) && (a.Title.Contains(queryTitle) || queryTitle == null));
-            ViewData["brands"] = brands.ToList();
 
-            ViewData["category"] = category.ToList();
+            const int pageSize = 150;
 
-            ViewData["price"] = price;
+            List<string> theBrands = brands.ToList();
 
-            ViewData["queryTitle"] = queryTitle;
+            List<string> theCategories = category.ToList();
 
-            return View("~/Views/Items/chosenIndex.cshtml", await searchItems.ToListAsync());
+            PaginatedList<Item> paginatedList = await PaginatedList<Item>.CreateAsync(searchItems.AsNoTracking(), pageNumber ?? 1, pageSize);
+
+            double thePrice = price;
+
+            string theQueryTitle = queryTitle;
+
+            var viewModel = new GetChosenItemsViewModel()
+            {
+                Categories = theCategories,
+                Brands = theBrands,
+                Items = searchItems.ToArray(),
+                PaginatedItems = paginatedList,
+                Price = thePrice,
+                QueryTitle = theQueryTitle,
+
+                ItemsInCart = await CountItemsInCart()
+            };
+
+            return View("~/Views/Items/chosenIndex.cshtml",viewModel);
         }
+
 
         public async Task<IActionResult> CategoryItems(int? id)
         {

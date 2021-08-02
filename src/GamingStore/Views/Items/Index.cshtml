@@ -19,30 +19,21 @@
             <div class="col-lg-3">
                 <form asp-controller="Items" asp-action="Search">
                     <div><strong>Filter by Category:</strong></div>
-                    @foreach (var category in GamingStoreContext.Category)
+                    @foreach (var category in Model.Categories)
                     {
-                        <input type="checkbox" id="category" name="category" value=@category.Name>
-                        <label for=@category.Name>@category.Name</label><br>
-                    }
-
-                    @{List<string> brands = new List<string>();}
-                    @foreach (var item in Model.Items)
-                    {
-                        if (!brands.Contains(item.Brand))
-                        {
-                            brands.Add(item.Brand);
-                        }
+                        <input type="checkbox" id="category" name="category" value=@category>
+                        <label for=@category>@category</label><br>
                     }
 
                     <div><strong>Filter by Brand:</strong></div>
-                    @foreach (var brand in brands)
+                    @foreach (var brand in Model.Brands)
                     {
                         <input type="checkbox" id="brands" name="brands" value=@brand>
                         <label for=@brand>@brand</label><br>
                     }
 
                     @{var maxPrice = 0.0;}
-                    @foreach (var item in GamingStoreContext.Item)
+                    @foreach (var item in Model.PaginatedItems)
                     {
                         if (item.Price > maxPrice)
                         {
@@ -76,17 +67,6 @@
                                         <div class="product_name">
                                             <a asp-action="Details" asp-route-id="@item.Id" tabindex="0" style="overflow-wrap: break-word">@item.Title</a>
                                         </div>
-                                        @*<div class="buttons d-flex flex-row">
-                                                <div class="cart">
-                                                    <i class="fa fa-shopping-cart" style="padding-right: 8%" ;></i>
-
-                                                    @using (Html.BeginForm("AddToCart", "Items", FormMethod.Post, null))
-                                                    {
-                                                        @Html.Hidden("itemId", item.Id)
-                                                        <input type="submit" value="Add to Cart" class="btn btn-success cart-button btn-block" style="width: 90%" />
-                                                    }
-                                                </div>
-                                            </div>*@
                                     </div>
                                 </div> } }
                     </div>
