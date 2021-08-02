@@ -46,6 +46,15 @@ namespace GamingStore.Controllers
 
             string theQueryTitle = queryTitle;
 
+            //for all the items
+
+            IQueryable<Item> allItems = _context.Item.Where(i => i.Active);
+
+            List<string> allBrands = allItems.Select(i => i.Brand).Distinct().ToList();
+
+            List<string> allCategories = allItems.Select(i => i.Category.Name).Distinct().ToList();
+
+
             var viewModel = new GetChosenItemsViewModel()
             {
                 Categories = theCategories,
@@ -54,6 +63,10 @@ namespace GamingStore.Controllers
                 PaginatedItems = paginatedList,
                 Price = thePrice,
                 QueryTitle = theQueryTitle,
+
+                AllItems = allItems.ToArray(),
+                AllBrands = allBrands,
+                AllCategories = allCategories,
 
                 ItemsInCart = await CountItemsInCart()
             };

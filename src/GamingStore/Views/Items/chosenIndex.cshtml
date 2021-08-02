@@ -19,30 +19,21 @@
             <div class="col-lg-3">
                 <form asp-controller="Items" asp-action="Search">
                     <div><strong>Filter by Category:</strong></div>
-                    @foreach (var category in GamingStoreContext.Category)
+                    @foreach (var category in Model.AllCategories)
                     {
-                        @if (Model.Categories.Contains(category.Name))
+                        @if (Model.Categories.Contains(category))
                         {
-                            <input type="checkbox" id="category" name="category" value=@category.Name checked>
+                            <input type="checkbox" id="category" name="category" value=@category checked>
                         }
                         else
                         {
-                            <input type="checkbox" id="category" name="category" value=@category.Name>
+                            <input type="checkbox" id="category" name="category" value=@category>
                         }
-                        <label for=@category.Name>@category.Name</label><br>
-                    }
-
-                    @{List<string> brands = new List<string>();}
-                    @foreach (var item in GamingStoreContext.Item)
-                    {
-                        if (!brands.Contains(item.Brand))
-                        {
-                            brands.Add(item.Brand);
-                        }
+                        <label for=@category>@category</label><br>
                     }
 
                     <div><strong>Filter by Brand:</strong></div>
-                    @foreach (var brand in brands)
+                    @foreach (var brand in Model.AllBrands)
                     {
                         @if (Model.Brands.Contains(brand))
                         {
@@ -56,7 +47,7 @@
                     }
 
                     @{var maxPrice = 0.0;}
-                    @foreach (var item in GamingStoreContext.Item)
+                    @foreach (var item in Model.AllItems)
                     {
                         if (item.Price > maxPrice)
                         {
@@ -67,11 +58,15 @@
                     <div><strong>Filter by Price:</strong></div>
                     @if (Model.Price != 0.0)
                     {
+                        <label>0</label>
                         <input type="range" id="price" name="price" min="0" max=@maxPrice value=@Model.Price>
+                        <label>@maxPrice</label>
                     }
                     else
                     {
+                        <label>0</label>
                         <input type="range" id="price" name="price" min="0" max=@maxPrice value=@maxPrice>
+                        <label>@maxPrice</label>
                     }
 
                     <input name="queryTitle" value=@Model.QueryTitle hidden />

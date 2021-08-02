@@ -10,8 +10,5 @@ namespace GamingStore.ViewModels.Items
         public PaginatedList<Item> PaginatedItems { get; set; }
         public IEnumerable<string>  Categories { get; set; }
         public IEnumerable<string> Brands { get; set; }
-
-        //public ItemsFilter ItemsFilter { get; set; }
-
     }
 }

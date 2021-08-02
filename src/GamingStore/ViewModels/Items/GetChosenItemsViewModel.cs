@@ -13,5 +13,9 @@ namespace GamingStore.ViewModels.Items
         public string QueryTitle { get; set; }
         public double Price { get; set; }
 
+        public Item[] AllItems { get; set; }
+        public IEnumerable<string> AllCategories { get; set; }
+        public IEnumerable<string> AllBrands { get; set; }
+
     }
 }
