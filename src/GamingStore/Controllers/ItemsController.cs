@@ -75,15 +75,58 @@ namespace GamingStore.Controllers
         }
 
 
-        public async Task<IActionResult> CategoryItems(int? id)
+        public async Task<IActionResult> CategoryItems(int? id, int? pageNumber)
         {
+            var searchItems = _context.Item.Where(i => i.CategoryId == id);
+
+            const int pageSize = 150;
+
+            List<string> theBrands= new List<string>();
+
+            List<string> theCategories = new List<string>();
+
+            foreach (var category in _context.Category)
+            {
+                if (category.Id == id)
+                {
+                    theCategories.Add(category.Name);
+                    break;
+                }
+            }
+
+            PaginatedList<Item> paginatedList = await PaginatedList<Item>.CreateAsync(searchItems.AsNoTracking(), pageNumber ?? 1, pageSize);
+
+            //for all the items
+
+            IQueryable<Item> allItems = _context.Item.Where(i => i.Active);
+
+            List<string> allBrands = allItems.Select(i => i.Brand).Distinct().ToList();
+
+            List<string> allCategories = allItems.Select(i => i.Category.Name).Distinct().ToList();
+
+
+            var viewModel = new GetChosenItemsViewModel()
+            {
+                Categories = theCategories,
+                Brands = theBrands,
+                Items = searchItems.ToArray(),
+                PaginatedItems = paginatedList,
+                Price = 0.0,
+                QueryTitle = null,
+
+                AllItems = allItems.ToArray(),
+                AllBrands = allBrands,
+                AllCategories = allCategories,
+
+                ItemsInCart = await CountItemsInCart()
+            };
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var searchItems = _context.Item.Where(i => i.CategoryId == id);
-            return View("~/Views/Items/Index.cshtml", await searchItems.ToListAsync());
+            return View("~/Views/Items/chosenIndex.cshtml", viewModel);
         }
 
         // GET: Items
