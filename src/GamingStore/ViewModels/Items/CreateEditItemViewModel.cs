@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace GamingStore.ViewModels.Items
 {
-    public class CreateEditItemViewModel
+    public class CreateEditItemViewModel : ViewModelBase
     {
         public Item Item { get; set; }
         
