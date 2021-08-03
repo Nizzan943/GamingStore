@@ -11,7 +11,15 @@
 
     <div class="text-center">
         <h4 style="margin-bottom: 10px;" class="display-4">Welcome to N.Y.O Gaming Store!</h4>
+        <form asp-controller="Items" asp-action="Search" id="form">
+            <div class="input-group mb-3">
+                <input class="form-control" aria-describedby="button-addon2" name="queryTitle" placeholder="Search something..." />
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+            </div>
+        </form>
     </div>
+
+
     <section class="characteristics">
         <div class="container">
             <div class="row">
