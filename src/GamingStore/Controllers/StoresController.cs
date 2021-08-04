@@ -54,7 +54,7 @@ namespace GamingStore.Controllers
             return openStores;
         }
 
-        // Post: Stores
+        // Post: Stores //the search function
         [HttpPost]
         public async Task<IActionResult> Index(StoresCitiesViewModel received)
         {
@@ -172,19 +172,20 @@ namespace GamingStore.Controllers
                     Active = true,
                     OpeningHours = new List<OpeningHours>(7)
                     {
-                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Sunday},
-                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Monday},
-                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Tuesday},
-                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Wednesday},
-                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Thursday},
-                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Friday},
-                        new OpeningHours() {OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Saturday}
+                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Sunday },
+                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Monday },
+                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Tuesday },
+                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Wednesday },
+                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Thursday },
+                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Friday },
+                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Saturday }
                     },
                     Address = new Address()
                     {
                         Country = "Israel"
                     }
-                }
+                },
+                ItemsInCart = await CountItemsInCart()
             };
 
             return View(viewModel);
@@ -201,6 +202,7 @@ namespace GamingStore.Controllers
             var viewModel = new CreateStoreViewModel()
             {
                 Store = store,
+                ItemsInCart = await CountItemsInCart()
             };
 
             if (store.OpeningHours.Any(openingHour => openingHour.ClosingTime <= openingHour.OpeningTime))
