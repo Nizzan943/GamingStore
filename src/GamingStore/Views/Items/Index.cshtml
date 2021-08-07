@@ -68,7 +68,7 @@
                                         </a>
                                     </div>
                                     <div class="product_content">
-                                        <div class="product_price">@Html.DisplayFor(m => item.Price)</div>
+                                        <div class="product_price">$ @Html.DisplayFor(m => item.Price)</div>
                                         <div class="product_name">
                                             <a asp-action="Details" asp-route-id="@item.Id" tabindex="0" style="overflow-wrap: break-word">@item.Title</a>
                                         </div>
