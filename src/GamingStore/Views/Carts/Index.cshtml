@@ -1,8 +1,8 @@
 ﻿@model GamingStore.ViewModels.Cart.CartViewModel
 @addTagHelper *, Vereyon.Web.FlashMessage
 @{ ViewData["Title"] = "Index";
-
-                Layout = "~/Views/Shared/_Layout.cshtml"; }
+   Layout = "~/Views/Shared/_Layout.cshtml";
+ }
 
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/cart_styles.css">
@@ -18,39 +18,44 @@
                     <div class="cart_items">
                         <ul class="cart_list">
                             @{ if (Model?.Carts != null && Model.Carts.Any())
-                                            {
-                                                foreach (Cart itemCart in Model.Carts)
-                                                {
-                                <li class="cart_item clearfix">
-                                    <div class="cart_item_image"><img src="/@itemCart.Item.ImageUrl/1.jpg" alt=""></div>
-                                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                        <div class="cart_item_name cart_info_col">
-                                            <div class="cart_item_title"> Name</div>
-                                            <div class="cart_item_text" style="width: 200px">@itemCart.Item.Title.Substring(0, Math.Min(itemCart.Item.Title.Length, 27))</div>
-                                        </div>
-                                        <div class="cart_info_col">
-                                            <div class="cart_item_title">Manufacturer</div>
-                                            <div class="cart_item_text"><span style="background-color: #999999;"></span>@itemCart.Item.Brand</div>
-                                        </div>
-                                        <div class="cart_info_col">
-                                            <div class="cart_item_title">Quantity</div>
-                                            <div class="cart_item_text">@itemCart.Quantity</div>
-                                        </div>
-                                        <div class="cart_item_total cart_info_col">
-                                            <div class="cart_item_title">Total</div>
-                                            @{ double total = @itemCart.Item.Price * @itemCart.Quantity;
-                                                                    total = Math.Round((total + Math.Abs(0.2 - 0.3 + 0.1)) * 100) / 100; }
-                                            <div class="cart_item_text"> $@total</div>
-                                        </div>
-                                    </div>
-                                </li> if (Model.Carts.Last().Id != itemCart.Id)
-                                                    {
-                                <hr /> }
-                                                }
-                                            }
-                                            else
-                                            {
-                                <p class="mt-3 ml-3">Your GamingStore Cart is empty.</p> } }
+                                {
+                                    foreach (Cart itemCart in Model.Carts)
+                                    {
+                                        <li class="cart_item clearfix">
+                                            <div class="cart_item_image"><img src="/@itemCart.Item.ImageUrl/1.jpg" alt=""></div>
+                                            <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                                <div class="cart_item_name cart_info_col">
+                                                    <div class="cart_item_title"> Name</div>
+                                                    <div class="cart_item_text" style="width: 200px">@itemCart.Item.Title.Substring(0, Math.Min(itemCart.Item.Title.Length, 27))</div>
+                                                </div>
+                                                <div class="cart_info_col">
+                                                    <div class="cart_item_title">Manufacturer</div>
+                                                    <div class="cart_item_text"><span style="background-color: #999999;"></span>@itemCart.Item.Brand</div>
+                                                </div>
+                                                <div class="cart_info_col">
+                                                    <div class="cart_item_title">Quantity</div>
+                                                    <div class="cart_item_text">@itemCart.Quantity</div>
+                                                </div>
+                                                <div class="cart_item_total cart_info_col">
+                                                    <div class="cart_item_title">Total</div>
+                                                    @{ double total = @itemCart.Item.Price * @itemCart.Quantity;
+                                                        total = Math.Round((total + Math.Abs(0.2 - 0.3 + 0.1)) * 100) / 100; }
+                                                    <div class="cart_item_text"> $@total</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        if (Model.Carts.Last().Id != itemCart.Id)
+                                        {
+                                            <hr />
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="mt-3 ml-3">Your GamingStore Cart is empty.</p>
+
+                                }
+                            }
                         </ul>
                     </div>
 
@@ -59,14 +64,15 @@
                         <div class="text-md-right">
                             <div class="order_total_title">Order Total:</div>
                             @{
-                                            <div class="order_total_amount">@Html.DisplayFor(m => m.Payment.ItemsCost)</div> }
+                               <div class="order_total_amount">@Html.DisplayFor(m => m.Payment.ItemsCost)</div> 
+                             }
                         </div>
                     </div>
 
                     <div class="cart_buttons">
                         @using (Html.BeginForm("Delete", "Carts", FormMethod.Post, null))
                         {
-            <input type="submit" class="button cart_button_clear" value="Clear Cart" />
+                            <input type="submit" class="button cart_button_clear" value="Clear Cart" />
                             <button type="button" class="button cart_button_checkout" style="background: linear-gradient(90deg, rgba(82,113,255,1) 0%, rgba(52,107,182,1) 66%, rgba(53,92,187,1) 91%); " onclick="location.href = '@Url.Action("Create", "Orders")'"
                                     @{ if (Model?.Carts == null || !Model.Carts.Any()) { @: disabled
                                     } }>
