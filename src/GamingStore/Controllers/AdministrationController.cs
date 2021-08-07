@@ -255,6 +255,32 @@ namespace GamingStore.Controllers
            
             return View(model);
         }
+
+        public async Task<IActionResult> EditUsersInRole(string roleName)
+        {
+            List<User> users = await UserManager.Users.ToListAsync();
+            List<UserRoleViewModel> allusers = new List<UserRoleViewModel>();
+            foreach (User user in users)
+            {
+                IList<string> userRoles = await UserManager.GetRolesAsync(user);
+                if (userRoles.Contains(roleName))
+                {
+                    var viewModel = new UserRoleViewModel()
+                    {
+                        UserId = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email,
+                    };
+                    allusers.Add(viewModel);
+                }
+            }
+            var viewModel2 = new ListUserRoleViewModel()
+            {
+                List = allusers,
+            };
+            return View(viewModel2);
+        }
+
     }
 
 }
