@@ -32,75 +32,6 @@ namespace GamingStore.Controllers
             return View();
         }
 
-        // GET: Administrator/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Administrator/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Administrator/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Administrator/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Administrator/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Administrator/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Administrator/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         [HttpGet]
         public async Task<IActionResult> ListItems()
         {
@@ -121,6 +52,22 @@ namespace GamingStore.Controllers
             var viewModel = new ListStoresViewModel()
             {
                 Stores = stores,
+            };
+
+            return View(viewModel);
+        }
+
+                public async Task<IActionResult> ListUsers()
+        {
+            List<User> users = await UserManager.Users.ToListAsync();
+            var currentUser = await GetCurrentUserAsync();
+            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+
+            var viewModel = new ListUsersViewModels
+            {
+                Users = users,
+                CurrentUser = currentUser,
+                CurrentUserRoles = userRoles
             };
 
             return View(viewModel);
@@ -157,66 +104,82 @@ namespace GamingStore.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> ListUsers()
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
-            List<User> users = await UserManager.Users.ToListAsync();
-            var currentUser = await GetCurrentUserAsync();
-            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+            User user = await UserManager.FindByIdAsync(model.Id);
 
-            var viewModel = new ListUsersViewModels
+            if (user == null)
             {
-                Users = users,
-                CurrentUser = currentUser,
-                CurrentUserRoles = userRoles
-            };
 
-            return View(viewModel);
+                return RedirectToAction("ListUsers");
+            }
+
+            user.UserName = model.UserName;
+            user.Email = model.Email;
+
+            IdentityResult result = await UserManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+
+                return RedirectToAction("ListUsers");
+            }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+
+            return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> DeleteUser(string id)
-        //{
-        //    User user = await UserManager.FindByIdAsync(id);
+    //[HttpPost]
+    //public async Task<IActionResult> DeleteUser(string id)
+    //{
+    //    User user = await UserManager.FindByIdAsync(id);
 
-        //    if (user == null)
-        //    {
+    //    if (user == null)
+    //    {
 
-        //        return RedirectToAction("ListUsers");
-        //    }
+    //        return RedirectToAction("ListUsers");
+    //    }
 
-        //    var currentUser = await GetCurrentUserAsync();
+    //    var currentUser = await GetCurrentUserAsync();
 
-        //    IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+    //    IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
 
-        //    if (!userRoles.Any(r => r.Equals("Admin")))
-        //    {
+    //    if (!userRoles.Any(r => r.Equals("Admin")))
+    //    {
 
-        //        return RedirectToAction("ListUsers");
-        //    }
+    //        return RedirectToAction("ListUsers");
+    //    }
 
-        //    if (user.Id == currentUser.Id)
-        //    {
+    //    if (user.Id == currentUser.Id)
+    //    {
 
-        //        return RedirectToAction("ListUsers");
-        //    }
+    //        return RedirectToAction("ListUsers");
+    //    }
 
-        //    IdentityResult result = await UserManager.DeleteAsync(user);
+    //    IdentityResult result = await UserManager.DeleteAsync(user);
 
-        //    if (result.Succeeded)
-        //    {
+    //    if (result.Succeeded)
+    //    {
 
-        //        return RedirectToAction("ListUsers");
-        //    }
+    //        return RedirectToAction("ListUsers");
+    //    }
 
-        //    foreach (IdentityError error in result.Errors)
-        //    {
-        //        ModelState.AddModelError(string.Empty, error.Description);
-        //    }
+    //    foreach (IdentityError error in result.Errors)
+    //    {
+    //        ModelState.AddModelError(string.Empty, error.Description);
+    //    }
 
-        //    return View("ListUsers");
-        //}
+    //    return View("ListUsers");
+    //}
 
-        [HttpGet]
+    [HttpGet]
         public async Task<IActionResult> ListRoles()
         {
             IQueryable<IdentityRole> roles = RoleManager.Roles;
