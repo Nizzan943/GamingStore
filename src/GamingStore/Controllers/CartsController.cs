@@ -64,7 +64,19 @@ namespace GamingStore.Controllers
             }
         }
 
-        [HttpPost]
+        
+        [Authorize]
+        [HttpPost("DeleteItemInCart")]
+        public async Task<IActionResult> DeleteItemInCart(int id)
+        {
+            IQueryable<Cart> cart = Context.Cart.Where(c => c.Id == id);
+            Context.Cart.RemoveRange(cart);
+            await Context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost("Delete")]
         [Authorize]
         public async Task<IActionResult> Delete()
         {
@@ -75,7 +87,5 @@ namespace GamingStore.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }

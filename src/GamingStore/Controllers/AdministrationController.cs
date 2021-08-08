@@ -281,6 +281,34 @@ namespace GamingStore.Controllers
             return View(viewModel2);
         }
 
+        
+        //need to change
+        public async Task<IActionResult> EditUsersInRole1(ListUserRoleViewModel model)
+        {
+            for (var i = 0; i < model.List.Count; i++)
+            {
+                if (model.List[i].IsSelected)
+                {
+                    User user = await UserManager.FindByIdAsync(model.List[i].UserId);
+                    IList<string> userRoles = await UserManager.GetRolesAsync(user);
+                    IdentityResult result = await UserManager.UpdateAsync(user);
+
+                    if (result.Succeeded)
+                    {
+
+                        return RedirectToAction("ListRoles");
+                    }
+
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
+
+            return View(model);
+        }
+        
     }
 
 }

@@ -21,29 +21,36 @@
                                 {
                                     foreach (Cart itemCart in Model.Carts)
                                     {
-                                        <li class="cart_item clearfix">
-                                            <div class="cart_item_image"><img src="/@itemCart.Item.ImageUrl/1.jpg" alt=""></div>
-                                            <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                                <div class="cart_item_name cart_info_col">
-                                                    <div class="cart_item_title"> Name</div>
-                                                    <div class="cart_item_text" style="width: 200px">@itemCart.Item.Title.Substring(0, Math.Min(itemCart.Item.Title.Length, 27))</div>
-                                                </div>
-                                                <div class="cart_info_col">
-                                                    <div class="cart_item_title">Manufacturer</div>
-                                                    <div class="cart_item_text"><span style="background-color: #999999;"></span>@itemCart.Item.Brand</div>
-                                                </div>
-                                                <div class="cart_info_col">
-                                                    <div class="cart_item_title">Quantity</div>
-                                                    <div class="cart_item_text">@itemCart.Quantity</div>
-                                                </div>
-                                                <div class="cart_item_total cart_info_col">
-                                                    <div class="cart_item_title">Total</div>
-                                                    @{ double total = @itemCart.Item.Price * @itemCart.Quantity;
-                                                        total = Math.Round((total + Math.Abs(0.2 - 0.3 + 0.1)) * 100) / 100; }
-                                                    <div class="cart_item_text"> $@total</div>
-                                                </div>
-                                            </div>
-                                        </li>
+                                                        <li class="cart_item clearfix">
+                                                            <div class="cart_item_image"><img src="/@itemCart.Item.ImageUrl/1.jpg" alt=""></div>
+                                                            <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                                                <div class="cart_item_name cart_info_col">
+                                                                    <div class="cart_item_title"> Name</div>
+                                                                    <div class="cart_item_text" style="width: 200px">@itemCart.Item.Title.Substring(0, Math.Min(itemCart.Item.Title.Length, 27))</div>
+                                                                </div>
+                                                                <div class="cart_info_col">
+                                                                    <div class="cart_item_title">Manufacturer</div>
+                                                                    <div class="cart_item_text"><span style="background-color: #999999;"></span>@itemCart.Item.Brand</div>
+                                                                </div>
+                                                                <div class="cart_info_col">
+                                                                    <div class="cart_item_title">Quantity</div>
+                                                                    <div class="cart_item_text">@itemCart.Quantity</div>
+                                                                </div>
+                                                                <div class="cart_item_total cart_info_col">
+                                                                    <div class="cart_item_title">Total</div>
+                                                                    @{ double total = @itemCart.Item.Price * @itemCart.Quantity;
+                                                                        total = Math.Round((total + Math.Abs(0.2 - 0.3 + 0.1)) * 100) / 100; }
+                                                                    <div class="cart_item_text"> $@total</div>
+                                                                </div>
+                                                                @using (Html.BeginForm("DeleteItemInCart", "Carts", FormMethod.Post, null))
+                                                                {
+                                                                    <input value="@itemCart.Id" name="id" hidden />
+                                                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                                                }
+                                                            </div>
+                                                            </li>
+                                                            
+
                                         if (Model.Carts.Last().Id != itemCart.Id)
                                         {
                                             <hr />
