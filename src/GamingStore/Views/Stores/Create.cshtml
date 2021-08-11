@@ -22,7 +22,7 @@
                 <label asp-for="@Model.Store.Address" class="control-label"></label>
                 <input asp-for="@Model.Store.Address.Street" class="form-control" placeholder="street" />
                 <span asp-validation-for="@Model.Store.Address.Street" class="text-danger"></span>
-                <input type="number" min="0" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="number" />
+                <input type="number" min="1" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="number" />
                 <span asp-validation-for="@Model.Store.Address.Number" class="text-danger"></span>
                 <input asp-for="@Model.Store.Address.City" class="form-control" placeholder="city" />
                 <span asp-validation-for="@Model.Store.Address.City" class="text-danger"></span>
@@ -56,10 +56,10 @@
                                 var close = "Close" + @i;
                                 <td>
                                     <span>
-                                        <input type="text" name="@open" class="form-control" />
+                                        <input type="time" name="@open" class="form-control" />
                                     </span>
                                     <span>
-                                        <input type="text" name="@close" class="form-control" />
+                                        <input type="time" name="@close" class="form-control" />
                                     </span>
                                 </td>
                             }

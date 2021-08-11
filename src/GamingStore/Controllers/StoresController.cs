@@ -302,13 +302,6 @@ namespace GamingStore.Controllers
                 return RedirectToAction("ListStores", "Administration");
             }
 
-            /*
-            store.Address = new Address();
-            store.Address.Address1 = street + " " + number;
-            store.Address.City = city;
-            store.Address.Country = "Israel";
-            */
-
             store.OpeningHours = new List<OpeningHours>();
             List<string> days = new List<string>();
             days.Add(Open0);
