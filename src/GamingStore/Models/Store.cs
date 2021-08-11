@@ -32,7 +32,7 @@ namespace GamingStore.Models
         public Address Address { get; set; }
 
         [DisplayName("Phone")]
-        [Required, DataType(DataType.PhoneNumber), StringLength(50)]
+        [Required, DataType(DataType.PhoneNumber), StringLength(10)]
         public string PhoneNumber { get; set; }
 
         [Required, DataType(DataType.EmailAddress)]
@@ -52,7 +52,8 @@ namespace GamingStore.Models
             var dayOfWeek = (int)currentDateTime.DayOfWeek;
             var curTime = currentDateTime.TimeOfDay;
 
-            return OpeningHours[dayOfWeek].OpeningTime <= curTime && curTime <= OpeningHours[dayOfWeek].ClosingTime;
+            return true;
+            //return OpeningHours[dayOfWeek].OpeningTime <= curTime && curTime <= OpeningHours[dayOfWeek].ClosingTime;
         }
     }
 }

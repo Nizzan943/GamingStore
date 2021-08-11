@@ -10,26 +10,18 @@ namespace GamingStore.Contracts
     public class Address
     {
         [Required]
-        [Display(Name = "Full Name")]
         [DataType(DataType.Text)]
-        public string? FullName { get; set; }
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "*Street is not valid")]
+        public string? Street { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Address")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Address is not valid")]
-        public string? Address1 { get; set; }
+        public int? Number { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "*City is not valid")]
         public string? City { get; set; }
-
-        [Required]
-        [DataType(DataType.PostalCode)]
-        [Display(Name = "Postal Code")]
-        [Range(00000, 9999999, ErrorMessage = "Postal code is not valid")]
-        public string? PostalCode { get; set; }
 
         [DataType(DataType.Text)]
         public string? Country { get; set; } = "Israel";

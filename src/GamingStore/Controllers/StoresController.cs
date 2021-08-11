@@ -172,13 +172,13 @@ namespace GamingStore.Controllers
                     Active = true,
                     OpeningHours = new List<OpeningHours>(7)
                     {
-                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Sunday },
-                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Monday },
-                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Tuesday },
-                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Wednesday },
-                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Thursday },
-                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Friday },
-                        new OpeningHours() { OpeningTime = new TimeSpan(00, 00, 00), ClosingTime = new TimeSpan(23, 59, 00), DayOfWeek = DayOfWeek.Saturday }
+                        new OpeningHours() { OpeningTime = "00:00", ClosingTime = "00:00", DayOfWeek = DayOfWeek.Sunday },
+                        new OpeningHours() { OpeningTime = "00:00", ClosingTime = "00:00", DayOfWeek = DayOfWeek.Monday },
+                        new OpeningHours() { OpeningTime = "00:00", ClosingTime ="00:00", DayOfWeek = DayOfWeek.Tuesday },
+                        new OpeningHours() { OpeningTime = "00:00", ClosingTime = "00:00", DayOfWeek = DayOfWeek.Wednesday },
+                        new OpeningHours() { OpeningTime = "00:00", ClosingTime = "00:00", DayOfWeek = DayOfWeek.Thursday },
+                        new OpeningHours() { OpeningTime = "00:00", ClosingTime = "00:00", DayOfWeek = DayOfWeek.Friday },
+                        new OpeningHours() { OpeningTime = "00:00", ClosingTime = "00:00", DayOfWeek = DayOfWeek.Saturday }
                     },
                     Address = new Address()
                     {
@@ -197,7 +197,7 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Viewer")]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,PhoneNumber,Email,OpeningHours")] Store store, string street, int number, string city, string Open0, string Open1, string Open2, string Open3, string Open4, string Open5, string Open6, string Close0, string Close1, string Close2, string Close3, string Close4, string Close5, string Close6)
         {
             var viewModel = new CreateStoreViewModel()
             {
@@ -205,16 +205,47 @@ namespace GamingStore.Controllers
                 ItemsInCart = await CountItemsInCart()
             };
 
+            store.OpeningHours = new List<OpeningHours>();
+            List<string> days = new List<string>();
+            days.Add(Open0);
+            days.Add(Open1);
+            days.Add(Open2);
+            days.Add(Open3);
+            days.Add(Open4);
+            days.Add(Open5);
+            days.Add(Open6);
+            days.Add(Close0);
+            days.Add(Close1);
+            days.Add(Close2);
+            days.Add(Close3);
+            days.Add(Close4);
+            days.Add(Close5);
+            days.Add(Close6);
+            for (var i = 0; i < 7; i++)
+            {
+                DayOfWeek day = (DayOfWeek) i;
+                OpeningHours temp = new OpeningHours();
+                temp.DayOfWeek = day;
+                temp.OpeningTime = days[i];
+                temp.ClosingTime = days[i + 7];
+
+                store.OpeningHours.Add(temp);
+            }
+
+
+            /* 
             if (store.OpeningHours.Any(openingHour => openingHour.ClosingTime <= openingHour.OpeningTime))
             {
                 return RedirectToAction("ListStores", "Administration");
             }
-
+            */
+            
+            /*
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }
-
+            */
             Context.Add(store);
             await Context.SaveChangesAsync();
 
@@ -256,7 +287,7 @@ namespace GamingStore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Viewer")]
-        public async Task<IActionResult> Edit(Store store)
+        public async Task<IActionResult> Edit(Store store, string street, int number, string city, string Open0, string Open1, string Open2, string Open3, string Open4, string Open5, string Open6, string Close0, string Close1, string Close2, string Close3, string Close4, string Close5, string Close6)
         {
             if (!StoreExists(store.Id))
             {
@@ -271,7 +302,43 @@ namespace GamingStore.Controllers
                 return RedirectToAction("ListStores", "Administration");
             }
 
+            /*
+            store.Address = new Address();
+            store.Address.Address1 = street + " " + number;
+            store.Address.City = city;
+            store.Address.Country = "Israel";
+            */
 
+            store.OpeningHours = new List<OpeningHours>();
+            List<string> days = new List<string>();
+            days.Add(Open0);
+            days.Add(Open1);
+            days.Add(Open2);
+            days.Add(Open3);
+            days.Add(Open4);
+            days.Add(Open5);
+            days.Add(Open6);
+            days.Add(Close0);
+            days.Add(Close1);
+            days.Add(Close2);
+            days.Add(Close3);
+            days.Add(Close4);
+            days.Add(Close5);
+            days.Add(Close6);
+            for (var i = 0; i < 7; i++)
+            {
+                DayOfWeek day = (DayOfWeek)i;
+                OpeningHours temp = new OpeningHours();
+                temp.DayOfWeek = day;
+                temp.OpeningTime = days[i];
+                temp.ClosingTime = days[i + 7];
+
+                store.OpeningHours.Add(temp);
+            }
+
+
+
+            /*
             if (store.OpeningHours.Any(openingHour => openingHour.ClosingTime <= openingHour.OpeningTime))
             {
 
@@ -280,7 +347,7 @@ namespace GamingStore.Controllers
                     id = store.Id
                 });
             }
-
+            */
             try
             {
                 Context.Update(store);

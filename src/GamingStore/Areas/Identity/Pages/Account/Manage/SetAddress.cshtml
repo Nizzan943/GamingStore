@@ -12,28 +12,23 @@
     <div class="col-md-6">
         <p>You can set up your default address here.</p>
         <form id="email-form" method="post">
+
             <div class="form-group">
-                <label asp-for="Address.FullName">Full Name</label>
-                <input asp-for="Address.FullName" class="form-control" required="required" />
-                <span asp-validation-for="Address.FullName" class="text-danger"></span>
+                <label asp-for="Address.Street">Street</label>
+                <input asp-for="Address.Street" class="form-control" required="required" />
+                <span asp-validation-for="Address.Street" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Address.Address1">Address</label>
-                <input asp-for="Address.Address1" class="form-control" required="required" />
-                <span asp-validation-for="Address.Address1" class="text-danger"></span>
+                <label asp-for="Address.Number">Number</label>
+                <input asp-for="Address.Number" class="form-control" required="required" />
+                <span asp-validation-for="Address.Number" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Address.City">City</label>
                 <input asp-for="Address.City" class="form-control" required="required" />
                 <span asp-validation-for="Address.City" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Address.PostalCode">Postal Code</label>
-                <input asp-for="Address.PostalCode" class="form-control" required="required" />
-                <span asp-validation-for="Address.PostalCode" class="text-danger"></span>
             </div>
 
             <div class="form-group">

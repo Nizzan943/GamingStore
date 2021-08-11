@@ -12,46 +12,73 @@
     <h4>Store</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Store.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Store.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Store.Address)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Store.Address)
+        <dd class="col-sm-10">
+            <lable>@Model.Store.Address.ToString()</lable>
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Store.PhoneNumber)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Store.PhoneNumber)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Store.Email)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Store.Email)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Store.OpeningHours)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Store.OpeningHours)
+        <dd class="col-sm-10">
+            <table class="opening_hours">
+                <tr>
+                    @{
+                        foreach (var day in Model.Store.OpeningHours)
+                        {
+                            <th> @day.DayOfWeek.ToString().Substring(0, 3)</th>
+                        }
+                    }
+                </tr>
+                <tr>
+                    @{
+                        for (var i = 0; i < 7; i++)
+                        {
+                            var open = "Open" + @i;
+                            var close = "Close" + @i;
+                            <td>
+                                <div>
+                                    <lable>@Model.Store.OpeningHours[i].OpeningTime</lable>
+                                </div>
+
+                                <div>
+                                    <lable>@Model.Store.OpeningHours[i].ClosingTime</lable>
+                                </div>
+                            </td>
+                        }
+                    }
+                </tr>
+            </table>
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Store.Active)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Store.Active)
         </dd>
     </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="@Model.Store.Id" />
+    <form asp-action="DeleteConfirmed">
+        <input type="hidden" name="id" value="@Model.Store.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

@@ -8,10 +8,8 @@ namespace GamingStore.Contracts
     {
         public DayOfWeek DayOfWeek { get; set; }
 
-        [DataType(DataType.Time)]
-        public TimeSpan OpeningTime { get; set; }
+        public string OpeningTime { get; set; }
 
-        [DataType(DataType.Time)]
-        public TimeSpan ClosingTime { get; set; }
+        public string ClosingTime { get; set; }
     }
 }

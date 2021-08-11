@@ -20,8 +20,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Store.Address" class="control-label"></label>
-                <input asp-for="@Model.Store.Address" class="form-control" />
-                <span asp-validation-for="@Model.Store.Address" class="text-danger"></span>
+                <input asp-for="@Model.Store.Address.Street" class="form-control" placeholder="street" />
+                <span asp-validation-for="@Model.Store.Address.Street" class="text-danger"></span>
+                <input type="number" min="0" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="number" />
+                <span asp-validation-for="@Model.Store.Address.Number" class="text-danger"></span>
+                <input asp-for="@Model.Store.Address.City" class="form-control" placeholder="city" />
+                <span asp-validation-for="@Model.Store.Address.City" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Store.PhoneNumber" class="control-label"></label>
@@ -35,8 +39,33 @@
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Store.OpeningHours" class="control-label"></label>
-                <input asp-for="@Model.Store.OpeningHours" class="form-control" />
-                <span asp-validation-for="@Model.Store.OpeningHours" class="text-danger"></span>
+                <table class="opening_hours">
+                    <tr>
+                        @{
+                            foreach (var day in Model.Store.OpeningHours)
+                            {
+                                <th> @day.DayOfWeek.ToString().Substring(0, 3)</th>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        @{
+                            for (var i = 0; i < 7; i++)
+                            {
+                                var open = "Open" + @i;
+                                var close = "Close" + @i;
+                                <td>
+                                    <span>
+                                        <input type="text" name="@open" class="form-control" />
+                                    </span>
+                                    <span>
+                                        <input type="text" name="@close" class="form-control" />
+                                    </span>
+                                </td>
+                            }
+                        }
+                    </tr>
+                </table>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
