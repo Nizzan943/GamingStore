@@ -7,7 +7,7 @@
 
 }
 
-<form method="post" asp-action="EditUsersInRole1">
+<form method="post" asp-action="EditUsersInRole1" asp-route-roleName="@Model.RoleName">
     <div class="card">
         <div class="card-header">
             <h2>Add or remove users from this role</h2>
@@ -26,7 +26,7 @@
         <div class="card-footer">
             <input type="submit" value="Update" class="btn btn-primary"
                    style="width: auto" />
-            <a asp-action="EditRole"
+            <a asp-action="EditRole" asp-route-id="@roleId"
                class="btn btn-primary" style="width: auto">
                 Cancel
             </a>

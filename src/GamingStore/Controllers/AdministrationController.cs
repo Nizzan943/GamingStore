@@ -57,7 +57,7 @@ namespace GamingStore.Controllers
             return View(viewModel);
         }
 
-                public async Task<IActionResult> ListUsers()
+        public async Task<IActionResult> ListUsers()
         {
             List<User> users = await UserManager.Users.ToListAsync();
             var currentUser = await GetCurrentUserAsync();
@@ -80,7 +80,7 @@ namespace GamingStore.Controllers
 
             if (user == null)
             {
-                
+
                 return RedirectToAction("ListUsers");
             }
 
@@ -88,7 +88,7 @@ namespace GamingStore.Controllers
             IList<string> userRoles = await UserManager.GetRolesAsync(user);
             if (!userRoles.Any(r => r.Equals("Admin")))
             {
-                
+
                 return RedirectToAction("ListUsers");
             }
 
@@ -136,50 +136,50 @@ namespace GamingStore.Controllers
             return View(model);
         }
 
-    //[HttpPost]
-    //public async Task<IActionResult> DeleteUser(string id)
-    //{
-    //    User user = await UserManager.FindByIdAsync(id);
+        //[HttpPost]
+        //public async Task<IActionResult> DeleteUser(string id)
+        //{
+        //    User user = await UserManager.FindByIdAsync(id);
 
-    //    if (user == null)
-    //    {
+        //    if (user == null)
+        //    {
 
-    //        return RedirectToAction("ListUsers");
-    //    }
+        //        return RedirectToAction("ListUsers");
+        //    }
 
-    //    var currentUser = await GetCurrentUserAsync();
+        //    var currentUser = await GetCurrentUserAsync();
 
-    //    IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
+        //    IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
 
-    //    if (!userRoles.Any(r => r.Equals("Admin")))
-    //    {
+        //    if (!userRoles.Any(r => r.Equals("Admin")))
+        //    {
 
-    //        return RedirectToAction("ListUsers");
-    //    }
+        //        return RedirectToAction("ListUsers");
+        //    }
 
-    //    if (user.Id == currentUser.Id)
-    //    {
+        //    if (user.Id == currentUser.Id)
+        //    {
 
-    //        return RedirectToAction("ListUsers");
-    //    }
+        //        return RedirectToAction("ListUsers");
+        //    }
 
-    //    IdentityResult result = await UserManager.DeleteAsync(user);
+        //    IdentityResult result = await UserManager.DeleteAsync(user);
 
-    //    if (result.Succeeded)
-    //    {
+        //    if (result.Succeeded)
+        //    {
 
-    //        return RedirectToAction("ListUsers");
-    //    }
+        //        return RedirectToAction("ListUsers");
+        //    }
 
-    //    foreach (IdentityError error in result.Errors)
-    //    {
-    //        ModelState.AddModelError(string.Empty, error.Description);
-    //    }
+        //    foreach (IdentityError error in result.Errors)
+        //    {
+        //        ModelState.AddModelError(string.Empty, error.Description);
+        //    }
 
-    //    return View("ListUsers");
-    //}
+        //    return View("ListUsers");
+        //}
 
-    [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> ListRoles()
         {
             IQueryable<IdentityRole> roles = RoleManager.Roles;
@@ -200,7 +200,7 @@ namespace GamingStore.Controllers
 
             if (role == null)
             {
-             
+
                 return RedirectToAction("ListUsers");
             }
 
@@ -232,7 +232,7 @@ namespace GamingStore.Controllers
 
             if (role == null)
             {
-               
+
                 return RedirectToAction("ListUsers");
             }
 
@@ -243,7 +243,7 @@ namespace GamingStore.Controllers
 
             if (result.Succeeded)
             {
-                
+
                 return RedirectToAction("ListRoles");
             }
 
@@ -252,7 +252,7 @@ namespace GamingStore.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
-           
+
             return View(model);
         }
 
@@ -270,6 +270,18 @@ namespace GamingStore.Controllers
                         UserId = user.Id,
                         UserName = user.UserName,
                         Email = user.Email,
+                        IsSelected = true
+                    };
+                    allusers.Add(viewModel);
+                }
+                else
+                {
+                    var viewModel = new UserRoleViewModel()
+                    {
+                        UserId = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email,
+                        IsSelected = false
                     };
                     allusers.Add(viewModel);
                 }
@@ -277,21 +289,23 @@ namespace GamingStore.Controllers
             var viewModel2 = new ListUserRoleViewModel()
             {
                 List = allusers,
+                RoleName = roleName
             };
             return View(viewModel2);
         }
 
-        
+
         //need to change
-        public async Task<IActionResult> EditUsersInRole1(ListUserRoleViewModel model)
+        public async Task<IActionResult> EditUsersInRole1(ListUserRoleViewModel model, string roleName)
         {
             for (var i = 0; i < model.List.Count; i++)
             {
                 if (model.List[i].IsSelected)
                 {
                     User user = await UserManager.FindByIdAsync(model.List[i].UserId);
-                    IList<string> userRoles = await UserManager.GetRolesAsync(user);
-                    IdentityResult result = await UserManager.UpdateAsync(user);
+
+
+                    var result = await UserManager.AddToRoleAsync(user, roleName);
 
                     if (result.Succeeded)
                     {
@@ -303,12 +317,36 @@ namespace GamingStore.Controllers
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
+
+                }
+                else
+                {
+                    User user = await UserManager.FindByIdAsync(model.List[i].UserId);
+                    try
+                    {
+                        var result = await UserManager.RemoveFromRoleAsync(user, roleName);
+                        if (result.Succeeded)
+                        {
+
+                            return RedirectToAction("ListRoles");
+                        }
+
+                        foreach (IdentityError error in result.Errors)
+                        {
+                            ModelState.AddModelError(string.Empty, error.Description);
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
                 }
             }
 
             return View(model);
         }
-        
+
     }
 
 }

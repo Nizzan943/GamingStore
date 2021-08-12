@@ -134,20 +134,22 @@ namespace GamingStore.Data
 
         public static void SeedDatabase(GamingStoreContext context)
         {
+            
             if (context.Item.Any())
             {
                 return;
             }
-
+            
             string directoryPath =
                 AppContext.BaseDirectory.Substring(0,
                     AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
 
-
+            
             if (context.Category.Any())
             {
                 return;
             }
+            
             var categories = SeedCategories(context);
 
             var items = SeedItems(context);
