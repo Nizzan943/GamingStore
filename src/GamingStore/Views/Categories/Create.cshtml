@@ -1,36 +1,42 @@
-﻿@model GamingStore.Models.Category
+﻿@using GamingStore.Contracts
+@model GamingStore.ViewModels.Categories.CategoryViewModel
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Category</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>Create a new Category</strong>
             </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
+            <div class="card-body card-block">
+                <div class="column">
+                    <form asp-action="Create" enctype="multipart/form-data" class="row">
+                        <div class="col-5">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Category.Name" class="control-label"></label>
+                                <input asp-for="Category.Name" class="form-control" required />
+                                <span asp-validation-for="Category.Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-5" style="padding-bottom: 3%">
+                            <div class="input-group d-flex justify-content-center" style="margin-top: 10%;">
+                                <input type="submit" value="Create Category" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
+
 </div>
 
-
-@section Scripts {
+@section Scripts
+{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -73,7 +73,7 @@ namespace GamingStore.Controllers
 
                 _context.Add(category);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View(category);
             }
             return View(category);
         }
@@ -158,7 +158,7 @@ namespace GamingStore.Controllers
             var category = await _context.Category.FindAsync(id);
             _context.Category.Remove(category);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View(category);
         }
 
         private bool CategoryExists(int id)
