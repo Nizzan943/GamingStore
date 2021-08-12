@@ -1,0 +1,68 @@
+﻿@using GamingStore.Data
+@model GamingStore.ViewModels.Administration.ListCategoriesViewModel
+@inject GamingStoreContext GamingStoreContext
+@addTagHelper *, Vereyon.Web.FlashMessage
+
+@{
+    ViewData["Title"] = "Admin Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <strong class="card-title">Categories</strong>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
+                    </div>
+                    <div class="col">
+                        <div class="float-right">
+                            <a class="badge" style="background: gold;" asp-action="Create" asp-controller="Categories">Create a New Category</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Categories.First().Name)
+                            </th>
+                            <th width="8%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Category category in Model.Categories)
+                        {
+                            <tr>
+                                <td class="item-titles">
+                                    @Html.DisplayFor(modelCategory => category.Name)
+                                </td>
+                                <td class="action-buttons">
+                                    <a class="badge" style="background: #11D0F6; color: white; padding: 10px; text-transform: uppercase; font-weight: normal; margin-bottom: 5px; " asp-action="Edit" asp-controller="Categories" asp-route-id="@category.Id">Edit</a>
+                                    <a class="badge" style="background: #00c292; color: white; padding: 10px; text-transform: uppercase; font-weight: normal; margin-bottom: 5px;" asp-action="Details" asp-controller="Categories" asp-route-id="@category.Id">Details</a>
+                                    <a class="badge" style="background: red; color: white; padding: 10px; text-transform: uppercase; font-weight: normal; margin-bottom: 5px; " asp-action="Delete" asp-controller="Categories" asp-route-id="@category.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        },
+            5000); // <-- time in milliseconds
+    </script>
+    <script src="/lib/jquery/dist/jquery.js"></script>
+}

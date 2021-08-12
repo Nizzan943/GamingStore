@@ -46,6 +46,19 @@ namespace GamingStore.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ListCategories()
+        {
+            List<Category> categories = await _context.Category.ToListAsync();
+
+            var viewModel = new ListCategoriesViewModel()
+            {
+                Categories = categories
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> ListStores()
         {
             List<Store> stores = await _context.Store.Include(s => s.Orders).ToListAsync();
