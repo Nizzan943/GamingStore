@@ -51,7 +51,7 @@
     "Name": "Big Eilat Store",
     "Address": {
       "Street": "Hasatat",
-      "Number":  "20",
+      "Number": "20",
       "City": "Eilat",
       "Country": "Israel"
     },
@@ -99,7 +99,7 @@
     "Name": "Rishon LeZion Ben Gurion Store",
     "Address": {
       "Street": "Ben Gurion",
-      "Number": "58"
+      "Number": "58",
       "City": "Rishon LeZion",
       "Country": "Israel"
     },
@@ -147,7 +147,7 @@
     "Name": "Jerusalem Ben Gurion Store",
     "Address": {
       "Street": "Ben Gurion",
-      "Number":  "3",
+      "Number": "3",
       "City": "Jerusalem",
       "Country": "Israel"
     },
@@ -195,7 +195,7 @@
     "Name": "Tel-Aviv Dizengoff Store",
     "Address": {
       "Street": "Dizengoff",
-      "Number":  "50",
+      "Number": "50",
       "City": "Tel-Aviv",
       "Country": "Israel"
     },
@@ -291,7 +291,7 @@
     "Name": "Tel-Aviv Levi Eshkol Store",
     "Address": {
       "Street": "Levi Eshkol",
-      "Number": "22"
+      "Number": "22",
       "City": "Tel-Aviv",
       "Country": "Israel"
     },

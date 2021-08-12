@@ -233,12 +233,12 @@ namespace GamingStore.Controllers
             }
 
 
-            /* 
-            if (store.OpeningHours.Any(openingHour => openingHour.ClosingTime <= openingHour.OpeningTime))
+             
+            if (store.OpeningHours.Any(openingHour => TimeSpan.Parse(openingHour.ClosingTime) <=  TimeSpan.Parse(openingHour.OpeningTime)))
             {
                 return RedirectToAction("ListStores", "Administration");
             }
-            */
+            
             
             /*
             if (!ModelState.IsValid)
@@ -331,8 +331,8 @@ namespace GamingStore.Controllers
 
 
 
-            /*
-            if (store.OpeningHours.Any(openingHour => openingHour.ClosingTime <= openingHour.OpeningTime))
+
+            if (store.OpeningHours.Any(openingHour => TimeSpan.Parse(openingHour.ClosingTime) <= TimeSpan.Parse(openingHour.OpeningTime)))
             {
 
                 return RedirectToAction("Edit", "Stores", new
@@ -340,7 +340,7 @@ namespace GamingStore.Controllers
                     id = store.Id
                 });
             }
-            */
+            
             try
             {
                 Context.Update(store);

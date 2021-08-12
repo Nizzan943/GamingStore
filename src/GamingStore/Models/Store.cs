@@ -52,8 +52,8 @@ namespace GamingStore.Models
             var dayOfWeek = (int)currentDateTime.DayOfWeek;
             var curTime = currentDateTime.TimeOfDay;
 
-            return true;
-            //return OpeningHours[dayOfWeek].OpeningTime <= curTime && curTime <= OpeningHours[dayOfWeek].ClosingTime;
+            //return true;
+            return TimeSpan.Parse(OpeningHours[dayOfWeek].OpeningTime) <= curTime && curTime <= TimeSpan.Parse(OpeningHours[dayOfWeek].ClosingTime);
         }
     }
 }
