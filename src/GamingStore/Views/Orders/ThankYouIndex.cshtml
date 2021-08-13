@@ -1,0 +1,84 @@
+﻿@model GamingStore.ViewModels.Orders.OrderPlacedViewModel
+@{
+    ViewData["Title"] = "Thank You";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/thank_you.css">
+</head>
+
+<body>
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="single_post" style="margin-top: 70px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 offset-lg-2">
+                        <div class="a-box a-alert a-alert-success">
+                            <div class="a-box-inner a-alert-container">
+                                <div class="a-alert-content">
+                                    <div class="a-row">
+                                        <div class="a-column a-span7">
+                                            <style type="text/css">
+                                                .subHeadingAndMobileWidgetDisplay {
+                                                    display: none;
+                                                    margin-top: 0px !important;
+                                                }
+                                            </style>
+                                            @{
+                                                if (Model == null)
+                                                {
+                                                    <h2 class="a-color-success">Order creation has been failed, contact support at gamingstore@gmail.com</h2>
+                                                }
+                                                else
+                                                {
+                                                    <div id="widget-purchaseConfirmationStatus" class="a-section a-spacing-micro">
+                                                        <div cel_widget_id="typ-purchaseConfirmationStatus" class="celwidget" data-cel-widget="typ-purchaseConfirmationStatus">
+                                                            <h2 class="a-color-success">
+                                                                Thank you, your order has been placed.
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                    <div id="widget-purchaseConfirmationReview-hidden" class="a-section a-spacing-none">
+                                                        <div cel_widget_id="typ-purchaseConfirmationReview" class="celwidget" data-cel-widget="typ-purchaseConfirmationReview">
+                                                            <p id="subHeadingAndMobileWidget" class="a-spacing-base subHeadingAndMobileWidgetDisplay" style="display: block;">
+                                                                <span>Please check your email for order confirmation and detailed delivery information.</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div cel_widget_id="purchase-summary" class="celwidget" data-cel-widget="purchase-summary">
+                                                        <div>
+                                                            <span>
+                                                                <strong>
+                                                                    <b>@Model.ItemsCount items will be delivered to:</b>
+                                                                </strong>
+                                                                <br>
+                                                            </span>
+                                                            <span>
+                                                                @Model.ShippingAddress.FullName
+                                                            </span><br>
+
+                                                            <span>
+                                                                @Model.ShippingAddress.Address1
+                                                            </span><br>
+                                                            <span>@Model.ShippingAddress.City , @Model.ShippingAddress.PostalCode </span><br>
+                                                            <span>@Model.ShippingAddress.Country</span>
+                                                        </div>
+
+                                                        <div>
+                                                            <a href="/Identity/Account/Manage/MyOrders" class="btn btn-success" style="margin-top: 4%">Review or edit your recent orders</a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
