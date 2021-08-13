@@ -3,7 +3,7 @@
 
 namespace GamingStore.Contracts
 {
-    class BarChartFormat
+    public class BarChartFormat
     {
 
         [DataType(DataType.Date)]

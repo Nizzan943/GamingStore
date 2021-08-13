@@ -1,9 +1,197 @@
 ﻿@model GamingStore.ViewModels.Administration.IndexViewModel
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
 }
 <link rel="stylesheet" href="~/css/administration/bar_chart_monthly_revenue.css" />
 <link rel="stylesheet" href="~/css/administration/pie_chart_category_revenue.css" />
 
-<div>Hello world</div>
+<!-- Animated -->
+<!-- Widgets  -->
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-1">
+                        <i class="pe-7s-cash"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text">$<span class="count">@Model.WidgetsValues["Revenue"]</span></div>
+                            <div class="stat-heading">Revenue</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-2">
+                        <i class="pe-7s-cart"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text"><span class="count">@Model.WidgetsValues["Orders"]</span></div>
+                            <div class="stat-heading">Orders</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-3">
+                        <i class="pe-7s-browser"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text"><span class="count">@Model.WidgetsValues["Items"]</span></div>
+                            <div class="stat-heading">Items</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-five">
+                    <div class="stat-icon dib flat-color-4">
+                        <i class="pe-7s-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="text-left dib">
+                            <div class="stat-text"><span class="count">@Model.WidgetsValues["Users"]</span></div>
+                            <div class="stat-heading">Clients</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Widgets -->
+<!--  Traffic  -->
+<div class="row">
+    <div class="col-lg-8 clearfix">
+        <div class="card">
+            <div class="card-body graph">
+                <h4 class="box-title">Monthly Revenues </h4>
+
+                <div class="chart-container ov-h">
+                    <div class="barchart"></div>
+                </div>
+            </div>
+        </div>
+    </div><!-- /# column -->
+    <div class="col-xl-4 clearfix">
+        <div class="card br-0">
+            <div class="card-body">
+                <h4 class="box-title">Categorical Revenue</h4>
+                <div class="chart-container ov-h">
+                    <div class="piechart"></div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.row -->
+    <!--  /Traffic -->
+    <div class="clearfix"></div>
+    <!-- Orders -->
+    <div class="orders col">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="box-title">Latest Orders </h4>
+                    </div>
+                    <div class="card-body--">
+                        <div class="table-stats order-table ov-h">
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th class="serial">
+                                            #
+                                        </th>
+                                        <th>
+                                            #@Html.DisplayNameFor(model => model.Orders.First().Id)
+                                        </th>
+                                        <th>
+                                            User Email
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Orders.First().State)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Orders.First().Store)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ var count = 0;}
+                                    @foreach (var order in Model.Orders.Take(10))
+                                    {
+                                        count++;
+                                        <tr>
+                                            <td class="serial">
+                                                @count.
+                                            </td>
+                                            <td class="serial">
+                                                #@Html.DisplayFor(modelItem => order.Id)
+                                            </td>
+                                            <td>
+                                                <span class="name"> @Html.DisplayFor(modelItem => order.User.Email)</span>
+                                            </td>
+                                            <td>
+                                                <span class="order_date"> @Html.DisplayFor(modelItem => order.OrderDate)</span>
+
+                                            </td>
+                                            <td>
+                                                <span class="order_state"> @Html.DisplayFor(modelItem => order.State)</span>
+
+                                            </td>
+                                            <td>
+                                                <span class="store_name"> @Html.DisplayFor(modelItem => order.Store.Name)</span>
+
+                                            </td>
+                                            <td>
+                                                <span class="payment_total"> @Html.DisplayFor(modelItem => order.Payment.Total)</span>
+                                            </td>
+                                           
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div> <!-- /.table-stats -->
+                    </div>
+                </div> <!-- /.card -->
+            </div>  <!-- /.col-lg-8 -->
+        </div> <!-- /.col-md-4 -->
+    </div>
+</div>
+<!-- /.orders -->
+<!-- .animated -->
+<div class="clearfix"></div>
+
+@section Scripts{
+    <script src="~/js/administration/adminstration_main.js"></script>
+    <script src="/js/administration/bar_chart_monthly_revenue.js"></script>
+    <script src="/js/administration/pie_chart_category_revenue.js"></script>
+}

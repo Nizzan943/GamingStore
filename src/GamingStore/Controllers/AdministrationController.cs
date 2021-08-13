@@ -11,6 +11,10 @@ using GamingStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
+using GamingStore.Contracts;
+using System.IO;
+using GamingStore.Models.Relationships;
 
 namespace GamingStore.Controllers
 {
@@ -27,10 +31,145 @@ namespace GamingStore.Controllers
         }
 
         // GET: Administrator
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            var revenue = await CalcRevenue();
+            var ordersNumber = await _context.Order.CountAsync();
+            var itemsNumber = await _context.Item.CountAsync();
+            var clientsNumber = await _context.User.CountAsync();
+
+            revenue = Math.Round(revenue, 2);
+            CreateMonthlyRevenueBarChartData(await _context.Order.Include(o => o.Payment).Include(o => o.Store).ToListAsync());
+            CreateRevenueByCategoryPieChartData(await _context.Order.Include(o => o.OrderItems).ThenInclude(oi => oi.Item).ToListAsync());
+
+            List<Order> orders = await _context.Order
+                .Include(order => order.User)
+                .Include(order => order.Payment)
+                .Include(order => order.Store)
+                .OrderByDescending(order => order.OrderDate)
+                .ToListAsync();
+
+            var viewModel = new IndexViewModel()
+            {
+                Customers = _context.User,
+                Items = _context.Item,
+                Stores = _context.Store,
+                Orders = orders,
+                ItemsInCart = await CountItemsInCart(),
+                WidgetsValues = new Dictionary<string, double>()
+                {
+                    {"Revenue", revenue}, {"Orders", ordersNumber}, {"Items", itemsNumber}, {"Clients", clientsNumber}
+                }
+            };
+
+            return View(viewModel);
         }
+
+        private void CreateRevenueByCategoryPieChartData(List<Order> orders)
+        {
+            var purchaseByCategoryList = new List<PieChartFormat>();
+
+            foreach (var order in orders)
+            {
+                foreach (OrderItem orderItem in order.OrderItems)
+                {
+                    var categoryName = orderItem.Item.Category.Name;
+                    var itemsCost = orderItem.ItemsCount * orderItem.Item.Price;
+                    if (purchaseByCategoryList.Any(d => d.Name == categoryName))
+                    {
+                        PieChartFormat pieChartFormat = purchaseByCategoryList.FirstOrDefault(d => d.Name == categoryName);
+                        if (pieChartFormat != null)
+                        {
+                            pieChartFormat.Value += itemsCost;
+                        }
+                    }
+                    else
+                    {
+                        purchaseByCategoryList.Add(new PieChartFormat()
+                        {
+                            Name = categoryName,
+                            Value = itemsCost
+                        });
+                    }
+                }
+            }
+
+            purchaseByCategoryList.Sort((a, b) => a.Value.CompareTo(b.Value));
+            var serializeObject = JsonConvert.SerializeObject(purchaseByCategoryList, Formatting.Indented);
+
+            //write string to file
+            string pieChartDataPath = "data\\RevenueByCategoryPieChartData.json";
+            var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{pieChartDataPath}";
+            System.IO.File.WriteAllText(fileDir, serializeObject);
+        }
+
+        private static void CreateMonthlyRevenueBarChartData(List<Order> orders)
+        {
+            orders.Sort((x, y) => x.OrderDate.CompareTo(y.OrderDate));
+
+            var groupByCheck = from order in orders
+                               group order by order.OrderDate.Date.ToString("Y")
+                into dateGroup
+                               select new BarChartFormat()
+                               {
+                                   Date = dateGroup.Key,
+                                   Value = dateGroup.Sum(o => o.Payment.ItemsCost)
+                               };
+
+            var serializedGroupBy = JsonConvert.SerializeObject(groupByCheck, Formatting.Indented);
+
+            //write string to file
+            string barChartDataPath = "data\\MonthlyRevenueBarChartData.json";
+            var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{barChartDataPath}";
+            System.IO.File.WriteAllText(fileDir, serializedGroupBy);
+        }
+
+        private void createStoresRevenueGraphData(List<Order> orders)
+        {
+            var orderMonthlyList = new List<PieChartFormat>();
+
+            foreach (var order in orders)
+            {
+                var storeName = order.Store.Name.Replace("Store", "");
+                var itemsCost = order.Payment.ItemsCost;
+
+                if (orderMonthlyList.Any(d => d.Name == storeName))
+                {
+                    PieChartFormat pieChartFormat = orderMonthlyList.FirstOrDefault(d => d.Name == storeName);
+                    if (pieChartFormat != null)
+                    {
+                        pieChartFormat.Value += itemsCost;
+                    }
+                }
+                else
+                {
+                    orderMonthlyList.Add(new PieChartFormat()
+                    {
+                        Name = storeName,
+                        Value = itemsCost
+                    });
+                }
+            }
+
+            orderMonthlyList.Sort((a, b) => a.Value.CompareTo(b.Value));
+
+            var serializeObject = JsonConvert.SerializeObject(orderMonthlyList, Formatting.Indented);
+
+            //write string to file
+            string pieChartDataPath = "data\\StoresRevenuePieChart.json";
+            var fileDir = $@"{Directory.GetCurrentDirectory()}\wwwroot\{pieChartDataPath}";
+            System.IO.File.WriteAllText(fileDir, serializeObject);
+        }
+
+
+
+        private async Task<double> CalcRevenue()
+        {
+            var orders = await _context.Order.Include(o => o.Payment).ToListAsync();
+
+            return orders.Sum(order => order.Payment.Total);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> ListItems()
@@ -359,6 +498,8 @@ namespace GamingStore.Controllers
 
             return View(model);
         }
+
+
 
     }
 
