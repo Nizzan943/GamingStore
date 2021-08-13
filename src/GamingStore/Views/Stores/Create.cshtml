@@ -5,81 +5,84 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>Store</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="@Model.Store.Name" class="control-label"></label>
-                <input asp-for="@Model.Store.Name" class="form-control" />
-                <span asp-validation-for="@Model.Store.Name" class="text-danger"></span>
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <strong>Create a new Store</strong>
             </div>
-            <div class="form-group">
-                <label asp-for="@Model.Store.Address" class="control-label"></label>
-                <input asp-for="@Model.Store.Address.Street" class="form-control" placeholder="street" />
-                <span asp-validation-for="@Model.Store.Address.Street" class="text-danger"></span>
-                <input type="number" min="1" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="number" />
-                <span asp-validation-for="@Model.Store.Address.Number" class="text-danger"></span>
-                <input asp-for="@Model.Store.Address.City" class="form-control" placeholder="city" />
-                <span asp-validation-for="@Model.Store.Address.City" class="text-danger"></span>
+            <div class="card-body card-block">
+                <div class="column">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Store.Name" class="control-label"></label>
+                            <input asp-for="@Model.Store.Name" class="form-control" />
+                            <span asp-validation-for="@Model.Store.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Store.Address" class="control-label"></label>
+                            <input asp-for="@Model.Store.Address.Street" class="form-control" placeholder="street" />
+                            <span asp-validation-for="@Model.Store.Address.Street" class="text-danger"></span>
+                            <input type="number" min="1" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="number" />
+                            <span asp-validation-for="@Model.Store.Address.Number" class="text-danger"></span>
+                            <input asp-for="@Model.Store.Address.City" class="form-control" placeholder="city" />
+                            <span asp-validation-for="@Model.Store.Address.City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Store.PhoneNumber" class="control-label"></label>
+                            <input asp-for="@Model.Store.PhoneNumber" class="form-control" />
+                            <span asp-validation-for="@Model.Store.PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Store.Email" class="control-label"></label>
+                            <input asp-for="@Model.Store.Email" class="form-control" />
+                            <span asp-validation-for="@Model.Store.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Store.OpeningHours" class="control-label"></label>
+                            <table class="opening_hours">
+                                <tr>
+                                    @{
+                                        foreach (var day in Model.Store.OpeningHours)
+                                        {
+                                            <th> @day.DayOfWeek.ToString().Substring(0, 3)</th>
+                                        }
+                                    }
+                                </tr>
+                                <tr>
+                                    @{
+                                        for (var i = 0; i < 7; i++)
+                                        {
+                                            var open = "Open" + @i;
+                                            var close = "Close" + @i;
+                                            <td>
+                                                <span>
+                                                    <input type="time" name="@open" class="form-control" required />
+                                                </span>
+                                                <span>
+                                                    <input type="time" name="@close" class="form-control" required />
+                                                </span>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="@Model.Store.Active" /> @Html.DisplayNameFor(model => model.Store.Active)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="@Model.Store.PhoneNumber" class="control-label"></label>
-                <input asp-for="@Model.Store.PhoneNumber" class="form-control" />
-                <span asp-validation-for="@Model.Store.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Store.Email" class="control-label"></label>
-                <input asp-for="@Model.Store.Email" class="form-control" />
-                <span asp-validation-for="@Model.Store.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="@Model.Store.OpeningHours" class="control-label"></label>
-                <table class="opening_hours">
-                    <tr>
-                        @{
-                            foreach (var day in Model.Store.OpeningHours)
-                            {
-                                <th> @day.DayOfWeek.ToString().Substring(0, 3)</th>
-                            }
-                        }
-                    </tr>
-                    <tr>
-                        @{
-                            for (var i = 0; i < 7; i++)
-                            {
-                                var open = "Open" + @i;
-                                var close = "Close" + @i;
-                                <td>
-                                    <span>
-                                        <input type="time" name="@open" class="form-control" required />
-                                    </span>
-                                    <span>
-                                        <input type="time" name="@close" class="form-control" required/>
-                                    </span>
-                                </td>
-                            }
-                        }
-                    </tr>
-                </table>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="@Model.Store.Active" /> @Html.DisplayNameFor(model => model.Store.Active)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
