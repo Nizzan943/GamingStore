@@ -38,7 +38,8 @@ namespace GamingStore.Models
         [Required, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [DisplayName("Opening Hours")] public List<OpeningHours> OpeningHours { get; set; } = new List<OpeningHours>(7);
+        [DisplayName("Opening Hours")]
+        public List<OpeningHours> OpeningHours { get; set; } = new List<OpeningHours>(7);
 
         //public Dictionary<Item,uint> Stock { get; set; } // determines how many items there are in the store. example: {{fridge, 5},{mouse,6}}
         public ICollection<Order> Orders { get; set; }

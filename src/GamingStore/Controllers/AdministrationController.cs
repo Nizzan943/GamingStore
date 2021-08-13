@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GamingStore.Controllers
 {
-    [Authorize(Roles = "Admin,Viewer")]
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : BaseController
     {
 

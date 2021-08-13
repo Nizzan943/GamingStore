@@ -38,6 +38,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
+        public int? ItemsInCart { get; set; }
+
         private async Task LoadAsync(User user)
         {
             var userName = await _userManager.GetUserNameAsync(user);

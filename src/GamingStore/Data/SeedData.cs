@@ -39,7 +39,6 @@ namespace GamingStore.Data
         {
             const string admin = "Admin";
             const string User = "User";
-            const string viewer = "Viewer";
 
 
             bool roleExists = await _roleManager.RoleExistsAsync(admin);
@@ -54,13 +53,6 @@ namespace GamingStore.Data
                 await AddAdmins(_userManager, adminPassword);
             }
             await AddAdmins(_userManager, adminPassword);
-            roleExists = await _roleManager.RoleExistsAsync(viewer);
-            if (!roleExists)
-            {
-                // first we create Viewer roll    
-                var role = new IdentityRole { Name = viewer };
-                await _roleManager.CreateAsync(role);
-            }
 
             // creating Creating Employee role     
             roleExists = await _roleManager.RoleExistsAsync(User);

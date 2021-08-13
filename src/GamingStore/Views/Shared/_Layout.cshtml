@@ -25,7 +25,7 @@
                     </svg>
                     <a href="mailto:support@nyo.com" style="margin-left: 10px">nyo.gamings@gmail.com</a>
                 </ul>
-                @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Viewer")))
+                @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") ))
                 {
                     <div class="top_bar_contact_item">
                         <a asp-controller="Administration" asp-action="Index">Admin CP</a>
