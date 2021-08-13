@@ -1,7 +1,7 @@
 ﻿@model GamingStore.ViewModels.Administration.IndexViewModel
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <link rel="stylesheet" href="~/css/administration/bar_chart_monthly_revenue.css" />
 <link rel="stylesheet" href="~/css/administration/pie_chart_category_revenue.css" />
@@ -72,7 +72,7 @@
                     </div>
                     <div class="stat-content">
                         <div class="text-left dib">
-                            <div class="stat-text"><span class="count">@Model.WidgetsValues["Users"]</span></div>
+                            <div class="stat-text"><span class="count">@Model.WidgetsValues["Clients"]</span></div>
                             <div class="stat-heading">Clients</div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                                             <td>
                                                 <span class="payment_total"> @Html.DisplayFor(modelItem => order.Payment.Total)</span>
                                             </td>
-                                           
+
                                         </tr>
                                     }
                                 </tbody>
