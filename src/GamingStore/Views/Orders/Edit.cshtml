@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <div class="row">
     <div class="col-lg-4">
@@ -16,22 +16,22 @@
                     @using (Html.BeginForm("Edit", "Orders", FormMethod.Post, new { @class = "col" }))
                     {
                         @Html.HiddenFor(m => m.Order.Id)
-                        @Html.HiddenFor(m => m.Order.CustomerId)
+                        @Html.HiddenFor(m => m.Order.UserId)
                         @Html.HiddenFor(m => m.Order.PaymentId)
 
                         <div class="form-group row">
-                            @Html.LabelFor(m => m.Order.Customer, new
+                            @Html.LabelFor(m => m.Order.User, new
                             {
                                 @class = "col-sm-5 col-form-label"
                             })
                             <div class="col">
                                 <div class="form-check">
-                                    @Html.TextBox("Customer", Model?.Order?.Customer?.UserName, new
+                                    @Html.TextBox("User", Model?.Order?.User?.UserName, new
                                     {
                                         @class = "form-control",
                                         @disabled = "disabled"
                                     })
-                                    @Html.ValidationMessageFor(m => m.Order.Customer)
+                                    @Html.ValidationMessageFor(m => m.Order.User)
                                 </div>
                             </div>
 

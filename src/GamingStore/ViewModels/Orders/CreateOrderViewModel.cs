@@ -10,20 +10,20 @@ namespace GamingStore.ViewModels.Orders
     {
         public int OrderId { get; set; }
 
-        [Required] 
+        [Required]
         public string CustomerId { get; set; }
-        
+
         public User User { get; set; }
-        
+
         [Required]
         public int StoreId { get; set; }
-        
+
         public DateTime OrderDate { get; set; }
-        
+
         public OrderState State { get; set; }
 
-        public Address ShippingAddress { get; set; }
-        
+        public ShippingAddress ShippingAddress { get; set; }
+
         public ShippingMethod ShippingMethod { get; set; }
 
         public CreditCard CreditCard { get; set; }
@@ -32,7 +32,6 @@ namespace GamingStore.ViewModels.Orders
 
         [Required]
         public Payment Payment { get; set; }
-
         public List<int> ItemsIdsInCartList { get; set; }
     }
 }

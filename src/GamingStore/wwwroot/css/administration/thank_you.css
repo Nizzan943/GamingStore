@@ -1,0 +1,17 @@
+﻿.a-alert-success .a-alert-container {
+    background-color: #fff;
+    box-shadow: 0 0 0 4px #dff7df inset;
+    padding-left: 60px;
+}
+
+.a-box .a-box-inner {
+    border-radius: 4px;
+    position: relative;
+    padding: 14px 18px;
+}
+
+body {
+    font-size: 16px;
+    line-height: 19px;
+    font-family: Arial,sans-serif;
+}

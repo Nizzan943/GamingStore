@@ -59,7 +59,7 @@ namespace GamingStore.Data
                 v => JsonConvert.SerializeObject(v), v => JsonConvert.DeserializeObject<List<OpeningHours>>(v));
 
             modelBuilder.Entity<Order>().Property(c => c.ShippingAddress).HasConversion(v => JsonConvert.SerializeObject(v),
-              v => JsonConvert.DeserializeObject<Address>(v));
+              v => JsonConvert.DeserializeObject<ShippingAddress>(v));
 
             #endregion
 

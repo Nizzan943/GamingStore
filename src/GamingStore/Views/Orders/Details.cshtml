@@ -1,7 +1,7 @@
 ﻿@model GamingStore.ViewModels.Orders.OrderDetailsViewModel
 @{
     ViewData["Title"] = "Order Details";
-    Layout = "~/Views/Shared/_NewLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div style="padding:3%">
     <h1>Order Details</h1>
@@ -16,7 +16,7 @@
                         @if (Model.Order.ShippingAddress != null)
                         {
                             <li>@Model.Order.ShippingAddress.FullName</li>
-                            <li>@Model.Order.ShippingAddress.Address1</li>
+                            <li>@Model.Order.ShippingAddress.Street</li>
                             <li>@Model.Order.ShippingAddress.City, @Model.Order.ShippingAddress.PostalCode</li>
                             <li>@Model.Order.ShippingAddress.Country</li>
                         }

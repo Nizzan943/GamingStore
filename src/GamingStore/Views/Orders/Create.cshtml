@@ -4,7 +4,7 @@
 
 @{
     ViewData["Title"] = "Check Out";
-    Layout = "~/Views/Shared/_NewLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
 </style>
@@ -14,7 +14,6 @@
     <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
 </head>
 <body>
-<h4 class="demonstration-title">The payment is for demonstration purposes only! please do not enter your actual credentials.</h4>
 @using (Html.BeginForm("Create", "Orders", FormMethod.Post, null))
 {
     for (var index = 0; index < Model.ItemsIdsInCartList.Count; index++)
@@ -73,7 +72,7 @@
                             </div>
                             <div class="col-50">
                                 @Html.LabelFor(m => m.CreditCard.ExpirationYear)
-                                @Html.DropDownListFor(m => m.CreditCard.ExpirationYear, new SelectList(new List<int> {2021, 2022, 2023, 2024, 2025, 2026, 2027}), new {@class = "form-control", style = "margin:auto;"})
+                                @Html.DropDownListFor(m => m.CreditCard.ExpirationYear, new SelectList(new List<int> {2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030}), new {@class = "form-control", style = "margin:auto;"})
                                 @Html.ValidationMessageFor(m => m.CreditCard.ExpirationYear)
                             </div>
                         </div>
@@ -163,47 +162,6 @@
                     </p>
                 </span>
                 <input type="submit" value="Place Order" class="btn btn-primary btn-lg btn-block">
-            </div>
-            <div class="container" style="margin-top: 8%">
-                <button type="button" class="collapsible" style="border-radius: .3rem">USD Exchange Rates</button>
-                <div class="content">
-                    <table id="tg-hZj8X" class="tg">
-                        <thead>
-                        <tr>
-                            <th class="tg-0vh3">Currency</th>
-                            <th class="tg-0vh3">Exchange</th>
-                            <th class="tg-0vh3">Total Order</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        @{
-                            double currencyValueIls = Model.Currencies[0].Value;
-                            double currencyValueEur = Model.Currencies[1].Value;
-                            double currencyValueGbp = Model.Currencies[2].Value;
-                            <input type="hidden" id="currency_value_ils" value="@currencyValueIls"/>
-                            <input type="hidden" id="currency_value_eur" value="@currencyValueEur"/>
-                            <input type="hidden" id="currency_value_gbp" value="@currencyValueGbp"/>
-                        }
-
-                        @for (var index = 0; index < Model.Currencies.Count; index++)
-                        {
-                            CurrencyInfo currency = Model.Currencies[index];
-                            string itemCostCurrency = $"item_cost_currency_{index}";
-                            string itemTotalCurrency = $"item_total_currency_{index}";
-                            <input type="hidden" id="@itemCostCurrency" value="@currency.Total"/>
-
-                            <tr>
-                                <td class="tg-4pr7">@Html.DisplayFor(m => currency.Currency)</td>
-                                <td class="tg-4pr7">@Html.DisplayFor(m => currency.Value)</td>
-                                <td class="tg-4pr7">
-                                    @currency.Symbol <span id="@itemTotalCurrency">@Html.DisplayFor(m => currency.Total)</span>
-                                </td>
-                            </tr>
-                        }
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     </div>

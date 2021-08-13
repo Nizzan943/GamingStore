@@ -40,7 +40,7 @@ namespace GamingStore.Models
         public CreditCard CreditCard { get; set; }
 
         [DisplayName("Shipping Address")]
-        public Address ShippingAddress { get; set; }
+        public ShippingAddress ShippingAddress { get; set; }
 
         [Required, DisplayName("Shipping Method")]
         public ShippingMethod ShippingMethod { get; set; }

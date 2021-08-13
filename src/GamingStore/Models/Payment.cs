@@ -40,7 +40,7 @@ namespace GamingStore.Models
         public double Total { get; set; }
 
         public PaymentMethod PaymentMethod { get; set; }
-        public string RefundAmount { get; set; }
+        public double RefundAmount { get; set; }
         public string Notes { get; set; }
         public bool Paid { get; set; } = true;
     }

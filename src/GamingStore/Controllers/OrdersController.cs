@@ -10,23 +10,19 @@ using GamingStore.Models;
 using GamingStore.Models.Relationships;
 using GamingStore.ViewModels;
 using GamingStore.ViewModels.Orders;
-using LoggerService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Vereyon.Web;
+
 
 namespace GamingStore.Controllers
 {
     public class OrdersController : BaseController
     {
-        private readonly IFlashMessage _flashMessage;
-        private readonly ILoggerManager _logger;
-
-        public OrdersController(UserManager<User> userManager, GamingStoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager, IFlashMessage flashMessage, ILoggerManager logger)
+        private readonly GamingStoreContext _context;
+        public OrdersController(UserManager<User> userManager, GamingStoreContext context, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
             : base(userManager, context, roleManager, signInManager)
         {
-            _flashMessage = flashMessage;
-            _logger = logger;
+            _context = context;
         }
 
         [HttpGet]
@@ -40,7 +36,7 @@ namespace GamingStore.Controllers
 
                 if (inactiveItemsInCart)
                 {
-                    _flashMessage.Danger("Some items in cart are no longer available");
+                    //"Some items in cart are no longer available");
                     return RedirectToAction("Index", "Carts");
                 }
 
@@ -49,7 +45,7 @@ namespace GamingStore.Controllers
 
                 if (itemsCost == 0)
                 {
-                    _flashMessage.Danger("Your cart does no longer has items, please add items to cart before proceed to checkout");
+                    //"Your cart does no longer has items, please add items to cart before proceed to checkout");
                     return RedirectToAction("Index", "Carts");
                 }
 
@@ -71,7 +67,15 @@ namespace GamingStore.Controllers
                 {
                     Cart = itemsInCart,
                     User = User,
-                    ShippingAddress = User.Address,
+                    ShippingAddress = new ShippingAddress
+                    {
+                        City = User.Address.City,
+                        Country = User.Address.Country,
+                        FullName = User.UserName,
+                        PostalCode = "00000",
+                        Street = User.Address.Street
+                    },
+
                     Payment = new Payment
                     {
                         ShippingCost = defaultPaymentCost,
@@ -82,14 +86,14 @@ namespace GamingStore.Controllers
                     ItemsIdsInCartList = itemsIdsInCartList
                 };
 
-                _flashMessage.Warning("Please verify your items before placing the order");
+                //"Please verify your items before placing the order");
 
                 return View(viewModel);
             }
             catch (Exception e)
             {
-                _flashMessage.Danger("Your order could not be placed. Please contact support for help");
-                _logger.LogError($"an order could not be created, e: {e}");
+                //"Your order could not be placed. Please contact support for help");
+                //$"an order could not be created, e: {e}");
 
                 return View(new CreateOrderViewModel() { ItemsInCart = await CountItemsInCart() });
             }
@@ -118,7 +122,7 @@ namespace GamingStore.Controllers
 
             if (!isEqual)
             {
-                _flashMessage.Danger("Your cart items are different from your checkout items");
+                //"Your cart items are different from your checkout items");
                 return RedirectToAction("Index", "Carts");
             }
 
@@ -135,7 +139,7 @@ namespace GamingStore.Controllers
                     Total = itemsCost + model.Payment.ShippingCost
                 },
                 PaymentId = model.Payment.Id,
-                Store = await Context.Stores.FirstOrDefaultAsync(s => s.Name == "Website"),
+                Store = await Context.Store.FirstOrDefaultAsync(s => s.Name == "Website"),
                 StoreId = 0, //website
                 User = User,
                 UserId = User.Id,
@@ -174,11 +178,11 @@ namespace GamingStore.Controllers
 
         private async Task<List<Cart>> GetItemsInCart(User User)
         {
-            List<Cart> itemsInCart = await Context.Carts.Where(c => c.UserId == User.Id).ToListAsync();
+            List<Cart> itemsInCart = await Context.Cart.Where(c => c.UserId == User.Id).ToListAsync();
 
             foreach (Cart cartItem in itemsInCart)
             {
-                Item item = Context.Items.First(i => i.Id == cartItem.ItemId);
+                Item item = Context.Item.First(i => i.Id == cartItem.ItemId);
                 cartItem.Item = item;
             }
 
@@ -194,7 +198,7 @@ namespace GamingStore.Controllers
 
             if (inactiveItemsInCart)
             {
-                _flashMessage.Danger("Some items in cart are no longer available");
+                //"Some items in cart are no longer available");
                 return RedirectToAction("Index", "Carts");
             }
 
@@ -202,7 +206,7 @@ namespace GamingStore.Controllers
 
             if (itemsCost == 0)
             {
-                _flashMessage.Danger("Your cart does no longer has items, please add items to cart before proceed to checkout");
+                //"Your cart does no longer has items, please add items to cart before proceed to checkout");
                 return RedirectToAction("Index", "Carts");
             }
 
@@ -211,7 +215,7 @@ namespace GamingStore.Controllers
 
             try
             {
-                order = Context.Orders.Include(o => o.User).First(o => o.Id == id);
+                order = Context.Order.Include(o => o.User).First(o => o.Id == id);
             }
             catch
             {
@@ -237,7 +241,7 @@ namespace GamingStore.Controllers
 
         private async Task<int> ClearCartAsync(User User)
         {
-            IQueryable<Cart> carts = Context.Carts.Where(c => c.UserId == User.Id);
+            IQueryable<Cart> carts = Context.Cart.Where(c => c.UserId == User.Id);
             var items = 0;
 
             foreach (Cart itemInCart in carts)
@@ -245,7 +249,7 @@ namespace GamingStore.Controllers
                 items += itemInCart.Quantity;
             }
 
-            Context.Carts.RemoveRange(carts);
+            Context.Cart.RemoveRange(carts);
             await Context.SaveChangesAsync();
             return items;
         }
@@ -259,7 +263,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Order order = await Context.Orders
+            Order order = await Context.Order
                 .Include(x => x.OrderItems)
                 .ThenInclude(y => y.Item)
                 .FirstOrDefaultAsync(o => o.Id == id);
@@ -270,7 +274,7 @@ namespace GamingStore.Controllers
             }
 
             order.User = await GetCurrentUserAsync();
-            order.Payment = await Context.Payments.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
+            order.Payment = await Context.Payment.FirstOrDefaultAsync(payment => payment.Id == order.PaymentId);
 
             var viewModel = new OrderDetailsViewModel()
             {
@@ -291,7 +295,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            Order order = await Context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == id);
+            Order order = await Context.Order.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == id);
 
             if (order == null)
             {
@@ -300,7 +304,7 @@ namespace GamingStore.Controllers
 
             var viewModel = new EditOrdersViewModel
             {
-                Users = await Context.Users.Where(User => !string.IsNullOrWhiteSpace(User.UserName))
+                User = await Context.Users.Where(User => !string.IsNullOrWhiteSpace(User.UserName))
                     .Distinct().ToListAsync(),
                 Order = order,
                 ItemsInCart = await CountItemsInCart(),
@@ -315,7 +319,7 @@ namespace GamingStore.Controllers
         {
             if (!await OrderExists(order.Id))
             {
-                _flashMessage.Danger("You cannot edit product that is no longer exists");
+                //"You cannot edit product that is no longer exists");
                 return RedirectToAction("ListOrders", "Administration");
             }
 
@@ -326,13 +330,13 @@ namespace GamingStore.Controllers
 
             if (!userRoles.Any(r => r.Equals("Admin")))
             {
-                _flashMessage.Danger("Your changes were not saved.\n You do not have the right permissions to edit orders.");
+               //"Your changes were not saved.\n You do not have the right permissions to edit orders.");
                 return RedirectToAction("ListOrders", "Administration");
             }
 
             try
             {
-                Order orderOnDb = await Context.Orders.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == order.Id);
+                Order orderOnDb = await Context.Order.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == order.Id);
                 orderOnDb.Payment.Paid = order.Payment.Paid;
                 orderOnDb.Payment.PaymentMethod = order.Payment.PaymentMethod;
                 orderOnDb.Payment.ShippingCost = order.Payment.ShippingCost;
@@ -353,12 +357,12 @@ namespace GamingStore.Controllers
 
                 Context.Update(orderOnDb);
                 await Context.SaveChangesAsync();
-                _flashMessage.Confirmation("Order has been updated");
+                //"Order has been updated";
             }
             catch (Exception e)
             {
-                _flashMessage.Danger("Order could not be updated");
-                _logger.LogError($"Order# '{order.Id}' could not be updated, ex: {e}");
+                //"Order could not be updated");
+               //$"Order# '{order.Id}' could not be updated, ex: {e}");
             }
 
             return RedirectToAction("ListOrders", "Administration");
@@ -366,7 +370,7 @@ namespace GamingStore.Controllers
 
         private async Task<bool> OrderExists(string id)
         {
-            return await Context.Orders.AnyAsync(e => e.Id == id);
+            return await Context.Order.AnyAsync(e => e.Id == id);
         }
     }
 }

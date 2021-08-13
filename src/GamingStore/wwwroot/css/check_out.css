@@ -1,0 +1,216 @@
+﻿﻿.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+
+.col-25 {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+}
+
+.col-50 {
+    -ms-flex: 50%; /* IE10 */
+    flex: 50%;
+}
+
+.col-75 {
+    -ms-flex: 75%; /* IE10 */
+    flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+    padding: 0 16px;
+}
+
+.container {
+    padding: 5px 20px 15px 20px;
+    border-radius: 3px;
+}
+
+input[type=text] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+}
+
+span.price {
+    float: right;
+    color: grey;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+    .row {
+        flex-direction: column-reverse;
+    }
+
+    .col-25 {
+        margin-bottom: 20px;
+    }
+}
+
+input[type=text].input-validation-error {
+    border: 2px solid #dc3545
+}
+
+.field-validation-error {
+    display: none;
+}
+
+/*Check Out Index*/
+
+.tg {
+    border-collapse: collapse;
+    border-color: #aaa;
+    border-spacing: 0;
+    border-style: solid;
+    border-width: 1px;
+}
+
+    .tg td {
+        background-color: #fff;
+        border-color: #aaa;
+        border-style: solid;
+        border-width: 0px;
+        color: #333;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 15px;
+        word-break: normal;
+    }
+
+    .tg th {
+        background-color: #ececec;
+        border-color: #aaa;
+        border-style: solid;
+        border-width: 0px;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+        overflow: hidden;
+        padding: 10px 20px;
+        word-break: normal;
+    }
+
+    .tg .tg-zv4m {
+        border-color: #ffffff;
+        text-align: left;
+        vertical-align: top
+    }
+
+    .tg .tg-0vh3 {
+        border-color: #ffffff;
+        color: #343434;
+        font-weight: bold;
+        position: -webkit-sticky;
+        position: sticky;
+        text-align: left;
+        top: -1px;
+        vertical-align: top;
+        will-change: transform
+    }
+
+    .tg .tg-4pr7 {
+        border-color: #ffffff;
+        color: #343434;
+        text-align: left;
+        vertical-align: top
+    }
+
+    .tg .tg-0pky {
+        border-color: inherit;
+        text-align: left;
+        vertical-align: top
+    }
+
+.tg-sort-header::-moz-selection {
+    background: 0 0
+}
+
+.tg-sort-header::selection {
+    background: 0 0
+}
+
+.tg-sort-header {
+    cursor: pointer
+}
+
+    .tg-sort-header:after {
+        content: '';
+        float: right;
+        margin-top: 7px;
+        border-width: 0 5px 5px;
+        border-style: solid;
+        border-color: #404040 transparent;
+        visibility: hidden
+    }
+
+    .tg-sort-header:hover:after {
+        visibility: visible
+    }
+
+.tg-sort-asc:after, .tg-sort-asc:hover:after, .tg-sort-desc:after {
+    visibility: visible;
+    opacity: .4
+}
+
+.tg-sort-desc:after {
+    border-bottom: none;
+    border-width: 5px 5px 0
+}
+
+.collapsible {
+    background-color: #9d9d9d;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+    .active, .collapsible:hover {
+        background-color: #555;
+    }
+
+.content {
+    padding: 0 5px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.collapsible:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+

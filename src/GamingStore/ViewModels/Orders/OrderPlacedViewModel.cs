@@ -9,7 +9,7 @@ namespace GamingStore.ViewModels.Orders
 
         public int ItemsCount { get; set; }
 
-        public Address ShippingAddress { get; set; }
+        public ShippingAddress ShippingAddress { get; set; }
 
         public string OrderId { get; set; }
     }
