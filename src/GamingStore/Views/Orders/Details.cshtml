@@ -1,0 +1,100 @@
+﻿@model GamingStore.ViewModels.Orders.OrderDetailsViewModel
+@{
+    ViewData["Title"] = "Order Details";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<div style="padding:3%">
+    <h1>Order Details</h1>
+
+    <div>
+        <p>Ordered on @Model.Order.OrderDate<span class="text-secondary" style="padding:2%;">|</span>Order# @Model.Order.Id</p>
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-sm-4">
+                    <h5><strong>Shipping Address</strong></h5>
+                    <ul>
+                        @if (Model.Order.ShippingAddress != null)
+                        {
+                            <li>@Model.Order.ShippingAddress.FullName</li>
+                            <li>@Model.Order.ShippingAddress.Address1</li>
+                            <li>@Model.Order.ShippingAddress.City, @Model.Order.ShippingAddress.PostalCode</li>
+                            <li>@Model.Order.ShippingAddress.Country</li>
+                        }
+                        else
+                        {
+                            <li>No shipping address</li>
+                        }
+
+                    </ul>
+                </div>
+
+                <div class="col-sm-4">
+                    <h5><strong>Payment Method</strong></h5>
+                    <span>@Html.DisplayFor(m => m.Order.Payment.PaymentMethod)</span>
+                </div>
+
+                <div class="col-sm-4">
+                    <h5><strong>Order Summary</strong></h5>
+                    <div class="row">
+                        <div class="col-sm-6">Item(s) Subtotal:</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Order.Payment.ItemsCost)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Shipping:</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Order.Payment.ShippingCost)</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">Grand Total:</div>
+                        <div class="col-sm-6">@Html.DisplayFor(m => m.Order.Payment.Total)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding:1%"></div>
+        <div class="card">
+            <div class="card-body row">
+                <div class="col-8">
+                    <div class="container">
+                        <div><h4><strong>@Model.Order.State</strong></h4></div>
+                    </div>
+                    @foreach (var orderItem in @Model.Order.OrderItems)
+                    {
+                        <div class="row" style="padding: 2%">
+                            <div class="col-3">
+                                <div class="image_selected"><img src="/@orderItem.Item.ImageUrl/1.jpg" alt="" width="60%"></div>
+                            </div>
+                            <div class="col-9">
+                                <div class="row">@orderItem.ItemsCount x @orderItem.Item.Title</div>
+                                @{
+                                    var price = orderItem.Item.Price;
+                                    var count = orderItem.ItemsCount;
+                                    var totalItemCost = Math.Round(price * count, 2);
+                                }
+                                <div class="row">$@totalItemCost</div>
+
+                            </div>
+                        </div>
+                        if (Model.Order.OrderItems.Last().ItemId != orderItem.ItemId)
+                        {
+                            <hr />
+                        }
+                    }
+                </div>
+                <div class="col-sm-3">
+
+                    <div class="row" style="padding: 2%">
+                        <form action="https://t.17track.net/en#nums=@null">
+                            <input type="submit" class="btn btn-primary btn-block" value="Track Package">
+                        </form>
+                    </div>
+                    <div class="row" style="padding: 2%">
+                        @using (Html.BeginForm("ContactUs", "Home", FormMethod.Get))
+                        {
+                            <input type="submit" class="btn btn-secondary btn-block" value="Contact Support">
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
