@@ -1,0 +1,378 @@
+[
+  {
+    "Name": "Website",
+    "Address": {
+      "Address1": "Jerusalem Boulevard 52",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "03-521-8666",
+    "Email": "Website@gmrz.live",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:59"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:59"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:59"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:59"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:59"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:59"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "00:00",
+        "ClosingTime": "23:59"
+      }
+    ]
+  },
+  {
+    "Name": "Arlozoroff Store",
+    "Address": {
+      "Address1": "Arlozoroff 48",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "03-522-3633",
+    "Email": "ArlozoroffTAStore@gmrz.live",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:22"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:32"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:58"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:38"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:07"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:36"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:02"
+      }
+    ]
+  },
+  {
+    "Name": "Ben Gurion Store",
+    "Address": {
+      "Address1": "Ben Gurion 58",
+      "City": "Rishon LeZion",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "03-954-7777",
+    "Email": "BenGurionRishonStore@gmrz.live",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:22"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:58"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:37"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:36"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:25"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:52"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:48"
+      }
+    ]
+  },
+  {
+    "Name": "Emek Refa'im Store",
+    "Address": {
+      "Address1": "Emek Refa'im St 37",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "02-581-3222",
+    "Email": "EmekRefaimJeruStore@gmrz.live",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:30"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:34"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:50"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:51"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:05"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:12"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:55"
+      }
+    ]
+  },
+  {
+    "Name": "Ben Yehuda Store",
+    "Address": {
+      "Address1": "Ben Yehuda 10",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "03-724-7777",
+    "Email": "BenYehudaTAStore@gmrz.live",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:09"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:05"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:12"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:52"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:42"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:01"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:48"
+      }
+    ]
+  },
+  {
+    "Name": "Herzl Store",
+    "Address": {
+      "Address1": "Herzl 80",
+      "City": "Jerusalem",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "02-531-4600",
+    "Email": "HerzlJeruStore@gmrz.live",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:04"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:32"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:37"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:09"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:11"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:18"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:39"
+      }
+    ]
+  },
+  {
+    "Name": "Levi Eshkol Store",
+    "Address": {
+      "Address1": "Levi Eshkol 22",
+      "City": "Tel-Aviv",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "03-521-7777",
+    "Email": "LeviEshkolTAStore@gmrz.live",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:35"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:27"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:28"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:44"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:14"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:56"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:18"
+      }
+    ]
+  },
+  {
+    "Name": "Herzl Store",
+    "Address": {
+      "Address1": "Herzl 17",
+      "City": "Haifa",
+      "Country": "Israel"
+    },
+    "PhoneNumber": "04-835-6865",
+    "Email": "HerzlHaifaStore@gmrz.live",
+    "OpeningHours": [
+      {
+        "DayOfWeek": 0,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:02"
+      },
+      {
+        "DayOfWeek": 1,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:04"
+      },
+      {
+        "DayOfWeek": 2,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:20"
+      },
+      {
+        "DayOfWeek": 3,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:30"
+      },
+      {
+        "DayOfWeek": 4,
+        "OpeningTime": "8:30",
+        "ClosingTime": "20:08"
+      },
+      {
+        "DayOfWeek": 5,
+        "OpeningTime": "8:30",
+        "ClosingTime": "21:44"
+      },
+      {
+        "DayOfWeek": 6,
+        "OpeningTime": "8:30",
+        "ClosingTime": "19:24"
+      }
+    ]
+  }
+]

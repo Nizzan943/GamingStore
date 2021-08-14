@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using static GamingStore.Contracts.PaymentMethod;
+using System.Data.SqlClient;
+
 
 namespace GamingStore.Data
 {
@@ -61,10 +63,29 @@ namespace GamingStore.Data
                 var role = new IdentityRole { Name = User };
                 await _roleManager.CreateAsync(role);
 
-                //Here we create a mock Users super users who will maintain the website                   
-                await AddUsers(_userManager, "default123");
+                //Here we create a mock Users super users who will maintain the website
+                try
+                {
+                    await AddUsers(_userManager, "default123");
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
-            await context.SaveChangesAsync();
+
+            try
+            {
+                await context.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         private static async Task AddUsers(UserManager<User> userManager, string usersPassword)
@@ -126,95 +147,87 @@ namespace GamingStore.Data
 
         public static void SeedDatabase(GamingStoreContext context)
         {
-            
+
             if (context.Item.Any())
             {
                 return;
             }
-            
-            string directoryPath =
-                AppContext.BaseDirectory.Substring(0,
-                    AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
 
-            
+
+
             if (context.Category.Any())
             {
                 return;
             }
-            
+
             var categories = SeedCategories(context);
 
             var items = SeedItems(context);
 
-            var stores = SeedStores(context, directoryPath);
 
-            //SeedOrdersAndPayments(context, items, stores);
+            string directoryPath =
+                AppContext.BaseDirectory.Substring(0,
+                    AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
+
+            var stores = SeedStores(context, directoryPath, items);
+
+            SeedOrdersAndPayments(context, items, stores);
         }
 
 
-        private static List<Store> SeedStores(GamingStoreContext context, string directoryPath)
+        private static List<Store> SeedStores(GamingStoreContext context, string directoryPath, Item[] items)
         {
             string dataStores = System.IO.File.ReadAllText(directoryPath + @"\Data\Store.json");
             List<Store> stores = JsonConvert.DeserializeObject<List<Store>>(dataStores);
-
-            if (context.Item.Any() && context.User.Any())
+            try
             {
-                //GenerateStoreItems(stores, items, context.Customers.ToList());
+                if (context.Item.Any() && context.User.Any())
+                {
+                    GenerateStoreItems(stores, items, context.Users.ToList());
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
 
             context.Store.AddRange(stores);
-            context.SaveChanges();
+            context.Store.AsNoTracking();
+            try
+            {
+                var test = context.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
             return stores;
         }
 
-        private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items, List<User> customersList)
+
+        private static void SeedOrdersAndPayments(GamingStoreContext context, Item[] items, List<Store> stores)
         {
-            var random = new Random();
+            IEnumerable<Order> orders = GenerateOrders(context.Users.AsEnumerable(), items.ToList(), stores, out List<Payment> payments);
 
-            foreach (Store store in stores)
+            List<Order> orderList = orders.ToList();
+            foreach (Order order in orderList)
             {
-                foreach (Item item in items)
-                {
-                    bool itemCreated = random.Next(2) == 1; // 1 - True  - False
-
-                    if (!itemCreated)
-                    {
-                        continue;
-                    }
-
-                    const float itemsNumberMultiplier = 0.3f;
-
-                    store.StoreItems.Add(new StoreItem
-                    {
-                        ItemId = item.Id,
-                        StoreId = store.Id,
-                        ItemsCount =
-                            (uint)random.Next(1,
-                                (int)(customersList.Count * itemsNumberMultiplier)) // customers number times 0.3
-                    });
-                }
+                context.Order.Add(order);
             }
+
+            foreach (Payment payment in payments)
+            {
+                context.Payment.Add(payment);
+            }
+
+            context.Order.AsNoTracking();
+            context.SaveChanges();
         }
-
-        //private static void SeedOrdersAndPayments(GamingStoreContext context, Item[] items, List<Store> stores)
-        //{
-        //    IEnumerable<Order> orders = GenerateOrders(context.Users.AsEnumerable(), items.ToList(), stores, out List<Payment> payments);
-
-        //    List<Order> orderList = orders.ToList();
-        //    foreach (Order order in orderList)
-        //    {
-        //        context.Orders.Add(order);
-        //    }
-
-        //    foreach (Payment payment in payments)
-        //    {
-        //        context.Payments.Add(payment);
-        //    }
-
-        //    context.Orders.AsNoTracking();
-        //    context.SaveChanges();
-        //}
 
 
 
@@ -272,6 +285,195 @@ namespace GamingStore.Data
             context.Category.AsNoTracking();
             context.SaveChanges();
             return categories;
+        }
+
+
+        private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items, List<User> customersList)
+        {
+            var random = new Random();
+
+            foreach (Store store in stores)
+            {
+                foreach (Item item in items)
+                {
+                    bool itemCreated = random.Next(2) == 1; // 1 - True  - False
+
+                    if (!itemCreated)
+                    {
+                        continue;
+                    }
+
+                    const float itemsNumberMultiplier = 0.3f;
+
+                    store.StoreItems.Add(new StoreItem
+                    {
+                        ItemId = item.Id,
+                        StoreId = store.Id,
+                        ItemsCount =
+                            (uint)random.Next(1,
+                                (int)(customersList.Count * itemsNumberMultiplier)) // customers number times 0.3
+                    });
+                }
+            }
+        }
+
+        private static IEnumerable<Order> GenerateOrders(IEnumerable<User> usersList, IReadOnlyCollection<Item> items, IReadOnlyCollection<Store> storesList, out List<Payment> paymentsList)
+        {
+            paymentsList = new List<Payment>();
+            var orderList = new List<Order>();
+            var rand = new Random();
+            var shopOpeningDate = new DateTime(2018, 1, 1);
+            int range = (DateTime.Today - shopOpeningDate).Days;
+
+            List<User> regusers = new List<User>();
+
+            foreach (var user in usersList)
+            {
+                var userRoles = _userManager.GetRolesAsync(user).Result;
+                var userRole = _roleManager.FindByNameAsync("user").Result;
+
+                foreach (var role in userRoles)
+                {
+                    if (userRole.Name == role)
+                    {
+                        regusers.Add(user);
+                    }
+                }
+            }
+
+            try
+            {
+                foreach (User user in regusers)
+                {
+                    int numOfOrdersForuser = rand.Next(minValue: 0, maxValue: 5);
+
+                    for (var orderNumber = 0; orderNumber < numOfOrdersForuser; orderNumber++)
+                    {
+                        const int minItems = 1;
+                        const int maxItems = 5;
+                        int numItemsOrdered = rand.Next(minItems, maxItems);
+                        Store store = GenerateRelatedStore(user, storesList);
+
+                        var order = new Order
+                        {
+                            UserId = user.Id,
+                            OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
+                            State = OrderState.Fulfilled,
+                            StoreId = store.Id,
+                            Store = store
+                        };
+
+                        order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, store, out Payment payment, out ShippingMethod shippingMethod);
+                        order.Payment = payment;
+                        order.PaymentId = payment.Id;
+                        order.ShippingMethod = shippingMethod;
+                        paymentsList.Add(payment);
+                        orderList.Add(order);
+                    }
+                }
+
+                return orderList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        private static Store GenerateRelatedStore(User user, IEnumerable<Store> stores)
+        {
+            try
+            {
+                List<Store> storeList = stores.ToList();
+                List<Store> storesInuserCity = storeList.Where(store => store.Address.City == user.Address.City).ToList();
+                var rand = new Random();
+
+                bool relatedStores = storesInuserCity.Count != 0;
+                var randRelatedStoreIndex = rand.Next(relatedStores ? storesInuserCity.Count : storeList.Count);
+
+                var generatedRelatedStore = relatedStores ? storesInuserCity[randRelatedStoreIndex] : storeList[randRelatedStoreIndex];
+
+                return generatedRelatedStore;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        private static ICollection<OrderItem> GenerateOrderItems(string orderId, IEnumerable<Item> items, int numItemsOrdered, Store store, out Payment payment, out ShippingMethod shippingMethod)
+        {
+            var itemsList = new List<Item>(items); // copy list in order to alter it.
+            var rand = new Random();
+            var orderItems = new List<OrderItem>();
+
+            try
+            {
+                for (var orderItemIndex = 0; orderItemIndex < numItemsOrdered; orderItemIndex++)
+                {
+                    int curIndex = rand.Next(itemsList.Count);
+                    Item curItem = itemsList[curIndex];
+                    itemsList.Remove(curItem);
+
+                    var orderItem = new OrderItem()
+                    {
+                        OrderId = orderId,
+                        ItemId = curItem.Id,
+                        Item = curItem,
+                        ItemsCount = rand.Next(1, 3)
+                    };
+
+                    orderItems.Add(orderItem);
+                }
+
+                double orderSum = CalculateOrderSum(orderItems);
+                PaymentMethod paymentMethod;
+
+                if (store.Name == "Website")
+                {
+                    paymentMethod = (PaymentMethod)rand.Next(1, 2);
+                }
+                else
+                {
+                    paymentMethod = (PaymentMethod)rand.Next(0, 2);
+                }
+
+                var r = new Random();
+                var priceArray = new[] { 0, 10, 45 };
+                int randomIndex = r.Next(priceArray.Length);
+                int shippingCost = priceArray[randomIndex];
+
+                shippingMethod = shippingCost switch
+                {
+                    0 => ShippingMethod.Pickup,
+                    10 => ShippingMethod.Standard,
+                    45 => ShippingMethod.Express,
+                    _ => ShippingMethod.Other
+                };
+
+                payment = new Payment
+                {
+                    ItemsCost = orderSum,
+                    PaymentMethod = paymentMethod,
+                    ShippingCost = shippingCost,
+                    Paid = true,
+                    Total = orderSum + shippingCost
+                };
+
+                return orderItems;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        private static double CalculateOrderSum(IEnumerable<OrderItem> orderItems)
+        {
+            return orderItems.Sum(orderItem => (orderItem.Item.Price * (double)orderItem.ItemsCount));
         }
 
         private static Item[] SeedItems(GamingStoreContext context)
@@ -1810,197 +2012,5 @@ namespace GamingStore.Data
             return items;
         }
 
-
-        private static void test()
-        {
-
-        }
-        //private static void GenerateStoreItems(IEnumerable<Store> stores, Item[] items, List<User> UsersList)
-        //{
-        //    var random = new Random();
-
-        //    foreach (Store store in stores)
-        //    {
-        //        foreach (Item item in items)
-        //        {
-        //            bool itemCreated = random.Next(2) == 1; // 1 - True  - False
-
-        //            if (!itemCreated)
-        //            {
-        //                continue;
-        //            }
-
-        //            const float itemsNumberMultiplier = 0.3f;
-
-        //            store.StoreItems.Add(new StoreItem
-        //            {
-        //                Id = item.Id,
-        //                StoreId = store.Id,
-        //                ItemsCount =
-        //                    (uint)random.Next(1,
-        //                        (int)(UsersList.Count * itemsNumberMultiplier)) // Users number times 0.3
-        //            });
-        //        }
-        //    }
-        //}
-
-        //private static IEnumerable<Order> GenerateOrders(IEnumerable<User> UsersList, IReadOnlyCollection<Item> items, IReadOnlyCollection<Store> storesList, out List<Payment> paymentsList)
-        //{
-        //    paymentsList = new List<Payment>();
-        //    var orderList = new List<Order>();
-        //    var rand = new Random();
-        //    var shopOpeningDate = new DateTime(2018, 1, 1);
-        //    int range = (DateTime.Today - shopOpeningDate).Days;
-
-        //    List<User> regUsers = new List<User>();
-
-        //    foreach (var User in UsersList)
-        //    {
-        //        var userRoles = _userManager.GetRolesAsync(User).Result;
-        //        var UserRole = _roleManager.FindByNameAsync("User").Result;
-
-        //        foreach (var role in userRoles)
-        //        {
-        //            if (UserRole.Name == role)
-        //            {
-        //                regUsers.Add(User);
-        //            }
-        //        }
-        //    }
-
-        //    try
-        //    {
-        //        foreach (User User in regUsers)
-        //        {
-        //            int numOfOrdersForUser = rand.Next(minValue: 0, maxValue: 5);
-
-        //            for (var orderNumber = 0; orderNumber < numOfOrdersForUser; orderNumber++)
-        //            {
-        //                const int minItems = 1;
-        //                const int maxItems = 5;
-        //                int numItemsOrdered = rand.Next(minItems, maxItems);
-        //                Store store = GenerateRelatedStore(User, storesList);
-
-        //                var order = new Order
-        //                {
-        //                    UserId = User.Id,
-        //                    OrderDate = shopOpeningDate.AddDays(rand.Next(range)),
-        //                    State = OrderState.Fulfilled,
-        //                    StoreId = store.Id,
-        //                    Store = store
-        //                };
-
-        //                order.OrderItems = GenerateOrderItems(order.Id, items, numItemsOrdered, store, out Payment payment, out ShippingMethod shippingMethod);
-        //                order.Payment = payment;
-        //                order.Id = payment.Id;
-        //                order.ShippingMethod = shippingMethod;
-        //                paymentsList.Add(payment);
-        //                orderList.Add(order);
-        //            }
-        //        }
-
-        //        return orderList;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
-
-        //private static Store GenerateRelatedStore(User User, IEnumerable<Store> stores)
-        //{
-        //    try
-        //    {
-        //        List<Store> storeList = stores.ToList();
-        //        List<Store> storesInUserCity = storeList.Where(store => store.Address.City == User.Address.City).ToList();
-        //        var rand = new Random();
-
-        //        bool relatedStores = storesInUserCity.Count != 0;
-        //        var randRelatedStoreIndex = rand.Next(relatedStores ? storesInUserCity.Count : storeList.Count);
-
-        //        var generatedRelatedStore = relatedStores ? storesInUserCity[randRelatedStoreIndex] : storeList[randRelatedStoreIndex];
-
-        //        return generatedRelatedStore;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
-
-        //private static ICollection<OrderItem> GenerateOrderItems(string orderId, IEnumerable<Item> items, int numItemsOrdered, Store store, out Payment payment, out ShippingMethod shippingMethod)
-        //{
-        //    var itemsList = new List<Item>(items); // copy list in order to alter it.
-        //    var rand = new Random();
-        //    var orderItems = new List<OrderItem>();
-
-        //    try
-        //    {
-        //        for (var orderItemIndex = 0; orderItemIndex < numItemsOrdered; orderItemIndex++)
-        //        {
-        //            int curIndex = rand.Next(itemsList.Count);
-        //            Item curItem = itemsList[curIndex];
-        //            itemsList.Remove(curItem);
-
-        //            var orderItem = new OrderItem()
-        //            {
-        //                Id = orderId,
-        //                Id = curItem.Id,
-        //                Item = curItem,
-        //                ItemsCount = rand.Next(1, 3)
-        //            };
-
-        //            orderItems.Add(orderItem);
-        //        }
-
-        //        double orderSum = CalculateOrderSum(orderItems);
-        //        PaymentMethod paymentMethod;
-
-        //        if (store.Name == "Website")
-        //        {
-        //            paymentMethod = (PaymentMethod)rand.Next(1, 2);
-        //        }
-        //        else
-        //        {
-        //            paymentMethod = (PaymentMethod)rand.Next(0, 2);
-        //        }
-
-        //        var r = new Random();
-        //        var priceArray = new[] { 0, 10, 45 };
-        //        int randomIndex = r.Next(priceArray.Length);
-        //        int shippingCost = priceArray[randomIndex];
-
-        //        shippingMethod = shippingCost switch
-        //        {
-        //            0 => ShippingMethod.Pickup,
-        //            10 => ShippingMethod.Standard,
-        //            45 => ShippingMethod.Express,
-        //            _ => ShippingMethod.Other
-        //        };
-
-        //        payment = new Payment
-        //        {
-        //            ItemsCost = orderSum,
-        //            PaymentMethod = paymentMethod,
-        //            ShippingCost = shippingCost,
-        //            Paid = true,
-        //            Total = orderSum + shippingCost
-        //        };
-
-        //        return orderItems;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
-
-        //private static double CalculateOrderSum(IEnumerable<OrderItem> orderItems)
-        //{
-        //    return orderItems.Sum(orderItem => (orderItem.Item.Price * (double)orderItem.ItemsCount));
-        //}
     }
 }
