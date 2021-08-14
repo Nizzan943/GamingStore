@@ -139,9 +139,9 @@ namespace GamingStore.Controllers
                     ItemsCost = itemsCost,
                     Total = itemsCost + model.Payment.ShippingCost
                 },
-                PaymentId = model.Payment.Id,
+                //PaymentId = model.Payment.Id,
                 Store = await Context.Store.FirstOrDefaultAsync(s => s.Name == "Website"),
-                StoreId = 8, //website
+                //StoreId = 8, //website //need to change
                 User = User,
                 UserId = User.Id,
                 State = OrderState.New,
