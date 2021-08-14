@@ -5,7 +5,9 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Linq;
 using System.Threading.Tasks;
+using GamingStore.Data;
 using GamingStore.Models;
+using GamingStore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +16,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace GamingStore.Areas.Identity.Pages.Account.Manage
 {
-    public partial class EmailModel : PageModel
+    public partial class EmailModel : ViewPageModel
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -23,7 +25,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         public EmailModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender, GamingStoreContext context) : base(context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -66,6 +68,7 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            ItemsInCart = await CountItemsInCart(user);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");

@@ -26,6 +26,9 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
+        public static string MyOrders => "MyOrders";
+
+
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
         public static string AddressNavClass(ViewContext viewContext) => PageNavClass(viewContext, SetAddress);
 
@@ -42,6 +45,8 @@ namespace GamingStore.Areas.Identity.Pages.Account.Manage
         public static string PersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, PersonalData);
 
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
+        public static string MyOrdersNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyOrders);
+
 
         private static string PageNavClass(ViewContext viewContext, string page)
         {
