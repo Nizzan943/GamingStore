@@ -30,10 +30,7 @@
                                 @Html.DisplayNameFor(model => model.Orders.First().Id)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Orders.First().User)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Orders.First().Store)
+                                User Email
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Orders.First().OrderDate)
@@ -42,18 +39,11 @@
                                 @Html.DisplayNameFor(model => model.Orders.First().State)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Orders.First().ShippingAddress)
+                                @Html.DisplayNameFor(model => model.Orders.First().Store)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Orders.First().ShippingMethod)
+                                @Html.DisplayNameFor(model => model.Orders.First().Payment.Total)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Orders.First().Payment)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Orders.First().OrderItems)
-                            </th>
-                            <th width="8%"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,36 +51,27 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelOrder => order.Id)
+                                    @Html.DisplayFor(modelItem => order.Id)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelOrder => order.User)
+                                    <span class="name"> @Html.DisplayFor(modelItem => order.User.Email)</span>
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelOrder => order.Store)
+                                    <span class="order_date"> @Html.DisplayFor(modelItem => order.OrderDate)</span>
+
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelOrder => order.OrderDate)
+                                    <span class="order_state"> @Html.DisplayFor(modelItem => order.State)</span>
+
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelOrder => order.State)
+                                    <span class="store_name"> @Html.DisplayFor(modelItem => order.Store.Name)</span>
+
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelOrder => order.ShippingAddress)
+                                    <span class="payment_total"> @Html.DisplayFor(modelItem => order.Payment.Total)</span>
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelOrder => order.ShippingMethod)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelOrder => order.ShippingAddress)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelOrder => order.Payment)
-                                </td>
-                                @foreach (OrderItem item in order.OrderItems)
-                                {
-                                    <lable>@item</lable>
-                                }
+
                             </tr>
                         }
                     </tbody>
