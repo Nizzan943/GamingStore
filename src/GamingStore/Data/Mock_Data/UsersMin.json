@@ -6,7 +6,8 @@
     "UserName": "JerryPryce@gmail.com",
     "PhoneNumber": "4352930673",
     "Address": {
-      "Address1": "Begin 6",
+      "Street": "Begin",
+	  "Number" : 6,
       "City": "Jerusalem",
       "Country": "Israel"
     }
@@ -18,7 +19,8 @@
     "UserName": "HesterSiviter@gmail.com",
     "PhoneNumber": "6819938941",
     "Address": {
-      "Address1": "Ibn Gabirol 35",
+      "Street": "Ibn Gabirol",
+	  "Number" : 35,
       "City": "Tel-Aviv",
       "Country": "Israel"
     }
@@ -30,7 +32,8 @@
     "UserName": "AlbertPalmby@gmail.com",
     "PhoneNumber": "4504888174",
     "Address": {
-      "Address1": "Jabotinsky 19",
+      "Street": "Jabotinsky",
+	  "Number" : 19,
       "City": "Hadera",
       "Country": "Israel"
     }
@@ -42,7 +45,8 @@
     "UserName": "ElliottKrzyzanowski@gmail.com",
     "PhoneNumber": "1312956128",
     "Address": {
-      "Address1": "Balfour 2",
+      "Street": "Balfour",
+	  "Number" : 2,
       "City": "Haifa",
       "Country": "Israel"
     }
@@ -54,7 +58,8 @@
     "UserName": "JoelShepperd@gmail.com",
     "PhoneNumber": "8276949838",
     "Address": {
-      "Address1": "Ibn Gabirol 4",
+      "Street": "Ibn Gabirol",
+	  "Number" : 4,
       "City": "Hadera",
       "Country": "Israel"
     }
@@ -66,7 +71,8 @@
     "UserName": "ElvaTomala@gmail.com",
     "PhoneNumber": "3161921312",
     "Address": {
-      "Address1": "Herzl 54",
+      "Street": "Herzl",
+	  "Number" : 54,
       "City": "Jerusalem",
       "Country": "Israel"
     }
@@ -78,7 +84,8 @@
     "UserName": "IverHawse@gmail.com",
     "PhoneNumber": "2531079586",
     "Address": {
-      "Address1": "Herzl 19",
+      "Street": "Herzl",
+	  "Number" : 19,
       "City": "Jerusalem",
       "Country": "Israel"
     }
@@ -90,7 +97,8 @@
     "UserName": "EsraHorwell@gmail.com",
     "PhoneNumber": "1826198723",
     "Address": {
-      "Address1": "Ben Yehuda 83",
+      "Street": "Ben Yehuda",
+	  "Number" : 83,
       "City": "Tel-Aviv",
       "Country": "Israel"
     }
@@ -102,7 +110,8 @@
     "UserName": "BasileBlade@gmail.com",
     "PhoneNumber": "4462903784",
     "Address": {
-      "Address1": "Jabotinsky 35",
+      "Street": "Jabotinsky",
+	  "Number" : 35,
       "City": "Haifa",
       "Country": "Israel"
     }
@@ -114,7 +123,8 @@
     "UserName": "SiouxieDeppe@gmail.com",
     "PhoneNumber": "8264922649",
     "Address": {
-      "Address1": "Ben Gurion 64",
+      "Street": "Ben Gurion",
+	  "Number" : 64,
       "City": "Tel-Aviv",
       "Country": "Israel"
     }
@@ -126,7 +136,8 @@
     "UserName": "ImeldaTieraney@gmail.com",
     "PhoneNumber": "7091408847",
     "Address": {
-      "Address1": "Hannah Szenes 55",
+      "Street": "Hannah Szenes",
+	  "Number" : 55,
       "City": "Tel-Aviv",
       "Country": "Israel"
     }
@@ -138,7 +149,8 @@
     "UserName": "CallieLanktree@gmail.com",
     "PhoneNumber": "4003525951",
     "Address": {
-      "Address1": "Bialik 7",
+      "Street": "Bialik",
+	  "Number" : 7,
       "City": "Haifa",
       "Country": "Israel"
     }
@@ -150,7 +162,8 @@
     "UserName": "EllieJanuszewicz@gmail.com",
     "PhoneNumber": "5967215271",
     "Address": {
-      "Address1": "Arlozoroff 63",
+      "Street": "Arlozoroff",
+	  "Number" : 63,
       "City": "Haifa",
       "Country": "Israel"
     }
@@ -162,7 +175,8 @@
     "UserName": "SusanettaBulstrode@gmail.com",
     "PhoneNumber": "8706069203",
     "Address": {
-      "Address1": "Dizengoff 6",
+      "Street": "Dizengoff",
+	  "Number" : 6,
       "City": "Beer Sheva",
       "Country": "Israel"
     }
@@ -174,7 +188,8 @@
     "UserName": "RemyWenger@gmail.com",
     "PhoneNumber": "3173910583",
     "Address": {
-      "Address1": "Dizengoff 85",
+      "Street": "Dizengoff",
+	  "Number" : 85,
       "City": "Jerusalem",
       "Country": "Israel"
     }
@@ -186,7 +201,8 @@
     "UserName": "NeddaNorthbridge@gmail.com",
     "PhoneNumber": "3664029524",
     "Address": {
-      "Address1": "Hannah Szenes 99",
+      "Street": "Hannah Szenes",
+	  "Number" : 99,
       "City": "Rishon LeZion",
       "Country": "Israel"
     }
@@ -198,7 +214,8 @@
     "UserName": "HeinrikPetworth@gmail.com",
     "PhoneNumber": "4445080500",
     "Address": {
-      "Address1": "Begin 61",
+      "Street": "Begin",
+	  "Number" : 61,
       "City": "Hadera",
       "Country": "Israel"
     }
@@ -210,7 +227,8 @@
     "UserName": "WendelineMatthew@gmail.com",
     "PhoneNumber": "7564912554",
     "Address": {
-      "Address1": "Weizmann 20",
+      "Street": "Weizmann",
+	  "Number" : 20,
       "City": "Haifa",
       "Country": "Israel"
     }
@@ -222,7 +240,8 @@
     "UserName": "RenellSchermick@gmail.com",
     "PhoneNumber": "8651101417",
     "Address": {
-      "Address1": "Arlozoroff 95",
+      "Street": "Arlozoroff",
+	  "Number" : 95,
       "City": "Jerusalem",
       "Country": "Israel"
     }
@@ -234,7 +253,8 @@
     "UserName": "BenjaminOCleary@gmail.com",
     "PhoneNumber": "6746412363",
     "Address": {
-      "Address1": "Balfour 2",
+      "Street": "Balfour",
+	  "Number" : 2,
       "City": "Rishon LeZion",
       "Country": "Israel"
     }
