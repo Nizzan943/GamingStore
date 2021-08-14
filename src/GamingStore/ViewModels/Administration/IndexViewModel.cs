@@ -7,7 +7,7 @@ namespace GamingStore.ViewModels.Administration
     {
         public IEnumerable<Store> Stores { get; set; }
         public IEnumerable<Item> Items { get; set; }
-        public IEnumerable<User> Customers{ get; set; }
+        public IEnumerable<User> Users{ get; set; }
         public IEnumerable<Order> Orders{ get; set; }
 
         public Dictionary<string,double> WidgetsValues{ get; set; }

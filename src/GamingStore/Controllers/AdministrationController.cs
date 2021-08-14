@@ -51,7 +51,7 @@ namespace GamingStore.Controllers
 
             var viewModel = new IndexViewModel()
             {
-                Customers = _context.User,
+                Users = _context.User,
                 Items = _context.Item,
                 Stores = _context.Store,
                 Orders = orders,
