@@ -22,6 +22,10 @@ namespace GamingStore.Contracts
 
         [Required]
         [DataType(DataType.Text)]
+        public int? Number { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "*City is not valid")]
         public string? City { get; set; }
 

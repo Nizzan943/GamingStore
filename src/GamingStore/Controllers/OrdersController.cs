@@ -73,7 +73,8 @@ namespace GamingStore.Controllers
                         Country = User.Address.Country,
                         FullName = User.UserName,
                         PostalCode = "00000",
-                        Street = User.Address.Street
+                        Street = User.Address.Street,
+                        Number = User.Address.Number
                     },
 
                     Payment = new Payment
@@ -130,7 +131,7 @@ namespace GamingStore.Controllers
 
             var order = new Order()
             {
-                Payment = new Payment
+                Payment = new Payment()
                 {
                     PaymentMethod = PaymentMethod.CreditCard,
                     Paid = true,
@@ -140,7 +141,7 @@ namespace GamingStore.Controllers
                 },
                 PaymentId = model.Payment.Id,
                 Store = await Context.Store.FirstOrDefaultAsync(s => s.Name == "Website"),
-                StoreId = 0, //website
+                StoreId = 8, //website
                 User = User,
                 UserId = User.Id,
                 State = OrderState.New,

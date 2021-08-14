@@ -33,23 +33,27 @@
                         <h3>Shipping Address</h3>
                         <br>
                         @Html.LabelFor(m => m.ShippingAddress.FullName)
-                        @Html.TextBoxFor(m => m.ShippingAddress.FullName, new {@class = "form-control"})
+                        @Html.TextBoxFor(m => m.ShippingAddress.FullName, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.ShippingAddress.FullName)
 
                         @Html.LabelFor(m => m.ShippingAddress.Street)
-                        @Html.TextBoxFor(m => m.ShippingAddress.Street, new {@class = "form-control"})
+                        @Html.TextBoxFor(m => m.ShippingAddress.Street, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.ShippingAddress.Street)
 
+                        @Html.LabelFor(m => m.ShippingAddress.Number)
+                        <input type="number" min="1" asp-for="@Model.ShippingAddress.Number" class="form-control"/>
+                        @Html.ValidationMessageFor(m => m.ShippingAddress.Number)
+
                         @Html.LabelFor(m => m.ShippingAddress.City)
-                        @Html.TextBoxFor(m => m.ShippingAddress.City, new {@class = "form-control"})
+                        @Html.TextBoxFor(m => m.ShippingAddress.City, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.ShippingAddress.City)
                         <div class="row">
                             <div class="col-50">
                                 @Html.LabelFor(m => m.ShippingAddress.Country)
-                                @Html.TextBoxFor(m => m.ShippingAddress.Country, new {@class = "form-control", disabled = "disabled"})
+                                @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @class = "form-control", disabled = "disabled" })
                                 @Html.ValidationMessageFor(m => m.ShippingAddress.Country)
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="col-50">

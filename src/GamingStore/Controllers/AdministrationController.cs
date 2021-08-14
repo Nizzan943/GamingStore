@@ -165,9 +165,14 @@ namespace GamingStore.Controllers
 
         private async Task<double> CalcRevenue()
         {
-            var orders = await _context.Order.Include(o => o.Payment).ToListAsync();
-
-            return orders.Sum(order => order.Payment.Total);
+            var orders = await _context.Order.ToListAsync();
+            double sum = 0.0;
+            foreach (Order order in orders)
+            {
+                var payment = await _context.Payment.FindAsync(order.PaymentId);
+                sum += payment.Total;
+            }
+            return sum;
         }
 
 
@@ -497,6 +502,17 @@ namespace GamingStore.Controllers
             }
 
             return View(model);
+        }
+
+        public async Task<IActionResult> ListOrders()
+        {
+            List<Order> orders = await _context.Order.ToListAsync();
+            var viewModel = new ListOrdersViewModel()
+            {
+                Orders = orders,
+            };
+
+            return View(viewModel);
         }
 
 
