@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "Name": "Pads",
+    "Value": 172.93
+  },
+  {
+    "Name": "Headsets",
+    "Value": 296.83
+  },
+  {
+    "Name": "Chairs",
+    "Value": 993.97
+  },
+  {
+    "Name": "Mouses",
+    "Value": 4958.119999999997
+  },
+  {
+    "Name": "Keyboards",
+    "Value": 10264.449999999995
+  },
+  {
+    "Name": "Monitors",
+    "Value": 11278.509999999997
+  },
+  {
+    "Name": "CPUs",
+    "Value": 14978.79
+  },
+  {
+    "Name": "GPUs",
+    "Value": 15225.819999999998
+  }
+]

@@ -40,7 +40,7 @@ namespace GamingStore.Controllers
 
             revenue = Math.Round(revenue, 2);
             CreateMonthlyRevenueBarChartData(await _context.Order.Include(o => o.Payment).Include(o => o.Store).ToListAsync());
-            //CreateRevenueByCategoryPieChartData(await _context.Order.Include(o => o.OrderItems).ThenInclude(oi => oi.Item).ToListAsync());
+            CreateRevenueByCategoryPieChartData(await _context.Order.Include(o => o.OrderItems).ThenInclude(oi => oi.Item).ToListAsync());
 
             List<Order> orders = await _context.Order
                 .Include(order => order.User)
@@ -51,7 +51,7 @@ namespace GamingStore.Controllers
 
             var viewModel = new IndexViewModel()
             {
-                Customers = _context.User,
+                Users = _context.User,
                 Items = _context.Item,
                 Stores = _context.Store,
                 Orders = orders,
