@@ -346,6 +346,7 @@ namespace GamingStore.Controllers
                 orderOnDb.Payment.Notes = order.Payment.Notes;
                 orderOnDb.State = order.State;
 
+                /*
                 if (order.Payment.RefundAmount > order.Payment.Total)
                 {
                     orderOnDb.Payment.RefundAmount = order.Payment.Total;
@@ -355,7 +356,7 @@ namespace GamingStore.Controllers
                     orderOnDb.Payment.RefundAmount = order.Payment.RefundAmount;
                 }
 
-
+                */
                 Context.Update(orderOnDb);
                 await Context.SaveChangesAsync();
                 //"Order has been updated";
