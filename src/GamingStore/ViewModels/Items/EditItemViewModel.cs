@@ -8,8 +8,8 @@ namespace GamingStore.ViewModels.Items
     public class EditItemViewModel : ViewModelBase
     {
         public Item Item { get; set; }
-        
 
+        public string LastItemName { get; set; }
 
         public IFormFile File1 { set; get; }
         

@@ -288,6 +288,7 @@ namespace GamingStore.Controllers
             var viewModel = new EditItemViewModel()
             {
                 Item = item,
+                LastItemName = item.Title,
                 File1 = file1,
                 File2 = file2,
                 File3 = file3,
@@ -308,10 +309,16 @@ namespace GamingStore.Controllers
         {
                 try
                 {
+                    if (model.LastItemName != model.Item.Title)
+                    {
+                        if (!Directory.Exists("wwwroot\\images\\items\\" + model.Item.Title))
+                            Directory.Move("wwwroot\\images\\items\\" + model.LastItemName, "wwwroot\\images\\items\\" + model.Item.Title);
+                    string temp = Path.Combine("images", "items", model.Item.Title);
+                    model.Item.ImageUrl = temp;
+                    }
                     if (model.File1 != null)
                     {
                         string dir = "wwwroot\\images\\items\\" + model.Item.Title;
-                        System.IO.Directory.CreateDirectory(dir);
                         string fileName1 = "1.jpg";
 
                         string _file1 = System.IO.Path.Combine(dir, fileName1);
@@ -325,7 +332,6 @@ namespace GamingStore.Controllers
                     if (model.File2 != null)
                     {
                         string dir = "wwwroot\\images\\items" + model.Item.Title;
-                        System.IO.Directory.CreateDirectory(dir);
                         string fileName2 = "2.jpg";
 
                         string _file2 = System.IO.Path.Combine(dir, fileName2);
@@ -339,7 +345,6 @@ namespace GamingStore.Controllers
                     if (model.File3 != null)
                     {
                         string dir = "wwwroot\\images\\items" + model.Item.Title;
-                        System.IO.Directory.CreateDirectory(dir);
                         string fileName3 = "3.jpg";
 
                         string _file3 = System.IO.Path.Combine(dir, fileName3);
