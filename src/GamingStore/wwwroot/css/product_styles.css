@@ -218,7 +218,7 @@ Shop Products
 .product_name {
     margin: 4px 4px 0px 4px;
     min-height: 40px;
-    max-height: 40px;
+    max-height: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
