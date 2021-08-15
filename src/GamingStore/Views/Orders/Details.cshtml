@@ -17,7 +17,8 @@
                         {
                             <li>@Model.Order.ShippingAddress.FullName</li>
                             <li>@Model.Order.ShippingAddress.Street</li>
-                            <li>@Model.Order.ShippingAddress.City, @Model.Order.ShippingAddress.PostalCode</li>
+                            <li>@Model.Order.ShippingAddress.Number</li>
+                            <li>@Model.Order.ShippingAddress.City</li>
                             <li>@Model.Order.ShippingAddress.Country</li>
                         }
                         else
@@ -88,7 +89,7 @@
                         </form>
                     </div>
                     <div class="row" style="padding: 2%">
-                        @using (Html.BeginForm("ContactUs", "Home", FormMethod.Get))
+                        @using (Html.BeginForm("Contact", "Home", FormMethod.Get))
                         {
                             <input type="submit" class="btn btn-secondary btn-block" value="Contact Support">
                         }

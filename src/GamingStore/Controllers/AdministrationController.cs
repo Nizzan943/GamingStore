@@ -243,11 +243,13 @@ namespace GamingStore.Controllers
 
             // GetRolesAsync returns the list of user Roles
             IList<string> userRoles = await UserManager.GetRolesAsync(user);
+            /*
             if (!userRoles.Any(r => r.Equals("Admin")))
             {
 
                 return RedirectToAction("ListUsers");
             }
+            */
 
             var model = new EditUserViewModel
             {

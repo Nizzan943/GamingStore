@@ -286,93 +286,10 @@ namespace GamingStore.Controllers
             return View(viewModel);
         }
 
-        // GET: Items/Edit/5
-        [HttpGet]
-        [Authorize(Roles = "Admin,Viewer")]
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Order order = await Context.Order.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == id);
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = new EditOrdersViewModel
-            {
-                User = await Context.Users.Where(User => !string.IsNullOrWhiteSpace(User.UserName))
-                    .Distinct().ToListAsync(),
-                Order = order,
-                ItemsInCart = await CountItemsInCart(),
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Admin,Viewer")]
-        public async Task<IActionResult> Edit(Order order)
-        {
-            if (!await OrderExists(order.Id))
-            {
-                //"You cannot edit product that is no longer exists");
-                return RedirectToAction("ListOrders", "Administration");
-            }
-
-
-            var currentUser = await GetCurrentUserAsync();
-
-            IList<string> userRoles = await UserManager.GetRolesAsync(currentUser);
-
-            if (!userRoles.Any(r => r.Equals("Admin")))
-            {
-               //"Your changes were not saved.\n You do not have the right permissions to edit orders.");
-                return RedirectToAction("ListOrders", "Administration");
-            }
-
-            try
-            {
-                Order orderOnDb = await Context.Order.Include(o => o.Payment).FirstOrDefaultAsync(o => o.Id == order.Id);
-                orderOnDb.Payment.Paid = order.Payment.Paid;
-                orderOnDb.Payment.PaymentMethod = order.Payment.PaymentMethod;
-                orderOnDb.Payment.ShippingCost = order.Payment.ShippingCost;
-                orderOnDb.Payment.ItemsCost = order.Payment.ItemsCost;
-                orderOnDb.Payment.Total = order.Payment.Total;
-                orderOnDb.Payment.Notes = order.Payment.Notes;
-                orderOnDb.State = order.State;
-
-                /*
-                if (order.Payment.RefundAmount > order.Payment.Total)
-                {
-                    orderOnDb.Payment.RefundAmount = order.Payment.Total;
-                }
-                else
-                {
-                    orderOnDb.Payment.RefundAmount = order.Payment.RefundAmount;
-                }
-
-                */
-                Context.Update(orderOnDb);
-                await Context.SaveChangesAsync();
-                //"Order has been updated";
-            }
-            catch (Exception e)
-            {
-                //"Order could not be updated");
-               //$"Order# '{order.Id}' could not be updated, ex: {e}");
-            }
-
-            return RedirectToAction("ListOrders", "Administration");
-        }
-
         private async Task<bool> OrderExists(string id)
         {
             return await Context.Order.AnyAsync(e => e.Id == id);
         }
+
     }
 }
