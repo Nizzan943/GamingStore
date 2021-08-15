@@ -98,7 +98,7 @@ namespace GamingStore.Data
             {
                 IdentityResult result = await userManager.CreateAsync(User, usersPassword);
 
-                //Add default User to Role Admin    
+                //Add default User to Role User    
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(User, "User");

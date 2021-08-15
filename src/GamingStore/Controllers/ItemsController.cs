@@ -203,6 +203,30 @@ namespace GamingStore.Controllers
             {
                 model.Item.Brand = model.Item.Brand.Trim();
                 string uploadFolder = await UploadImages(model);
+                string dir = "wwwroot\\" + uploadFolder;
+                System.IO.Directory.CreateDirectory(dir);
+                string fileName1 = "1.jpg";
+                string fileName2 = "2.jpg";
+                string fileName3 = "3.jpg";
+
+                string file1 = System.IO.Path.Combine(dir, fileName1);
+                string file2 = System.IO.Path.Combine(dir, fileName2);
+                string file3 = System.IO.Path.Combine(dir, fileName3);
+
+                using (Stream fileStream = new FileStream(file1, FileMode.Create))
+                {
+                    await model.File1.CopyToAsync(fileStream);
+                }
+
+                using (Stream fileStream = new FileStream(file2, FileMode.Create))
+                {
+                    await model.File2.CopyToAsync(fileStream);
+                }
+
+                using (Stream fileStream = new FileStream(file3, FileMode.Create))
+                {
+                    await model.File3.CopyToAsync(fileStream);
+                }
 
                 await _context.Item.AddAsync(model.Item);
                 await _context.SaveChangesAsync();
@@ -305,7 +329,7 @@ namespace GamingStore.Controllers
             var item = await _context.Item.FindAsync(id);
             _context.Item.Remove(item);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ListItems", "Administration");
         }
 
         private bool ItemExists(int id)
@@ -348,12 +372,12 @@ namespace GamingStore.Controllers
 
             if (model.File2 != null)
             {
-                await CopyImage(model, uploadFolder, 1);
+                await CopyImage(model, uploadFolder, 2);
             }
 
             if (model.File3 != null)
             {
-                await CopyImage(model, uploadFolder, 1);
+                await CopyImage(model, uploadFolder, 3);
             }
 
             return uploadFolder;
@@ -414,10 +438,5 @@ namespace GamingStore.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-
-
-
-
     }
 }
