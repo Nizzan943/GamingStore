@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using GamingStore.Services.Twitter;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using GamingStore.Contracts;
+using Microsoft.AspNetCore.Http;
 
 namespace GamingStore.Controllers
 {
@@ -103,7 +104,6 @@ namespace GamingStore.Controllers
             List<string> allBrands = allItems.Select(i => i.Brand).Distinct().ToList();
 
             List<string> allCategories = allItems.Select(i => i.Category.Name).Distinct().ToList();
-
 
             var viewModel = new GetChosenItemsViewModel()
             {
@@ -197,7 +197,7 @@ namespace GamingStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateEditItemViewModel model)
+        public async Task<IActionResult> Create(CreateItemViewModel model)
         {
             try
             {
@@ -261,8 +261,42 @@ namespace GamingStore.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", nameof(Category.Name), item.Category);
-            return View(item);
+
+            string[] files = Directory.GetFiles("wwwroot\\images\\items\\" + item.Title);
+
+            IFormFile file1;
+            IFormFile file2;
+            IFormFile file3;
+
+            using (var stream = System.IO.File.OpenRead(files[0]))
+            {
+                file1 = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name));
+            }
+            using (var stream = System.IO.File.OpenRead(files[1]))
+            {
+                file2 = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name));
+            }
+            using (var stream = System.IO.File.OpenRead(files[2]))
+            {
+                file3 = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name));
+            }
+
+            IQueryable<Item> allItems = _context.Item.Where(i => i.Active);
+
+            List<Category> allCategories = await _context.Category.ToListAsync();
+
+            var viewModel = new EditItemViewModel()
+            {
+                Item = item,
+                File1 = file1,
+                File2 = file2,
+                File3 = file3,
+
+                categories = allCategories
+            };
+
+            //ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", nameof(Category.Name), item.Category);
+            return View(viewModel);
         }
 
         // POST: Items/Edit/5
@@ -270,23 +304,57 @@ namespace GamingStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Price,Brand,StockCounter,Description,CategoryId,StarReview,ImageUrl,Active")] Item item)
+        public async Task<IActionResult> Edit(EditItemViewModel model)
         {
-            if (id != item.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
                 try
                 {
-                    _context.Update(item);
+                    if (model.File1 != null)
+                    {
+                        string dir = "wwwroot\\images\\items\\" + model.Item.Title;
+                        System.IO.Directory.CreateDirectory(dir);
+                        string fileName1 = "1.jpg";
+
+                        string _file1 = System.IO.Path.Combine(dir, fileName1);
+
+                        using (Stream fileStream = new FileStream(_file1, FileMode.Create))
+                        {
+                            await model.File1.CopyToAsync(fileStream);
+                        }
+                    }
+
+                    if (model.File2 != null)
+                    {
+                        string dir = "wwwroot\\images\\items" + model.Item.Title;
+                        System.IO.Directory.CreateDirectory(dir);
+                        string fileName2 = "2.jpg";
+
+                        string _file2 = System.IO.Path.Combine(dir, fileName2);
+
+                        using (Stream fileStream = new FileStream(_file2, FileMode.Create))
+                        {
+                            await model.File2.CopyToAsync(fileStream);
+                        }
+                    }
+
+                    if (model.File3 != null)
+                    {
+                        string dir = "wwwroot\\images\\items" + model.Item.Title;
+                        System.IO.Directory.CreateDirectory(dir);
+                        string fileName3 = "3.jpg";
+
+                        string _file3 = System.IO.Path.Combine(dir, fileName3);
+
+                        using (Stream fileStream = new FileStream(_file3, FileMode.Create))
+                        {
+                            await model.File3.CopyToAsync(fileStream);
+                        }
+                    }
+                    _context.Update(model.Item);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemExists(item.Id))
+                    if (!ItemExists(model.Item.Id))
                     {
                         return NotFound();
                     }
@@ -295,10 +363,7 @@ namespace GamingStore.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", item.CategoryId);
-            return View(item);
+            return RedirectToAction("ListItems", "Administration");
         }
 
         // GET: Items/Delete/5
@@ -359,7 +424,7 @@ namespace GamingStore.Controllers
             }
         }
 
-        private async Task<string> UploadImages(CreateEditItemViewModel model)
+        private async Task<string> UploadImages(CreateItemViewModel model)
         {
             string directoryName = model.Item.Title.Trim().Replace(" ", string.Empty);
             string uploadFolder = Path.Combine("images", "items", directoryName);
@@ -383,7 +448,7 @@ namespace GamingStore.Controllers
             return uploadFolder;
         }
 
-        private static async Task CopyImage(CreateEditItemViewModel model, string uploadFolder, int imageNumber)
+        private static async Task CopyImage(CreateItemViewModel model, string uploadFolder, int imageNumber)
         {
             Directory.CreateDirectory(uploadFolder);
             string uniqueFileName = $"{imageNumber}.jpg";

@@ -1,10 +1,11 @@
 ﻿using GamingStore.Contracts;
 using GamingStore.Models;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace GamingStore.ViewModels.Items
 {
-    public class CreateEditItemViewModel : ViewModelBase
+    public class EditItemViewModel : ViewModelBase
     {
         public Item Item { get; set; }
         
@@ -16,7 +17,6 @@ namespace GamingStore.ViewModels.Items
         
         public IFormFile File3 { set; get; }
 
-        
-        public bool PublishItemFlag { get; set; }
+        public IEnumerable<Category> categories { get; set; }
     }
 }

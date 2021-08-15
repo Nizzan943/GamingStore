@@ -1,4 +1,4 @@
-﻿@model GamingStore.Models.Item
+﻿@model GamingStore.ViewModels.Items.EditItemViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,46 +12,76 @@
             </div>
             <div class="card-body card-block">
                 <div class="column">
-                    <form asp-action="Edit">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="Item.Id" />
                         <div class="form-group">
-                            <label asp-for="Title" class="control-label"></label>
-                            <input asp-for="Title" class="form-control" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
+                            <label asp-for="Item.Title" class="control-label"></label>
+                            <input asp-for="Item.Title" class="form-control" required />
+                            <span asp-validation-for="Item.Title" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Price" class="control-label"></label>
-                            <input asp-for="Price" class="form-control" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
+                            <label asp-for="Item.Description" class="control-label"></label>
+                            <input asp-for="Item.Description" class="form-control" required />
+                            <span asp-validation-for="Item.Description" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Brand" class="control-label"></label>
-                            <input asp-for="Brand" class="form-control" />
-                            <span asp-validation-for="Brand" class="text-danger"></span>
+                            <label asp-for="Item.Brand" class="control-label"></label>
+                            <input asp-for="Item.Brand" class="form-control" required />
+                            <span asp-validation-for="Item.Brand" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Description" class="control-label"></label>
-                            <input asp-for="Description" class="form-control" />
-                            <span asp-validation-for="Description" class="text-danger"></span>
+                            @Html.LabelFor(m => m.Item.Price)
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                                @Html.TextBoxFor(m => m.Item.Price, null, new { @class = "form-control" })
+                            </div>
+                            <span asp-validation-for="Item.Price" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="CategoryId" class="control-label"></label>
-                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                            <label asp-for="Item.CategoryId" class="control-label"></label>
+                            <select type="text" asp-for="Item.CategoryId" class="form-control" asp-items="@(new SelectList(Model.categories, "Id", nameof(Category.Name), Model.Item.Category))"></select>
+                            <span asp-validation-for="Item.CategoryId" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="ImageUrl" class="control-label"></label>
-                            <input asp-for="ImageUrl" class="form-control" />
-                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                            <label>Active</label>
+                            <input type="checkbox" asp-for="Item.Active" />
                         </div>
-                        <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-primary" />
+
+                        <div>
+                            <label class="control-label">Images</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="file1" id="file1" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="file1">Choose Primary Image</label>
+                                </div>
+                            </div>
+                            <input asp-for="Item.ImageUrl" class="form-control" hidden />
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon02">Image</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="file2" id="file2" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="file2">Choose 2nd Image</label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon03">Image</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="file3" id="file3" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="file3">Choose 3rd Image</label>
+                                </div>
+                            </div>
+                            <div class="input-group d-flex justify-content-center" style="margin-top: 10%;">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                            </div>
                         </div>
                     </form>
                 </div>
