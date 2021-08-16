@@ -262,7 +262,7 @@ namespace GamingStore.Controllers
                 return NotFound();
             }
 
-            string[] files = Directory.GetFiles("wwwroot\\images\\items\\" + item.Title);
+            string[] files = Directory.GetFiles("wwwroot\\images\\items\\" + item.Title.Replace(" ", ""));
 
             IFormFile file1;
             IFormFile file2;

@@ -14,62 +14,42 @@
             </div>
             <div class="card-body card-block">
                 <div class="column">
-                    <form asp-action="Create" enctype="multipart/form-data" class="row">
-                        <div class="col-5">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="form-group">
-                                <label asp-for="Item.Title" class="control-label"></label>
-                                <input asp-for="Item.Title" class="form-control" required />
-                                <span asp-validation-for="Item.Title" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Item.Description" class="control-label"></label>
-                                <input asp-for="Item.Description" class="form-control" required />
-                                <span asp-validation-for="Item.Description" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Item.Brand" class="control-label"></label>
-                                <input asp-for="Item.Brand" class="form-control" required />
-                                <span asp-validation-for="Item.Brand" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Item.Price)
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">$</div>
-                                    @Html.TextBoxFor(m => m.Item.Price, null, new { @class = "form-control" })
-                                </div>
-                                <span asp-validation-for="Item.Price" class="text-danger"></span>
-                            </div>
-
-                            @*<div class="form-group">
-                                    <label asp-for="Item.Category" class="control-label"></label>
-                                    <select class="form-control custom-select" asp-for="Item.Category" style="margin-left: auto;">
-
-                                        @foreach (var category in Model.Categories)
-                                        {
-                                            <option class="form-control">@category</option>
-                                        }
-
-                                    </select>
-                                    <span asp-validation-for="Item.Category" class="text-danger"></span>
-                                </div>*@
-
-                            <div class="form-group">
-                                <label asp-for="Item.CategoryId" class="control-label"></label>
-                                <select asp-for="Item.CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
-                                <span asp-validation-for="Item.CategoryId" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group row">
-                                @Html.LabelFor(m => m.Item.Active, new { @class = "col-sm-3 col-form-label" })
-                                <div class="col-sm-5">
-                                    <div class="form-check">
-                                        @Html.CheckBoxFor(m => m.Item.Active, new { @class = "form-check-input", style = "margin: Left;" })
-                                    </div>
-                                </div>
-                            </div>
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Item.Title" class="control-label"></label>
+                            <input asp-for="Item.Title" class="form-control" required />
+                            <span asp-validation-for="Item.Title" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-5" style="padding-bottom: 3%">
+                        <div class="form-group">
+                            <label asp-for="Item.Description" class="control-label"></label>
+                            <input asp-for="Item.Description" class="form-control" required />
+                            <span asp-validation-for="Item.Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Item.Brand" class="control-label"></label>
+                            <input asp-for="Item.Brand" class="form-control" required />
+                            <span asp-validation-for="Item.Brand" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Item.Price)
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                                @Html.TextBoxFor(m => m.Item.Price, null, new { @class = "form-control" })
+                            </div>
+                            <span asp-validation-for="Item.Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Item.CategoryId" class="control-label"></label>
+                            <select asp-for="Item.CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+                            <span asp-validation-for="Item.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Active</label>
+                            <input type="checkbox" asp-for="Item.Active" />
+                        </div>
+                        <div>
                             <label class="control-label">Images</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -98,6 +78,7 @@
                                     <label class="custom-file-label" for="file3">Choose 3rd Image</label>
                                 </div>
                             </div>
+                            &nbsp;
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" asp-for="PublishItemFlag">
                                 <label class="form-check-label">Publish On Twitter</label>
