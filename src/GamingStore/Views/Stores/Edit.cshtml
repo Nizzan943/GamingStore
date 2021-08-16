@@ -23,11 +23,11 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.Store.Address" class="control-label"></label>
-                            <input asp-for="@Model.Store.Address.Street" class="form-control" placeholder="street" />
+                            <input asp-for="@Model.Store.Address.Street" class="form-control" placeholder="Street" value="@Model.Store.Address.Street" />
                             <span asp-validation-for="@Model.Store.Address.Street" class="text-danger"></span>
-                            <input type="number" min="1" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="number" />
+                            <input type="number" min="1" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="Number" value="@Model.Store.Address.Number" />
                             <span asp-validation-for="@Model.Store.Address.Number" class="text-danger"></span>
-                            <input asp-for="@Model.Store.Address.City" class="form-control" placeholder="city" />
+                            <input asp-for="@Model.Store.Address.City" class="form-control" placeholder="City" value="@Model.Store.Address.City" />
                             <span asp-validation-for="@Model.Store.Address.City" class="text-danger"></span>
                         </div>
                         <div class="form-group">
