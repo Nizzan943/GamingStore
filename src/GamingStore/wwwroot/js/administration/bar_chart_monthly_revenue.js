@@ -1,6 +1,6 @@
 ﻿const width = $(".col-lg-8").width();
 const height = 500;
-const margin = { top: width*0.02, right: width*0.03 ,bottom: width*0.08, left: width*0.1 };
+const margin = { top: width*0.02, right: width*0.03 ,bottom: width*0.08, left: width*0.2 };
 const graphWidth = width -  margin.right;
 const graphHeight = height - margin.top - margin.bottom;
 
