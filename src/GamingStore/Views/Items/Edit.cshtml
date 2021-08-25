@@ -36,7 +36,7 @@
                             @Html.LabelFor(m => m.Item.Price)
                             <div class="input-group-prepend">
                                 <div class="input-group-text">$</div>
-                                @Html.TextBoxFor(m => m.Item.Price, null, new { @class = "form-control" })
+                                <input type="number" min="1" asp-for="Item.Price" class="form-control" required />
                             </div>
                             <span asp-validation-for="Item.Price" class="text-danger"></span>
                         </div>
