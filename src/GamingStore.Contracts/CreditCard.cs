@@ -30,7 +30,7 @@ namespace GamingStore.Contracts
         public string ExpirationYear { get; set; }
 
         [Required]
-        [Range(000, 9999, ErrorMessage = "CVV is not valid")]
+        [Range(000, 999, ErrorMessage = "CVV is not valid")]
         [DataType(DataType.Currency)]
         [Display(Name = "CVV (Code)")]
         public string CVV { get; set; }
