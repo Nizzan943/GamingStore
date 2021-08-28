@@ -14,224 +14,226 @@
     <link rel="stylesheet" type="text/css" href="~/css/check_out.css">
 </head>
 <body>
-@using (Html.BeginForm("Create", "Orders", FormMethod.Post, null))
-{
-    for (var index = 0; index < Model.ItemsIdsInCartList.Count; index++)
+    @using (Html.BeginForm("Create", "Orders", FormMethod.Post, null))
     {
-        @Html.HiddenFor(m => m.ItemsIdsInCartList[index])
-    }
+        for (var index = 0; index < Model.ItemsIdsInCartList.Count; index++)
+        {
+            @Html.HiddenFor(m => m.ItemsIdsInCartList[index])
+        }
 
-    <div class="col">
-        <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true"/></div>
-    </div>
+        <div class="col">
+            <div class="d-flex justify-content-center" id="flash_message"> <flash dismissable="true" /></div>
+        </div>
 
-    <div class="row">
-        <div class="col-8">
-            <div class="container">
-                <div class="row">
-                    <div class="col-50">
-                        <h3>Shipping Address</h3>
-                        <br>
-                        @Html.LabelFor(m => m.ShippingAddress.FullName)
-                        @Html.TextBoxFor(m => m.ShippingAddress.FullName, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.ShippingAddress.FullName)
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
-                        @Html.LabelFor(m => m.ShippingAddress.Street)
-                        @Html.TextBoxFor(m => m.ShippingAddress.Street, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.ShippingAddress.Street)
+        <div class="row">
+            <div class="col-8">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Shipping Address</h3>
+                            <br>
+                            @Html.LabelFor(m => m.ShippingAddress.FullName)
+                            @Html.TextBoxFor(m => m.ShippingAddress.FullName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ShippingAddress.FullName)
 
-                        @Html.LabelFor(m => m.ShippingAddress.Number)
-                        <input type="number" min="1" asp-for="@Model.ShippingAddress.Number" class="form-control"/>
-                        @Html.ValidationMessageFor(m => m.ShippingAddress.Number)
+                            @Html.LabelFor(m => m.ShippingAddress.Street)
+                            @Html.TextBoxFor(m => m.ShippingAddress.Street, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ShippingAddress.Street)
 
-                        &nbsp;
-                        @Html.LabelFor(m => m.ShippingAddress.City)
-                        @Html.TextBoxFor(m => m.ShippingAddress.City, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.ShippingAddress.City)
-                        <div class="row">
-                            <div class="col-50">
-                                @Html.LabelFor(m => m.ShippingAddress.Country)
-                                @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @class = "form-control", disabled = "disabled" })
-                                @Html.ValidationMessageFor(m => m.ShippingAddress.Country)
-                            </div>
+                            @Html.LabelFor(m => m.ShippingAddress.Number)
+                            <input type="number" min="1" asp-for="@Model.ShippingAddress.Number" class="form-control" />
+                            @Html.ValidationMessageFor(m => m.ShippingAddress.Number)
 
-                        </div>
-                    </div>
-                    <div class="col-50">
-                        <h3>Payment</h3>
-                        <br>
-                        @Html.LabelFor(m => m.CreditCard.OwnerName)
-                        @Html.TextBoxFor(m => m.CreditCard.OwnerName, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(m => m.CreditCard.OwnerName)
+                            &nbsp;
+                            @Html.LabelFor(m => m.ShippingAddress.City)
+                            @Html.TextBoxFor(m => m.ShippingAddress.City, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ShippingAddress.City)
+                            <div class="row">
+                                <div class="col-50">
+                                    @Html.LabelFor(m => m.ShippingAddress.Country)
+                                    @Html.TextBoxFor(m => m.ShippingAddress.Country, new { @class = "form-control", disabled = "disabled" })
+                                    @Html.ValidationMessageFor(m => m.ShippingAddress.Country)
+                                </div>
 
-                        @Html.LabelFor(m => m.CreditCard.Number)
-                        @Html.TextBoxFor(m => m.CreditCard.Number, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(m => m.CreditCard.Number)
-
-                        <div class="row">
-                            <div class="col-50">
-                                @Html.LabelFor(m => m.CreditCard.ExpirationMonth)
-                                @Html.DropDownListFor(m => m.CreditCard.ExpirationMonth, new SelectList(new List<int> {01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12}), new {@class = "form-control", style = "margin:auto;"})
-                                @Html.ValidationMessageFor(m => m.CreditCard.ExpirationMonth)
-
-                            </div>
-                            <div class="col-50">
-                                @Html.LabelFor(m => m.CreditCard.ExpirationYear)
-                                @Html.DropDownListFor(m => m.CreditCard.ExpirationYear, new SelectList(new List<int> {2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030}), new {@class = "form-control", style = "margin:auto;"})
-                                @Html.ValidationMessageFor(m => m.CreditCard.ExpirationYear)
                             </div>
                         </div>
-                        <br/>
-                        @Html.LabelFor(m => m.CreditCard.CVV)
-                        @Html.TextBoxFor(m => m.CreditCard.CVV, new {@class = "form-control"})
-                        @Html.ValidationMessageFor(m => m.CreditCard.CVV)
-                    </div>
-                    <div class="col-50">
-                        <br>
-                        <h3>Shipping options</h3>
-                        <fieldset>
-                            <label>Choose a delivery option:</label>
-                            <div data-isscheduleddelivery="0">
-                                @Html.RadioButtonFor(m => m.Payment.ShippingCost, "0")
-                                <span>
-                                    <strong>Pickup</strong>
-                                </span>
-                                <br>
-                                <span>$0.00 -&nbsp;FREE&nbsp;</span>
+                        <div class="col-50">
+                            <h3>Payment</h3>
+                            <br>
+                            @Html.LabelFor(m => m.CreditCard.OwnerName)
+                            @Html.TextBoxFor(m => m.CreditCard.OwnerName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CreditCard.OwnerName)
+
+                            @Html.LabelFor(m => m.CreditCard.Number)
+                            @Html.TextBoxFor(m => m.CreditCard.Number, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CreditCard.Number)
+
+                            <div class="row">
+                                <div class="col-50">
+                                    @Html.LabelFor(m => m.CreditCard.ExpirationMonth)
+                                    @Html.DropDownListFor(m => m.CreditCard.ExpirationMonth, new SelectList(new List<int> { 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12 }), new { @class = "form-control", style = "margin:auto;" })
+                                    @Html.ValidationMessageFor(m => m.CreditCard.ExpirationMonth)
+
+                                </div>
+                                <div class="col-50">
+                                    @Html.LabelFor(m => m.CreditCard.ExpirationYear)
+                                    @Html.DropDownListFor(m => m.CreditCard.ExpirationYear, new SelectList(new List<int> { 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030 }), new { @class = "form-control", style = "margin:auto;" })
+                                    @Html.ValidationMessageFor(m => m.CreditCard.ExpirationYear)
+                                </div>
                             </div>
-                            <div data-isscheduleddelivery="0">
-                                @Html.RadioButtonFor(m => m.Payment.ShippingCost, "10")
-                                <span>
-                                    <strong>
-                                        Averages 7-10 business days
-                                    </strong>
-                                </span>
-                                <br>
-                                <span>$10.00&nbsp;-&nbsp;Standard Shipping&nbsp;</span>
-                            </div>
-                            <div data-isscheduleddelivery="0">
-                                @Html.RadioButtonFor(m => m.Payment.ShippingCost, "45")
-                                <span>
-                                    <strong>
-                                        Averages 2-5 business days
-                                    </strong>
-                                </span>
-                                <br>
-                                <span>$45.00&nbsp;-&nbsp;Express Shipping&nbsp;</span>
-                            </div>
-                        </fieldset>
-                        @Html.ValidationMessageFor(m => m.Payment.ShippingCost)
+                            <br />
+                            @Html.LabelFor(m => m.CreditCard.CVV)
+                            @Html.TextBoxFor(m => m.CreditCard.CVV, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CreditCard.CVV)
+                        </div>
+                        <div class="col-50">
+                            <br>
+                            <h3>Shipping options</h3>
+                            <fieldset>
+                                <label>Choose a delivery option:</label>
+                                <div data-isscheduleddelivery="0">
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "0")
+                                    <span>
+                                        <strong>Pickup</strong>
+                                    </span>
+                                    <br>
+                                    <span>$0.00 -&nbsp;FREE&nbsp;</span>
+                                </div>
+                                <div data-isscheduleddelivery="0">
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "10")
+                                    <span>
+                                        <strong>
+                                            Averages 7-10 business days
+                                        </strong>
+                                    </span>
+                                    <br>
+                                    <span>$10.00&nbsp;-&nbsp;Standard Shipping&nbsp;</span>
+                                </div>
+                                <div data-isscheduleddelivery="0">
+                                    @Html.RadioButtonFor(m => m.Payment.ShippingCost, "45")
+                                    <span>
+                                        <strong>
+                                            Averages 2-5 business days
+                                        </strong>
+                                    </span>
+                                    <br>
+                                    <span>$45.00&nbsp;-&nbsp;Express Shipping&nbsp;</span>
+                                </div>
+                            </fieldset>
+                            @Html.ValidationMessageFor(m => m.Payment.ShippingCost)
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-4">
-            <div class="container">
-                <h3>
-                    Cart
-                    <span class="price" style="color: black">
-                        <i class="fa fa-shopping-cart"></i>
-                        @{
-                            double count = Model.Cart.Aggregate(0, (current, itemsInCart) => current + itemsInCart.Quantity);
-                            <b>@count</b>
-
-                        }
-                    </span>
-                    <br>
-                </h3>
-                <span class="col-50" style="color: black">
-                    <p>
-                        @foreach (Cart cart in Model.Cart)
-                        {
-                            var total = cart.Item.Price * cart.Quantity;
-                            total = Math.Round((total + Math.Abs(0.2 - 0.3 + 0.1)) * 100) / 100;
-                            <span>@cart.Quantity x @cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</span>
-                            <span class="price">
-                                $@Html.DisplayFor(m => total)
-                            </span>
-                            <br>
-                        }
-                    </p>
-                    <p>
-                        <span>Shipping:</span><span class="price" id="shipping_amount">10.00</span><span class="price">$</span>
-                    </p>
-                    <!-- Order Total -->
-                    <p>
-                        <h4>
-                            <hr class="solid">
+            <div class="col-4">
+                <div class="container">
+                    <h3>
+                        Cart
+                        <span class="price" style="color: black">
+                            <i class="fa fa-shopping-cart"></i>
                             @{
-                                <input type="hidden" id="items_cost" value="@Model.Payment.ItemsCost"/>
-                                <span>Order Total:</span><span class="price" id="total_amount">@Html.DisplayFor(m => Model.Payment.Total)</span>
+                                double count = Model.Cart.Aggregate(0, (current, itemsInCart) => current + itemsInCart.Quantity);
+                                <b>@count</b>
+
                             }
-                        </h4>
-                    </p>
-                </span>
-                <input type="submit" value="Place Order" class="button cart_button_checkout" style="background: linear-gradient(90deg, rgba(82,113,255,1) 0%, rgba(52,107,182,1) 66%, rgba(53,92,187,1) 91%)">
+                        </span>
+                        <br>
+                    </h3>
+                    <span class="col-50" style="color: black">
+                        <p>
+                            @foreach (Cart cart in Model.Cart)
+                            {
+                                var total = cart.Item.Price * cart.Quantity;
+                                total = Math.Round((total + Math.Abs(0.2 - 0.3 + 0.1)) * 100) / 100;
+                                <span>@cart.Quantity x @cart.Item.Title.Substring(0, Math.Min(cart.Item.Title.Length, 27))</span>
+                                <span class="price">
+                                    $@Html.DisplayFor(m => total)
+                                </span>
+                                <br>
+                            }
+                        </p>
+                        <p>
+                            <span>Shipping:</span><span class="price" id="shipping_amount">10.00</span><span class="price">$</span>
+                        </p>
+                        <!-- Order Total -->
+                        <p>
+                            <h4>
+                                <hr class="solid">
+                                @{
+                                    <input type="hidden" id="items_cost" value="@Model.Payment.ItemsCost" />
+                                    <span>Order Total:</span><span class="price" id="total_amount">@Html.DisplayFor(m => Model.Payment.Total)</span>
+                                }
+                            </h4>
+                        </p>
+                    </span>
+                    <input type="submit" value="Place Order" class="button cart_button_checkout" style="background: linear-gradient(90deg, rgba(82,113,255,1) 0%, rgba(52,107,182,1) 66%, rgba(53,92,187,1) 91%)">
+                </div>
             </div>
         </div>
-    </div>
-}
+    }
 
-@section scripts{
-    <script type="text/javascript">
-        $(function() {
-            $("input:radio").on("change",
-                function() {
-                    var ic = parseFloat($('#items_cost').val());
-                    var icc0 = parseFloat($('#item_cost_currency_0').val());
-                    var icc1 = parseFloat($('#item_cost_currency_1').val());
-                    var icc2 = parseFloat($('#item_cost_currency_2').val());
-                    var ils_value = parseFloat($('#currency_value_ils').val());
-                    var eur_value = parseFloat($('#currency_value_eur').val());
-                    var gbp_value = parseFloat($('#currency_value_gbp').val());
+    @section scripts{
+        <script type="text/javascript">
+            $(function () {
+                $("input:radio").on("change",
+                    function () {
+                        var ic = parseFloat($('#items_cost').val());
+                        var icc0 = parseFloat($('#item_cost_currency_0').val());
+                        var icc1 = parseFloat($('#item_cost_currency_1').val());
+                        var icc2 = parseFloat($('#item_cost_currency_2').val());
+                        var ils_value = parseFloat($('#currency_value_ils').val());
+                        var eur_value = parseFloat($('#currency_value_eur').val());
+                        var gbp_value = parseFloat($('#currency_value_gbp').val());
 
-                    if ($(this).val() == "0") {
-                        $('#shipping_amount').text("0.00");
-                        $('#total_amount').text('$' + ic.toFixed(2));
-                        $('#item_total_currency_0').text(icc0.toFixed(2));
-                        $('#item_total_currency_1').text(icc1.toFixed(2));
-                        $('#item_total_currency_2').text(icc2.toFixed(2));
-                    } else if ($(this).val() == "10") {
-                        $('#shipping_amount').text("10.00");
-                        $('#total_amount').text('$' + (ic + 10).toFixed(2));
-                        $('#item_total_currency_0').text((icc0 + 10 * ils_value).toFixed(2));
-                        $('#item_total_currency_1').text((icc1 + 10 * eur_value).toFixed(2));
-                        $('#item_total_currency_2').text((icc2 + 10 * gbp_value).toFixed(2));
-                    } else if ($(this).val() == "45") {
-                        $('#shipping_amount').text("45.00");
-                        $('#total_amount').text('$' + (ic + 45).toFixed(2));
-                        $('#item_total_currency_0').text((icc0 + 45 * ils_value).toFixed(2));
-                        $('#item_total_currency_1').text((icc1 + 45 * eur_value).toFixed(2));
-                        $('#item_total_currency_2').text((icc2 + 45 * gbp_value).toFixed(2));
-                    }
-                });
-        });
-    </script>
+                        if ($(this).val() == "0") {
+                            $('#shipping_amount').text("0.00");
+                            $('#total_amount').text('$' + ic.toFixed(2));
+                            $('#item_total_currency_0').text(icc0.toFixed(2));
+                            $('#item_total_currency_1').text(icc1.toFixed(2));
+                            $('#item_total_currency_2').text(icc2.toFixed(2));
+                        } else if ($(this).val() == "10") {
+                            $('#shipping_amount').text("10.00");
+                            $('#total_amount').text('$' + (ic + 10).toFixed(2));
+                            $('#item_total_currency_0').text((icc0 + 10 * ils_value).toFixed(2));
+                            $('#item_total_currency_1').text((icc1 + 10 * eur_value).toFixed(2));
+                            $('#item_total_currency_2').text((icc2 + 10 * gbp_value).toFixed(2));
+                        } else if ($(this).val() == "45") {
+                            $('#shipping_amount').text("45.00");
+                            $('#total_amount').text('$' + (ic + 45).toFixed(2));
+                            $('#item_total_currency_0').text((icc0 + 45 * ils_value).toFixed(2));
+                            $('#item_total_currency_1').text((icc1 + 45 * eur_value).toFixed(2));
+                            $('#item_total_currency_2').text((icc2 + 45 * gbp_value).toFixed(2));
+                        }
+                    });
+            });
+        </script>
 
-    <script>
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
 
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click",
-                function() {
-                    this.classList.toggle("active");
-                    var content = this.nextElementSibling;
-                    if (content.style.display === "block") {
-                        content.style.display = "none";
-                    } else {
-                        content.style.display = "block";
-                    }
-                });
-        }
-    </script>
-    <script>
-        setTimeout(function() {
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click",
+                    function () {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.display === "block") {
+                            content.style.display = "none";
+                        } else {
+                            content.style.display = "block";
+                        }
+                    });
+            }
+        </script>
+        <script>
+            setTimeout(function () {
                 $('.alert').fadeOut('slow');
             },
-            5000); // <-- time in milliseconds
-    </script>
-    <script src="/lib/jquery/dist/jquery.js"></script>
-}
+                5000); // <-- time in milliseconds
+        </script>
+        <script src="/lib/jquery/dist/jquery.js"></script>
+    }
 
 </body>
