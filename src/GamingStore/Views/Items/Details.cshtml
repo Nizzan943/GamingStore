@@ -36,14 +36,10 @@
                             <div class="clearfix" style="z-index: 1000;">
 
                                 <!-- Product Quantity -->
-                                <div class="product_quantity clearfix">
+                                <div class="product_quantity">
                                     <span>Quantity: </span>
-                                    <input id="quantity_input" name="quantity" type="text" pattern="[0-9]*" value="1">
+                                    <input style="box-sizing: unset" id="quantity_input" name="quantity" type="number" value="1">
                                     <input id="product_id" name="id" type="hidden" value="@Model.Item.Id">
-                                    <div class="quantity_buttons">
-                                        <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
-                                        <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
-                                    </div>
                                 </div>
                             </div>
 
