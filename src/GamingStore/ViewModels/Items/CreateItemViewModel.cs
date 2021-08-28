@@ -11,11 +11,13 @@ namespace GamingStore.ViewModels.Items
         public Item Item { get; set; }
 
 
-        [Required( ErrorMessage = "the Primary Image field is required")]
+        [Required(ErrorMessage = "the Primary Image field is required.")]
         public IFormFile File1 { set; get; }
-        
+
+        [Required(ErrorMessage = "the 2nd Image field is required.")]
         public IFormFile File2 { set; get; }
-        
+
+        [Required(ErrorMessage = "the 3nd Image field is required.")]
         public IFormFile File3 { set; get; }
 
         

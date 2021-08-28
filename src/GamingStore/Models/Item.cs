@@ -18,7 +18,6 @@ namespace GamingStore.Models
         [Required]
         public string Title { get; set; }
         [Required]
-     
         public double Price { get; set; }
         [Required]
         public string Brand { get; set; }
