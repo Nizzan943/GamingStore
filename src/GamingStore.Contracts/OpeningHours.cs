@@ -8,8 +8,10 @@ namespace GamingStore.Contracts
     {
         public DayOfWeek DayOfWeek { get; set; }
 
+        [Required(ErrorMessage = "the Opening Time field is required.")]
         public string OpeningTime { get; set; }
 
+        [Required(ErrorMessage = "the Closing Time field is required.")]
         public string ClosingTime { get; set; }
     }
 }

@@ -236,7 +236,8 @@ namespace GamingStore.Controllers
              
             if (store.OpeningHours.Any(openingHour => TimeSpan.Parse(openingHour.ClosingTime) <=  TimeSpan.Parse(openingHour.OpeningTime)))
             {
-                return RedirectToAction("ListStores", "Administration");
+                ModelState.AddModelError("", "Opening hours needs to be earlier than closing hours.");
+                return View(viewModel);
             }
             
             
@@ -329,16 +330,18 @@ namespace GamingStore.Controllers
                 store.OpeningHours.Add(temp);
             }
 
+            var viewModel = new StoreDetailsViewModel()
+            {
+                Store = store,
+                ItemsInCart = await CountItemsInCart()
+            };
 
 
 
             if (store.OpeningHours.Any(openingHour => TimeSpan.Parse(openingHour.ClosingTime) <= TimeSpan.Parse(openingHour.OpeningTime)))
             {
-
-                return RedirectToAction("Edit", "Stores", new
-                {
-                    id = store.Id
-                });
+                ModelState.AddModelError("", "Opening hours needs to be earlier than closing hours.");
+                return View(viewModel);
             }
             
             try
