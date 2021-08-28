@@ -59,10 +59,10 @@
                                             var close = "Close" + @i;
                                             <td>
                                                 <span>
-                                                    <input type="time" name="@open" class="form-control" value="@Model.Store.OpeningHours[i].OpeningTime" />
+                                                    <input type="time" name="@open" class="form-control" value="@Model.Store.OpeningHours[i].OpeningTime" required />
                                                 </span>
                                                 <span>
-                                                    <input type="time" name="@close" class="form-control" value="@Model.Store.OpeningHours[i].ClosingTime" />
+                                                    <input type="time" name="@close" class="form-control" value="@Model.Store.OpeningHours[i].ClosingTime" required />
                                                 </span>
                                             </td>
                                         }

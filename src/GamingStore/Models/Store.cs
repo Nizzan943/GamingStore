@@ -25,14 +25,14 @@ namespace GamingStore.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [Required, DataType(DataType.Text), StringLength(50), RegularExpression(@"[a-zA-Z]{2,}$")]
+        [Required, DataType(DataType.Text), StringLength(50)]
         public string Name { get; set; }
 
         [Required]
         public Address Address { get; set; }
 
         [DisplayName("Phone")]
-        [Required, DataType(DataType.PhoneNumber), RegularExpression("^[0-9]*$")]
+        [Required, DataType(DataType.PhoneNumber), RegularExpression("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-/0-9]*$")]
         public string PhoneNumber { get; set; }
 
         [Required, DataType(DataType.EmailAddress)]
