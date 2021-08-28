@@ -1,15 +1,17 @@
-﻿using GamingStore.Contracts;
-using GamingStore.Models;
+﻿using GamingStore.Models;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace GamingStore.ViewModels.Items
 {
     public class CreateItemViewModel : ViewModelBase
     {
         public Item Item { get; set; }
-        
 
 
+        [Required( ErrorMessage = "the Primary Image field is required")]
         public IFormFile File1 { set; get; }
         
         public IFormFile File2 { set; get; }

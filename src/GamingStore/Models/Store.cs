@@ -32,7 +32,7 @@ namespace GamingStore.Models
         public Address Address { get; set; }
 
         [DisplayName("Phone")]
-        [Required, DataType(DataType.PhoneNumber), RegularExpression("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-/0-9]*$")]
+        [Required, DataType(DataType.PhoneNumber), RegularExpression("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-/0-9]*$", ErrorMessage = "Please enter a valid phone number.")]
         public string PhoneNumber { get; set; }
 
         [Required, DataType(DataType.EmailAddress)]

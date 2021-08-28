@@ -14,7 +14,7 @@
                 <div class="column">
                     <form asp-action="Edit" enctype="multipart/form-data">
 
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
                         <input type="hidden" asp-for="LastItemName" />
                         <input type="hidden" asp-for="Item.Id" />
                         <div class="form-group">
@@ -46,8 +46,8 @@
                             <span asp-validation-for="Item.CategoryId" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label>Active</label>
                             <input type="checkbox" asp-for="Item.Active" />
+                            <label>Active</label>
                         </div>
 
                         <div>

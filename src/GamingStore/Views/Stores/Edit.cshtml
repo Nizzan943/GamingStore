@@ -14,7 +14,7 @@
             <div class="card-body card-block">
                 <div class="column">
                     <form asp-action="Edit">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
                         <input type="hidden" asp-for="@Model.Store.Id" />
                         <div class="form-group">
                             <label asp-for="@Model.Store.Name" class="control-label"></label>
@@ -60,6 +60,7 @@
                                             <td>
                                                 <span>
                                                     <input type="time" name="@open" class="form-control" value="@Model.Store.OpeningHours[i].OpeningTime" required />
+                                                    <span asp-validation-for="@Model.Store.OpeningHours" class="text-danger"></span>
                                                 </span>
                                                 <span>
                                                     <input type="time" name="@close" class="form-control" value="@Model.Store.OpeningHours[i].ClosingTime" required />
