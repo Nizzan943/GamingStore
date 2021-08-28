@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GamingStore.Data;
 using GamingStore.Models;
 using Microsoft.AspNetCore.Authorization;
+using GamingStore.ViewModels.Categories;
 
 namespace GamingStore.Controllers
 {
@@ -64,18 +65,12 @@ namespace GamingStore.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Image")] Category category, int[] Items)
+        public async Task<IActionResult> Create(CategoryViewModel viewModel)
         {
-            if (ModelState.IsValid)
-            {
-                category.Items = new List<Item>();
-                category.Items.AddRange(_context.Item.Where(x => Items.Contains(x.Id)));
+            _context.Add(viewModel.Category);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("ListCategories", "Administration");
 
-                _context.Add(category);
-                await _context.SaveChangesAsync();
-                return View(category);
-            }
-            return View(category);
         }
 
         // GET: Categories/Edit/5
@@ -108,8 +103,6 @@ namespace GamingStore.Controllers
             }
             ViewData["itemsEdit"] = new SelectList(_context.Item.Where(x => x.CategoryId == category.Id), nameof(Item.Id), nameof(Item.Title));
 
-            if (ModelState.IsValid)
-            {
                 try
                 {
                     _context.Update(category);
@@ -126,9 +119,7 @@ namespace GamingStore.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(category);
+                return RedirectToAction("ListCategories", "Administration");
         }
 
         // GET: Categories/Delete/5
@@ -158,7 +149,7 @@ namespace GamingStore.Controllers
             var category = await _context.Category.FindAsync(id);
             _context.Category.Remove(category);
             await _context.SaveChangesAsync();
-            return View(category);
+            return RedirectToAction("ListCategories", "Administration");
         }
 
         private bool CategoryExists(int id)
