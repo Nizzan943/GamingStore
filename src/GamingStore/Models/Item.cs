@@ -17,7 +17,7 @@ namespace GamingStore.Models
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
-        [Required]
+        [Required, Range(1,100000, ErrorMessage = "Please enter a valid price.")]
         public double Price { get; set; }
         [Required]
         public string Brand { get; set; }

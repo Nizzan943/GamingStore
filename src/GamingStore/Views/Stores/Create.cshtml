@@ -24,7 +24,7 @@
                             <label asp-for="@Model.Store.Address" class="control-label"></label>
                             <input asp-for="@Model.Store.Address.Street" class="form-control" placeholder="Street" />
                             <span asp-validation-for="@Model.Store.Address.Street" class="text-danger"></span>
-                            <input type="number" min="1" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="Number" />
+                            <input type="text" asp-for="@Model.Store.Address.Number" class="form-control" placeholder="Number" />
                             <span asp-validation-for="@Model.Store.Address.Number" class="text-danger"></span>
                             <input asp-for="@Model.Store.Address.City" class="form-control" placeholder="City" />
                             <span asp-validation-for="@Model.Store.Address.City" class="text-danger"></span>

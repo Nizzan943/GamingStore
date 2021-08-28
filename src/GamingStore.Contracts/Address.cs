@@ -11,16 +11,17 @@ namespace GamingStore.Contracts
     {
         [Required]
         [DataType(DataType.Text)]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "*Street is not valid")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Please enter a valid Street.")]
         public string? Street { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
+        [Range(1, 100000, ErrorMessage = "Please enter a valid Street Number.")]
         public int? Number { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "*City is not valid")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Please enter a valid City.")]
         public string? City { get; set; }
 
         [DataType(DataType.Text)]

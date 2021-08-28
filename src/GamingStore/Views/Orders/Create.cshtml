@@ -43,10 +43,9 @@
                             @Html.ValidationMessageFor(m => m.ShippingAddress.Street)
 
                             @Html.LabelFor(m => m.ShippingAddress.Number)
-                            <input type="number" min="1" asp-for="@Model.ShippingAddress.Number" class="form-control" />
+                            @Html.TextBoxFor(m => m.ShippingAddress.Number, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.ShippingAddress.Number)
 
-                            &nbsp;
                             @Html.LabelFor(m => m.ShippingAddress.City)
                             @Html.TextBoxFor(m => m.ShippingAddress.City, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.ShippingAddress.City)
