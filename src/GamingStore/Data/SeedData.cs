@@ -1110,7 +1110,7 @@ namespace GamingStore.Data
                     Brand = "Razer",
                     Price = 220.45,
                     Category = context.Category.Find(3),
-                    ImageUrl = "images/items/RazerHuntsmanEliteOpto-MechanicalSwitch",
+                    ImageUrl = "images/items/RazerHuntsmanElite Opto-MechanicalSwitch",
                     Description = "The New Razer Opto-Mechanical Switch - Actuation at the speed of light"
                 },
 
