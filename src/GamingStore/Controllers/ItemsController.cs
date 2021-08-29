@@ -29,13 +29,13 @@ namespace GamingStore.Controllers
             _context = context;
         }
 
-   
+
         // Search
         public async Task<IActionResult> Search(string[] brands, string[] category, double price, string queryTitle, int? pageNumber)
         {
-            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name) || category.Length == 0) && (a.Price <= price || price == 0) && (a.Title.Contains(queryTitle) || queryTitle == null));
+            var searchItems = _context.Item.Where(a => (brands.Contains(a.Brand) || brands.Length == 0) && (category.Contains(a.Category.Name) || category.Length == 0) && (a.Price <= price || price == 0) && (a.Title.Contains(queryTitle) || queryTitle == null) && (a.Active));
 
-            const int pageSize = 150;
+            const int pageSize = 200;
 
             List<string> theBrands = brands.ToList();
 
@@ -72,17 +72,17 @@ namespace GamingStore.Controllers
                 ItemsInCart = await CountItemsInCart()
             };
 
-            return View("~/Views/Items/chosenIndex.cshtml",viewModel);
+            return View("~/Views/Items/chosenIndex.cshtml", viewModel);
         }
 
 
         public async Task<IActionResult> CategoryItems(int? id, int? pageNumber)
         {
-            var searchItems = _context.Item.Where(i => i.CategoryId == id);
+            var searchItems = _context.Item.Where(i => i.CategoryId == id && i.Active);
 
-            const int pageSize = 150;
+            const int pageSize = 200;
 
-            List<string> theBrands= new List<string>();
+            List<string> theBrands = new List<string>();
 
             List<string> theCategories = new List<string>();
 
@@ -132,7 +132,7 @@ namespace GamingStore.Controllers
         // GET: Items
         public async Task<IActionResult> Index(int? pageNumber)
         {
-            const int pageSize = 150;
+            const int pageSize = 200;
 
             IQueryable<Item> items = _context.Item.Where(i => i.Active);
 
@@ -153,7 +153,7 @@ namespace GamingStore.Controllers
                 ItemsInCart = await CountItemsInCart()
             };
 
-            
+
 
             return View(viewModel);
         }
